@@ -1,1250 +1,2288 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#17131f">
-<title>Só MLD</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Só MLD — Prévia do site</title>
 <style>
-:root{
-    --bg:#f7f5fa;
-    --surface:#ffffff;
-    --surface2:#f0ecf5;
-    --text:#211b29;
-    --muted:#746b7d;
-    --accent:#7c3aed;
-    --accent2:#a855f7;
-    --border:#ded7e7;
-    --danger:#dc2626;
-    --warning:#d97706;
-    --success:#16a34a;
-    --shadow:0 10px 35px rgba(30,15,50,.12);
-    --reader-size:18px;
-    --reader-width:760px;
+:root{--accent:#7c5cff;--bg:#f5f5fa;--panel:#fff;--text:#202033;--muted:#73738a;--line:#e7e5ef;--soft:#eeeaff;--shadow:0 12px 35px #28204d12}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;transition:.2s}
+body.dark{--bg:#111117;--panel:#1b1b25;--text:#f4f2ff;--muted:#aaa7bf;--line:#333240;--soft:#2a2540;--shadow:0 12px 35px #0003}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+
+.topbar{
+height:68px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 max(20px,calc((100vw - 1120px)/2));
+background:var(--panel);
+border-bottom:1px solid var(--line);
+position:sticky;
+top:0;
+z-index:5
 }
 
-body.dark{
-    --bg:#0e0b12;
-    --surface:#17131f;
-    --surface2:#211a2c;
-    --text:#eee8f5;
-    --muted:#aaa0b5;
-    --border:#352b42;
-    --shadow:0 12px 40px rgba(0,0,0,.35);
+.brand{
+display:flex;
+gap:11px;
+align-items:center;
+font-weight:850;
+letter-spacing:.2px
 }
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+.brand-mark{
+height:39px;
+width:39px;
+border-radius:13px;
+background:var(--accent);
+display:grid;
+place-items:center;
+color:#fff;
+font-weight:900;
+font-size:19px
 }
 
-html{
-    scroll-behavior:smooth;
+.nav{
+display:flex;
+align-items:center;
+gap:8px
 }
 
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    transition:.25s;
+.nav button,.iconbtn{
+background:transparent;
+color:var(--text);
+padding:9px 12px;
+border-radius:10px
 }
 
-button,input,textarea,select{
-    font:inherit;
+.nav button:hover,.iconbtn:hover{
+background:var(--soft)
 }
 
-button{
-    cursor:pointer;
-}
-
-header{
-    height:64px;
-    background:rgba(255,255,255,.92);
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 16px;
-    position:sticky;
-    top:0;
-    z-index:50;
-    backdrop-filter:blur(12px);
-}
-
-body.dark header{
-    background:rgba(23,19,31,.92);
-}
-
-.logo{
-    font-weight:900;
-    letter-spacing:.5px;
-    color:var(--accent);
-}
-
-.icon-btn{
-    width:42px;
-    height:42px;
-    border:0;
-    border-radius:12px;
-    background:var(--surface2);
-    color:var(--text);
-    font-size:20px;
-}
-
-.primary,
-.secondary,
-.danger{
-    border:0;
-    border-radius:10px;
-    padding:11px 15px;
-    font-weight:700;
-}
-
-.primary{
-    background:var(--accent);
-    color:#fff;
-}
-
-.secondary{
-    background:var(--surface2);
-    color:var(--text);
-    border:1px solid var(--border);
-}
-
-.danger{
-    background:var(--danger);
-    color:white;
-}
-
-.full{
-    width:100%;
-}
-
-.page{
-    display:none;
-    width:min(1100px,100%);
-    margin:auto;
-    padding:22px 16px 70px;
-}
-
-.page.active{
-    display:block;
-}
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.58);
-    display:none;
-    z-index:80;
-}
-
-.overlay.open{
-    display:block;
-}
-
-.side-menu{
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-    width:min(320px,86vw);
-    background:var(--surface);
-    z-index:90;
-    transform:translateX(-105%);
-    transition:.25s;
-    padding:20px;
-    overflow:auto;
-}
-
-.side-menu.open{
-    transform:translateX(0);
-}
-
-.menu-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.menu-item{
-    padding:14px 10px;
-    border-bottom:1px solid var(--border);
-    cursor:pointer;
-    font-weight:700;
-}
-
-.menu-item:hover{
-    color:var(--accent);
-}
-
-.menu-sub{
-    display:none;
-    padding:8px 0 8px 14px;
-}
-
-.menu-sub.open{
-    display:block;
-}
-
-.menu-arc{
-    margin:5px 0;
-}
-
-.menu-arc-title{
-    padding:10px;
-    border-radius:8px;
-    background:var(--surface2);
-    cursor:pointer;
-}
-
-.menu-caps{
-    padding-left:12px;
-}
-
-.menu-cap{
-    padding:9px;
-    color:var(--muted);
-    cursor:pointer;
-}
-
-.menu-cap:hover{
-    color:var(--accent);
+.container{
+max-width:1120px;
+margin:auto;
+padding:26px 20px 70px
 }
 
 .hero{
-    display:grid;
-    grid-template-columns:260px 1fr;
-    gap:28px;
-    align-items:center;
-    padding:35px 0;
+display:grid;
+grid-template-columns:minmax(200px,310px) 1fr;
+gap:34px;
+align-items:center;
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:24px;
+padding:26px;
+box-shadow:var(--shadow)
 }
 
 .cover{
-    width:100%;
-    aspect-ratio:2/3;
-    background:
-        radial-gradient(circle at 30% 20%,#8b5cf6 0,transparent 32%),
-        linear-gradient(145deg,#191120,#3a1756);
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-    position:relative;
+aspect-ratio:3/4;
+border-radius:17px;
+overflow:hidden;
+position:relative;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+padding:22px;
+color:#fff;
+background:
+radial-gradient(circle at 70% 20%,#c7a2ff 0,transparent 23%),
+radial-gradient(circle at 30% 65%,#503a9b 0,transparent 34%),
+linear-gradient(145deg,#111326,#39266d 50%,#d06d83);
+box-shadow:0 16px 32px #2a174533
 }
 
-.cover img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:none;
+.cover:before{
+content:"";
+position:absolute;
+inset:12px;
+border:1px solid #ffffff60;
+border-radius:10px
 }
 
-.cover-placeholder{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:white;
-    font-size:30px;
-    font-weight:900;
-    text-align:center;
-    padding:20px;
+.cover>*{
+position:relative
 }
 
-.hero h1{
-    font-size:clamp(35px,8vw,64px);
-    line-height:.95;
-    margin-bottom:16px;
+.cover .eyebrow{
+font-size:10px;
+letter-spacing:4px;
+text-transform:uppercase;
+opacity:.8
 }
 
-.hero p{
-    line-height:1.7;
-    color:var(--muted);
-    margin-bottom:20px;
+.cover h2{
+font:900 clamp(38px,5vw,58px)/.92 Georgia,serif;
+letter-spacing:2px;
+margin:0;
+text-shadow:0 3px 14px #0008
 }
 
-.section-title{
-    margin:25px 0 14px;
+.cover .cover-bottom{
+font-size:11px;
+letter-spacing:3px;
+text-transform:uppercase
 }
 
-.card{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:18px;
-    box-shadow:var(--shadow);
+.pill{
+display:inline-flex;
+align-items:center;
+gap:6px;
+border-radius:999px;
+padding:6px 10px;
+background:var(--soft);
+color:var(--accent);
+font-size:12px;
+font-weight:750
+}
+
+h1{
+font-size:clamp(34px,5vw,54px);
+line-height:1.05;
+letter-spacing:-1.5px;
+margin:15px 0 13px
+}
+
+h2{
+letter-spacing:-.5px
+}
+
+p{
+color:var(--muted)
+}
+
+.hero-desc{
+max-width:580px;
+font-size:16px;
+line-height:1.8
+}
+
+.actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:23px
+}
+
+.primary{
+background:var(--accent);
+color:#fff;
+padding:12px 18px;
+border-radius:12px;
+font-weight:750;
+box-shadow:0 7px 18px color-mix(in srgb,var(--accent) 25%,transparent)
+}
+
+.secondary{
+background:var(--soft);
+color:var(--text);
+padding:12px 16px;
+border-radius:12px;
+font-weight:700
+}
+
+.section-head{
+display:flex;
+align-items:end;
+justify-content:space-between;
+gap:12px;
+margin:34px 0 15px
+}
+
+.section-head h2{
+margin:0;
+font-size:24px
+}
+
+.section-head p{
+margin:4px 0 0;
+font-size:13px
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:14px;
+display:grid;
+grid-template-columns:1.15fr .85fr;
+gap:18px
 }
 
-.arc-card{
-    cursor:pointer;
+.card{
+background:var(--panel);
+border:1px solid var(--line);
+border-radius:19px;
+padding:20px;
+box-shadow:var(--shadow)
 }
 
-.arc-card:hover{
-    border-color:var(--accent);
+.arc-list{
+display:grid;
+gap:10px
 }
 
-.arc-card small{
-    color:var(--muted);
+.arc{
+width:100%;
+display:flex;
+align-items:center;
+gap:12px;
+text-align:left;
+padding:14px;
+background:var(--bg);
+border:1px solid var(--line);
+border-radius:14px;
+color:var(--text)
 }
 
-.notice{
-    margin:10px 0;
-    border-left:4px solid var(--accent);
+.arc.active{
+border-color:var(--accent);
+background:var(--soft)
 }
 
-.notice.content-warning{
-    border-left-color:var(--warning);
+.arc-num{
+width:39px;
+height:39px;
+display:grid;
+place-items:center;
+border-radius:12px;
+background:var(--panel);
+font-weight:850;
+color:var(--accent)
+}
+
+.arc-main{
+flex:1
+}
+
+.arc-main strong{
+display:block
+}
+
+.arc-main small{
+color:var(--muted)
+}
+
+.count{
+font-size:12px;
+color:var(--muted);
+white-space:nowrap
+}
+
+.chapters{
+display:grid;
+gap:8px;
+margin-top:14px
+}
+
+.chapter{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px;
+border:1px solid var(--line);
+border-radius:12px
+}
+
+.chapter .num{
+color:var(--accent);
+font-weight:850
+}
+
+.chapter .title{
+flex:1;
+font-weight:650
+}
+
+.chapter button{
+background:var(--soft);
+color:var(--accent);
+padding:8px 10px;
+border-radius:9px;
+font-weight:700;
+font-size:12px
+}
+
+.feature-list{
+display:grid;
+gap:12px
+}
+
+.feature{
+display:flex;
+gap:12px;
+align-items:flex-start
+}
+
+.feature-icon{
+flex:0 0 38px;
+height:38px;
+display:grid;
+place-items:center;
+background:var(--soft);
+border-radius:12px;
+font-size:18px
+}
+
+.feature strong{
+display:block
+}
+
+.feature small{
+color:var(--muted);
+display:block;
+margin-top:2px
 }
 
 .reader{
-    max-width:var(--reader-width);
-    margin:auto;
+display:none;
+margin-top:20px
 }
 
-.reader-meta{
-    color:var(--accent);
-    font-size:13px;
-    font-weight:800;
-    text-transform:uppercase;
-    margin-bottom:7px;
+.reader.open{
+display:block
 }
 
-.reader h1{
-    margin-bottom:20px;
+.reader-top{
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center
 }
 
-.reader-content{
-    font-size:var(--reader-size);
-    line-height:1.9;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:clamp(18px,5vw,40px);
+.reader-body{
+max-width:680px;
+margin:25px auto;
+font:18px/1.95 Georgia,serif
 }
 
-.reader-content p{
-    margin-bottom:1.3em;
+.reader-body h2{
+text-align:center;
+font-size:30px
 }
 
-.reader-content img{
-    display:block;
-    max-width:100%;
-    max-height:700px;
-    object-fit:contain;
-    margin:25px auto;
-    border-radius:12px;
+.reader-body p{
+color:var(--text)
 }
 
 .reader-nav{
-    display:flex;
-    gap:10px;
-    justify-content:space-between;
-    margin-top:15px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+margin-top:22px
 }
 
-.character{
-    overflow:hidden;
-    padding:0;
+footer{
+text-align:center;
+padding:26px 20px;
+color:var(--muted);
+font-size:13px
 }
 
-.character img{
-    width:100%;
-    height:260px;
-    object-fit:cover;
-    background:var(--surface2);
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:#09091188;
+z-index:10;
+justify-content:flex-end
 }
 
-.character-body{
-    padding:16px;
+.overlay.open{
+display:flex
 }
 
-.character-body h3{
-    margin-bottom:8px;
+.drawer{
+width:min(440px,100%);
+height:100%;
+overflow:auto;
+background:var(--panel);
+padding:22px
 }
 
-.character-body p{
-    line-height:1.6;
-    color:var(--muted);
-    white-space:pre-wrap;
+.drawer-head{
+display:flex;
+justify-content:space-between;
+align-items:center
 }
 
-.route-card{
-    min-height:180px;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
+.close{
+background:var(--soft);
+color:var(--text);
+border-radius:10px;
+padding:8px 12px
 }
 
-.route-card h3{
-    color:var(--accent);
-    margin-bottom:8px;
+.drawer h2{
+margin-top:25px
 }
 
-.route-card p{
-    color:var(--muted);
-    line-height:1.5;
-    margin-bottom:12px;
-}
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:120;
-    background:rgba(0,0,0,.7);
-    display:none;
-    padding:16px;
-    overflow:auto;
-}
-
-.modal.open{
-    display:block;
-}
-
-.modal-box{
-    width:min(900px,100%);
-    background:var(--surface);
-    margin:30px auto;
-    border-radius:18px;
-    border:1px solid var(--border);
-    box-shadow:var(--shadow);
-    overflow:hidden;
-}
-
-.modal-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:18px;
-    border-bottom:1px solid var(--border);
-}
-
-.modal-body{
-    padding:18px;
+.drawer p{
+font-size:13px
 }
 
 .field{
-    margin-bottom:15px;
+display:grid;
+gap:6px;
+margin:14px 0
 }
 
 .field label{
-    display:block;
-    font-size:13px;
-    font-weight:800;
-    margin-bottom:6px;
+font-size:13px;
+font-weight:750
 }
 
-input,
-textarea,
-select{
-    width:100%;
-    background:var(--bg);
-    color:var(--text);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px;
-    outline:none;
+.field input,
+.field textarea,
+.field select{
+width:100%;
+padding:11px 12px;
+border-radius:10px;
+border:1px solid var(--line);
+background:var(--bg);
+color:var(--text)
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-    border-color:var(--accent);
+.field textarea{
+min-height:82px;
+resize:vertical
 }
 
-textarea{
-    min-height:140px;
-    resize:vertical;
-    line-height:1.6;
+.color-row{
+display:flex;
+gap:9px;
+flex-wrap:wrap
 }
 
-.editor{
-    min-height:330px;
+.swatch{
+width:30px;
+height:30px;
+border-radius:50%;
+border:3px solid var(--panel);
+outline:1px solid var(--line)
 }
 
-.tabs{
-    display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding-bottom:12px;
-    margin-bottom:15px;
+.swatch.selected{
+outline:3px solid var(--accent)
 }
 
-.tab{
-    white-space:nowrap;
-    border:1px solid var(--border);
-    background:var(--surface2);
-    color:var(--text);
-    border-radius:10px;
-    padding:10px 13px;
+.notice{
+padding:12px 14px;
+border-radius:12px;
+background:var(--soft);
+font-size:13px;
+color:var(--text);
+margin-top:14px
 }
 
-.tab.active{
-    background:var(--accent);
-    color:white;
+.tagline{
+font-size:11px;
+text-transform:uppercase;
+letter-spacing:2px;
+color:var(--muted);
+font-weight:800
 }
 
-.tab-content{
-    display:none;
-}
-
-.tab-content.active{
-    display:block;
-}
-
-.admin-list{
-    margin-top:15px;
-}
-
-.admin-item{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    align-items:center;
-    padding:12px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    margin-bottom:8px;
-}
-
-.admin-item button{
-    padding:7px 9px;
-}
-
-.settings-row{
-    margin-bottom:18px;
-}
-
-.range-info{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.message{
-    margin-top:10px;
-    font-size:14px;
-    font-weight:700;
-}
-
-.empty{
-    color:var(--muted);
-    text-align:center;
-    padding:25px;
-}
-
-.badge{
-    display:inline-block;
-    padding:4px 8px;
-    border-radius:999px;
-    background:var(--surface2);
-    color:var(--muted);
-    font-size:12px;
-    margin-bottom:8px;
-}
-
-.route-admin-button{
-    margin-top:18px;
-    padding:16px;
-    border:1px dashed var(--accent);
-    border-radius:14px;
-    background:rgba(124,58,237,.08);
-}
-
-@media(max-width:650px){
-    .hero{
-        grid-template-columns:1fr;
-    }
-
-    .cover{
-        width:min(230px,75%);
-        margin:auto;
-    }
-
-    .hero-copy{
-        text-align:center;
-    }
-
-    .reader-nav{
-        flex-direction:column;
-    }
-
-    .reader-nav button{
-        width:100%;
-    }
+@media(max-width:760px){
+.topbar{padding:0 15px}
+.nav button:not(.iconbtn){display:none}
+.container{padding:16px 13px 45px}
+.hero{grid-template-columns:1fr;gap:22px;padding:17px}
+.cover{max-width:250px;width:100%;margin:auto}
+.hero-copy{text-align:center}
+.hero-desc{font-size:14px}
+.actions{justify-content:center}
+.grid{grid-template-columns:1fr}
+.section-head{align-items:start;flex-direction:column}
+.chapter{gap:8px}
+.chapter .title{font-size:13px}
+.count{font-size:11px}
+.brand span{font-size:14px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <button class="icon-btn" onclick="openMenu()">☰</button>
-    <div class="logo" id="headerTitle">SÓ MLD</div>
-    <button class="icon-btn" onclick="openSettings()">⚙️</button>
-</header>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">M</div>
+    <span>SÓ MLD</span>
+  </div>
 
-<div class="overlay" id="menuOverlay" onclick="closeMenu()"></div>
-
-<aside class="side-menu" id="sideMenu">
-    <div class="menu-head">
-        <h2>Menu</h2>
-        <button class="icon-btn" onclick="closeMenu()">✕</button>
+  <nav class="nav">
+    <button onclick="scrollToId('arcos')">Arcos</button>
+    <button onclick="scrollToId('novidades')">Novidades</button>      <div class="notice">No site final, o autor poderá adicionar, renomear e organizar os arcos. A contagem de capítulos será atualizada automaticamente.</div>
     </div>
 
-    <div class="menu-item" onclick="showPage('home')">🏠 Início</div>
+    <div class="card">
+      <div class="tagline" id="chapterLabel">ARCO 1</div>
+      <h2 style="margin:8px 0 4px" id="chapterHeading">Capítulos</h2>
+      <p style="margin:0 0 13px;font-size:13px">Selecione um capítulo para abrir a prévia de leitura.</p>
 
-    <div class="menu-item" onclick="toggleArcMenu()">
-        📚 Arcos e capítulos
+      <div class="chapters" id="chapterList">
+        <div class="chapter"><span class="num">01</span><span class="title">Capítulo 1: O início</span><button onclick="openReader(1)">Ler</button></div>
+        <div class="chapter"><span class="num">02</span><span class="title">Capítulo 2: Um novo dia</span><button onclick="openReader(2)">Ler</button></div>
+        <div class="chapter"><span class="num">03</span><span class="title">Capítulo 3: Algo estranho</span><button onclick="openReader(3)">Ler</button></div>
+        <div class="chapter"><span class="num">04</span><span class="title">Capítulo 4: Segredos</span><button onclick="openReader(4)">Ler</button></div>
+      </div>
+
+      <button class="secondary" style="width:100%;margin-top:12px" onclick="alert('Na versão final, esta ação abrirá a lista completa de capítulos do arco.')">Ver todos os capítulos</button>
+    </div>
+  </section>
+
+  <section class="reader card" id="reader">
+    <div class="reader-top">
+      <span class="pill" id="readerArc">ARCO 1</span>
+      <button class="close" onclick="closeReader()">Fechar leitura ×</button>
     </div>
 
-    <div class="menu-sub" id="arcMenu"></div>
+    <div class="reader-body">
+      <div class="tagline" style="text-align:center">SÓ MLD</div>
+      <h2 id="readerTitle">Capítulo 1: O início</h2>
 
-    <div class="menu-item" onclick="showPage('characters')">
-        👤 Personagens
+      <div id="chapterContent">
+        <p>Esta é uma prévia visual do leitor de capítulos. O texto definitivo será escrito e publicado pelo autor no Painel do Autor.</p>
+
+        <p>As ilustrações poderão aparecer entre os parágrafos, com opções para ajustar o tamanho e a posição. O leitor também poderá mudar a aparência do texto conforme sua preferência.</p>
+
+        <p>Algumas histórias começam com uma pergunta. Outras começam com um segredo que ninguém deveria descobrir.</p>
+      </div>
+
+      <figure style="margin:24px 0">
+        <img id="chapterIllustration"
+             src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80"
+             alt="Ilustração demonstrativa de fantasia para um capítulo"
+             style="display:block;width:100%;max-height:420px;object-fit:cover;border-radius:14px">
+
+        <figcaption style="text-align:center;font:12px system-ui;color:var(--muted);margin-top:8px">
+          Ilustração demonstrativa. Na versão final, você poderá inserir suas próprias imagens.
+        </figcaption>
+      </figure>
+
+      <div class="reader-nav">
+        <button class="secondary" onclick="changeReader(-1)">← Anterior</button>
+        <button class="primary" onclick="changeReader(1)">Próximo →</button>
+      </div>
     </div>
+  </section>
 
-    <div class="menu-item" onclick="showPage('routes')">
-        🔀 Rotas alternativas
+  <div class="section-head" id="novidades">
+    <div>
+      <h2>Novidades da MLD</h2>
+      <p>Um lugar para destacar capítulos recentes e avisos do autor.</p>
     </div>
+  </div>
 
-    <div class="menu-item" onclick="showPage('notices')">
-        📢 Avisos
-    </div>
+  <section class="grid">
+    <div class="card">
+      <div class="feature-list">
 
-    <div class="menu-item" onclick="openAuthorLogin()">
-        🔐 Painel do Autor
-    </div>
-</aside>
-
-<!-- INÍCIO -->
-
-<main class="page active" id="page-home">
-
-    <section class="hero">
-
-        <div class="cover">
-            <div class="cover-placeholder" id="coverPlaceholder">
-                SÓ<br>MLD
-            </div>
-            <img id="coverImage" alt="Capa da novel">
+        <div class="feature">
+          <div class="feature-icon">✦</div>
+          <div>
+            <strong>Capítulos recentes</strong>
+            <small>Os capítulos publicados mais recentemente aparecerão aqui.</small>
+          </div>
         </div>
 
-        <div class="hero-copy">
-            <span class="badge">LIGHT NOVEL</span>
-
-            <h1 id="novelTitle">
-                Só MLD
-            </h1>
-
-            <p id="novelSynopsis">
-                Sua história começa aqui.
-            </p>
-
-            <button class="primary" onclick="startReading()">
-                📖 Começar a ler
-            </button>
+        <div class="feature">
+          <div class="feature-icon">📣</div>
+          <div>
+            <strong>Avisos do autor</strong>
+            <small>Comunicados sobre atualizações, pausas e novidades da história.</small>
+          </div>
         </div>
 
-    </section>
+        <div class="feature">
+          <div class="feature-icon">⚠</div>
+          <div>
+            <strong>Avisos de conteúdo</strong>
+            <small>Informações antes de capítulos com temas que mereçam aviso.</small>
+          </div>
+        </div>
 
-    <h2 class="section-title">Arcos</h2>
+        <div id="publishedNotices" class="notice" style="display:none"></div>
+      </div>
+    </div>
 
-    <div class="grid" id="homeArcs"></div>
+    <div class="card">
+      <div class="tagline">Sua leitura</div>
+      <h2 style="margin:8px 0 10px">Continue de onde parou</h2>
 
-    <h2 class="section-title">Últimos avisos</h2>
+      <p style="font-size:14px">
+        O site poderá guardar seu progresso e seus marcadores neste dispositivo.
+      </p>
 
-    <div id="homeNotices"></div>
+      <div class="notice">
+        🔖 Seus marcadores e histórico serão pessoais neste protótipo. A sincronização entre dispositivos exigirá uma conta ou serviço de armazenamento.
+      </div>
 
+      <div style="margin-top:15px;display:flex;gap:8px;flex-wrap:wrap">
+        <button class="secondary" onclick="alert('Na versão final, aqui ficará seu histórico de leitura.')">Histórico</button>
+        <button class="secondary" onclick="alert('Na versão final, aqui ficarão os trechos marcados.')">Marcadores</button>
+        <button class="secondary" onclick="alert('Na versão final, os leitores poderão avaliar a novel.')">☆ Avaliar</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <h2>O universo da história</h2>
+      <p>Informações extras para quem gosta de investigar cada detalhe.</p>
+    </div>
+  </div>
+
+  <section class="grid">
+    <div class="card">
+      <div class="feature">
+        <div class="feature-icon">👥</div>
+        <div>
+          <strong>Personagens</strong>
+          <small>Fichas extras para conhecer melhor cada personagem, sem fazer parte da obra oficial/canon.</small>
+        </div>
+      </div>
+
+      <div id="publicCharacters" style="margin-top:14px"></div>
+
+      <button class="secondary" style="margin-top:15px" onclick="scrollToId('publicCharacters')">
+        Ver personagens
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="feature">
+        <div class="feature-icon">🌌</div>
+        <div>
+          <strong>Enciclopédia do universo</strong>
+          <small>Lugares, organizações, poderes e conceitos importantes da MLD.</small>
+        </div>
+      </div>
+
+      <button class="secondary" style="margin-top:15px" onclick="alert('A enciclopédia será construída na versão final.')">
+        Explorar universo
+      </button>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <div>
+      <h2>Rotas alternativas</h2>
+      <p>Seis caminhos alternativos, separados da rota principal da obra.</p>
+    </div>
+  </div>
+
+  <section class="grid" id="publicRoutes">
+    <div class="card"><h3>Rota da Ganância</h3><p>Uma possibilidade alternativa.</p></div>
+    <div class="card"><h3>Rota da Ira</h3><p>Uma possibilidade alternativa.</p></div>
+    <div class="card"><h3>Rota da Inveja</h3><p>Uma possibilidade alternativa.</p></div>
+    <div class="card"><h3>Rota da Preguiça</h3><p>Uma possibilidade alternativa.</p></div>
+    <div class="card"><h3>Rota da Luxúria</h3><p>Uma possibilidade alternativa.</p></div>
+    <div class="card"><h3>Rota do Orgulho</h3><p>Uma possibilidade alternativa.</p></div>
+  </section>
+
+  <footer>
+    SÓ MLD · Prévia de design ·
+    <button class="iconbtn" onclick="toggleMenu()">Abrir menu ☰</button>
+    <br>
+    Este protótipo usa conteúdo fictício de demonstração.
+  </footer>
 </main>
 
-<!-- LEITOR -->
+<div class="overlay" id="drawer" onclick="if(event.target===this)closeDrawer()">
+  <aside class="drawer">
 
-<main class="page" id="page-reader">
+    <div class="drawer-head">
+      <div>
+        <div class="tagline">Configurações</div>
+        <h2 style="margin:3px 0">Personalizar site</h2>
+      </div>
 
-    <div class="reader">
-
-        <div class="reader-meta" id="readerArc">
-            Capítulo
-        </div>
-
-        <h1 id="readerTitle">
-            Escolha um capítulo
-        </h1>
-
-        <div class="reader-content" id="readerContent">
-            <p>Abra o menu e escolha um capítulo.</p>
-        </div>
-
-        <div class="reader-nav">
-            <button class="secondary" onclick="previousChapter()">
-                ← Anterior
-            </button>
-
-            <button class="secondary" onclick="showPage('home')">
-                🏠 Início
-            </button>
-
-            <button class="primary" onclick="nextChapter()">
-                Próximo →
-            </button>
-        </div>
-
+      <button class="close" onclick="closeDrawer()">Fechar ×</button>
     </div>
 
-</main>
+    <p>Teste as opções visuais. Elas afetam apenas esta prévia no seu navegador.</p>
 
-<!-- PERSONAGENS -->
+    <h3>Cor do tema</h3>
+    <div class="color-row" id="swatches"></div>
 
-<main class="page" id="page-characters">
+    <div class="field">
+      <label for="bgMode">Fundo do site</label>
 
-    <h1 class="section-title">Personagens</h1>
-
-    <p style="color:var(--muted);margin-bottom:20px;">
-        Fichas extras para conhecer melhor os personagens.
-        Estas informações não precisam fazer parte oficialmente da obra.
-    </p>
-
-    <div class="grid" id="charactersGrid"></div>
-
-</main>
-
-<!-- ROTAS -->
-
-<main class="page" id="page-routes">
-
-    <h1 class="section-title">Rotas alternativas</h1>
-
-    <p style="color:var(--muted);margin-bottom:20px;">
-        Histórias alternativas separadas da rota principal.
-    </p>
-
-    <div class="grid" id="routesGrid"></div>
-
-</main>
-
-<!-- AVISOS -->
-
-<main class="page" id="page-notices">
-
-    <h1 class="section-title">Avisos</h1>
-
-    <div id="noticesList"></div>
-
-</main>
-
-<!-- CONFIGURAÇÕES -->
-
-<div class="modal" id="settingsModal">
-
-    <div class="modal-box" style="max-width:550px;">
-
-        <div class="modal-head">
-            <h2>⚙️ Leitura</h2>
-            <button class="icon-btn" onclick="closeSettings()">✕</button>
-        </div>
-
-        <div class="modal-body">
-
-            <div class="settings-row">
-
-                <label>Modo</label>
-
-                <select id="themeSetting" onchange="changeTheme()">
-                    <option value="light">Claro</option>
-                    <option value="dark">Escuro</option>
-                </select>
-
-            </div>
-
-            <div class="settings-row">
-
-                <label>Tamanho da fonte</label>
-
-                <input
-                    type="range"
-                    min="14"
-                    max="28"
-                    value="18"
-                    id="fontSetting"
-                    oninput="changeFont()"
-                >
-
-                <div class="range-info" id="fontValue">
-                    18px
-                </div>
-
-            </div>
-
-            <div class="settings-row">
-
-                <label>Largura do leitor</label>
-
-                <input
-                    type="range"
-                    min="500"
-                    max="1000"
-                    value="760"
-                    id="widthSetting"
-                    oninput="changeWidth()"
-                >
-
-                <div class="range-info" id="widthValue">
-                    760px
-                </div>
-
-            </div>
-
-            <div class="settings-row">
-
-                <label>Cor principal</label>
-
-                <select id="accentSetting" onchange="changeAccent()">
-
-                    <option value="#7c3aed">Roxo</option>
-                    <option value="#2563eb">Azul</option>
-                    <option value="#dc2626">Vermelho</option>
-                    <option value="#db2777">Rosa</option>
-                    <option value="#059669">Verde</option>
-                    <option value="#d97706">Laranja</option>
-
-                </select>
-
-            </div>
-
-        </div>
-
+      <select id="bgMode" onchange="setMode(this.value)">
+        <option value="light">Modo claro</option>
+        <option value="dark">Modo escuro</option>
+      </select>
     </div>
 
+    <div class="field">
+      <label for="fontSize">Tamanho do texto de leitura</label>
+
+      <select id="fontSize" onchange="setFontSize(this.value)">
+        <option value="16">Pequeno</option>
+        <option value="18" selected>Médio</option>
+        <option value="21">Grande</option>
+        <option value="24">Extra grande</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="widthMode">Largura do texto</label>
+
+      <select id="widthMode" onchange="setReaderWidth(this.value)">
+        <option value="620">Estreita</option>
+        <option value="680" selected>Confortável</option>
+        <option value="820">Larga</option>
+      </select>
+    </div>
+
+    <div class="notice">
+      As opções são interativas nesta demonstração. No site final, as preferências poderão ser salvas para a próxima visita.
+    </div>
+
+  </aside>
 </div>
 
-<!-- LOGIN -->
+<div class="overlay" id="authorOverlay" onclick="if(event.target===this)closeAuthorPanel()">
+  <aside class="drawer">
 
-<div class="modal" id="loginModal">
+    <div class="drawer-head">
+      <div>
+        <div class="tagline">Área restrita</div>
+        <h2 style="margin:3px 0">Painel do Autor</h2>
+      </div>
 
-    <div class="modal-box" style="max-width:450px;">
-
-        <div class="modal-head">
-            <h2>🔐 Autor</h2>
-            <button class="icon-btn" onclick="closeLogin()">✕</button>
-        </div>
-
-        <div class="modal-body">
-
-            <div class="field">
-                <label>Senha</label>
-                <input
-                    type="password"
-                    id="authorPassword"
-                    placeholder="Digite sua senha"
-                >
-            </div>
-
-            <button class="primary full" onclick="loginAuthor()">
-                Entrar
-            </button>
-
-            <div class="message" id="loginMessage"></div>
-
-        </div>
-
+      <button class="close" onclick="closeAuthorPanel()">Fechar ×</button>
     </div>
 
+    <div id="authorLogin">
+      <div class="tagline">Área do autor</div>
+      <h2 style="margin:6px 0">Painel do Autor</h2>
+
+      <p>Digite a senha para abrir as opções demonstrativas do autor.</p>
+
+      <div class="field">
+        <label for="authorPassword">Senha</label>
+        <input id="authorPassword" type="password" inputmode="numeric" placeholder="Digite a senha">
+      </div>
+
+      <button class="primary" style="width:100%" onclick="checkAuthorPassword()">
+        Entrar no painel
+      </button>
+
+      <p id="loginError" style="color:#e05252;display:none">
+        Senha incorreta.
+      </p>
+
+      <p style="font-size:12px">
+        A senha nesta prévia é apenas uma demonstração visual, não uma proteção real.
+      </p>
+    </div>
+
+    <div id="authorPanel" style="display:none">
+
+      <div class="tagline">Área demonstrativa</div>
+      <h2 style="margin:6px 0">Painel do Autor</h2>
+
+      <p>
+        Na versão final, esta área permitirá gerenciar capas, sinopse, arcos, capítulos, imagens, personagens, rascunhos, backups e publicações.
+      </p>
+
+      <div class="field">
+        <label for="coverUpload">Imagem da capa</label>
+        <input id="coverUpload" type="file" accept="image/*" onchange="previewCover(event)">
+        <small style="color:var(--muted)">Escolha uma imagem do seu dispositivo para testar a capa nesta prévia.</small>
+      </div>
+
+      <div class="field">
+        <label for="chapterUpload">Imagem de capítulo</label>
+        <input id="chapterUpload" type="file" accept="image/*" onchange="previewChapterImage(event)">
+        <small style="color:var(--muted)">A imagem aparecerá no capítulo de demonstração.</small>
+      </div>
+
+      <div class="field">
+        <label for="coverTitle">Título da novel</label>
+        <input id="coverTitle" value="Só MLD">
+      </div>
+
+      <div class="field">
+        <label for="synopsis">Sinopse</label>
+        <textarea id="synopsis">Um mundo de segredos, personagens marcantes e acontecimentos que escondem mais do que parecem.</textarea>
+      </div>
+
+      <div class="field">
+        <label for="arcName">Nome de um novo arco (demonstração)</label>
+        <input id="arcName" placeholder="Ex.: Arco 4">
+      </div>
+
+      <div class="field">
+        <label for="chapterName">Título do capítulo</label>
+        <input id="chapterName" placeholder="Ex.: Capítulo 1: O início" value="Capítulo 1: O início">
+      </div>
+
+      <div class="field">
+        <label for="chapterText">Texto do capítulo</label>
+
+        <textarea id="chapterText" style="min-height:260px" placeholder="Comece a escrever seu capítulo aqui...
+
+Separe os parágrafos com uma linha em branco."></textarea>
+
+        <small style="color:var(--muted)">
+          Escreva o capítulo inteiro aqui. As linhas em branco serão usadas para separar os parágrafos na leitura.
+        </small>
+      </div>
+
+      <button class="primary" style="width:100%" onclick="applyChapterText()">
+        Aplicar texto ao capítulo
+      </button>
+
+      <button class="secondary" style="width:100%;margin-top:9px" onclick="saveMainDraft()">
+        Salvar rascunho
+      </button>
+
+      <button class="secondary" style="width:100%;margin-top:9px" onclick="publishMainChapter()">
+        Publicar capítulo nesta instalação
+      </button>
+
+      <div class="field">
+        <label for="chapterArcSelect">Arco do capítulo</label>
+
+        <select id="chapterArcSelect">
+          <option value="1">Arco 1</option>
+          <option value="2">Arco 2</option>
+          <option value="3">Arco 3</option>
+        </select>
+      </div>
+
+      <button class="secondary" style="width:100%;margin-top:9px" onclick="createArc()">
+        Criar arco
+      </button>
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+
+      <h3>Conhecer personagem (extra, não canon)</h3>
+
+      <p>
+        Estas fichas são só para conhecer melhor os personagens. Não alteram a história oficial.
+      </p>
+
+      <div class="field">
+        <label for="characterName">Nome do personagem</label>
+        <input id="characterName" placeholder="Nome">
+      </div>
+
+      <div class="field">
+        <label for="characterImage">Imagem do personagem</label>
+        <input id="characterImage" type="file" accept="image/*">
+      </div>
+
+      <div class="field">
+        <label for="characterDescription">Descrição / curiosidades</label>
+        <textarea id="characterDescription" placeholder="Personalidade, gostos, curiosidades..."></textarea>
+      </div>
+
+      <button class="primary" style="width:100%" onclick="addCharacter()">
+        Adicionar ficha de personagem
+      </button>
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+
+      <h3>Avisos do site</h3>
+
+      <div class="field">
+        <label for="authorNotice">Aviso do autor</label>
+        <textarea id="authorNotice" placeholder="Comunicado, atualização, pausa..."></textarea>
+      </div>
+
+      <button class="secondary" style="width:100%" onclick="publishNotice('authorNotice','📣 Aviso do autor')">
+        Publicar aviso do autor
+      </button>
+
+      <div class="field">
+        <label for="contentWarning">Aviso de conteúdo</label>
+        <textarea id="contentWarning" placeholder="Temas sensíveis presentes em capítulo específico..."></textarea>
+      </div>
+
+      <button class="secondary" style="width:100%" onclick="publishNotice('contentWarning','⚠ Aviso de conteúdo')">
+        Publicar aviso de conteúdo
+      </button>
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+
+      <h3>Rotas alternativas</h3>
+
+      <p>
+        Escolha uma rota para escrever nela. Cada rota tem seu próprio texto demonstrativo.
+      </p>
+
+      <button class="secondary" style="width:100%" onclick="openRoutePanel()">
+        Abrir segundo painel: escrever nas 6 rotas
+      </button>
+
+      <p style="font-size:12px;margin-top:12px">
+        Importante: esta é uma prévia. A senha embutida no navegador não protege um site publicado; a versão final precisará de autenticação real.
+      </p>
+
+    </div>
+  </aside>
 </div>
 
-<!-- PAINEL PRINCIPAL -->
+<div class="overlay" id="routeOverlay" onclick="if(event.target===this)closeRoutePanel()">
 
-<div class="modal" id="authorModal">
+  <aside class="drawer">
 
-<div class="modal-box">
+    <div class="drawer-head">
+      <div>
+        <div class="tagline">Área restrita · painel 2</div>
+        <h2 style="margin:3px 0">Editor das rotas alternativas</h2>
+      </div>
 
-<div class="modal-head">
-
-    <h2>✍️ Painel do Autor</h2>
-
-    <button class="icon-btn" onclick="closeAuthor()">
-        ✕
-    </button>
-
-</div>
-
-<div class="modal-body">
-
-<div class="tabs">
-
-    <button class="tab active" onclick="authorTab('site',this)">
-        Site
-    </button>
-
-    <button class="tab" onclick="authorTab('arcs',this)">
-        Arcos
-    </button>
-
-    <button class="tab" onclick="authorTab('chapters',this)">
-        Capítulos
-    </button>
-
-    <button class="tab" onclick="authorTab('characters',this)">
-        Personagens
-    </button>
-
-    <button class="tab" onclick="authorTab('notices',this)">
-        Avisos
-    </button>
-
-</div>
-
-<!-- SITE -->
-
-<section class="tab-content active" id="author-site">
-
-    <h3>Informações da novel</h3>
-
-    <div class="field">
-        <label>Título</label>
-        <input id="editNovelTitle">
+      <button class="close" onclick="closeRoutePanel()">Fechar ×</button>
     </div>
 
-    <div class="field">
-        <label>Sinopse</label>
-        <textarea id="editSynopsis"></textarea>
-    </div>
-
-    <div class="field">
-        <label>Capa</label>
-        <input
-            type="file"
-            accept="image/*"
-            id="coverUpload"
-        >
-    </div>
-
-    <button class="primary" onclick="saveSiteInfo()">
-        💾 Salvar alterações
-    </button>
-
-</section>
-
-<!-- ARCOS -->
-
-<section class="tab-content" id="author-arcs">
-
-    <h3>Criar arco</h3>
-
-    <div class="field">
-        <label>Nome</label>
-        <input
-            id="newArcName"
-            placeholder="Ex: Arco Sirius"
-        >
-    </div>
-
-    <div class="field">
-        <label>Descrição</label>
-        <input
-            id="newArcDescription"
-            placeholder="Descrição curta"
-        >
-    </div>
-
-    <button class="primary" onclick="createArc()">
-        + Criar arco
-    </button>
-
-    <div class="admin-list" id="adminArcList"></div>
-
-</section>
-
-<!-- CAPÍTULOS -->
-
-<section class="tab-content" id="author-chapters">
-
-    <h3>Editor da obra principal</h3>
-
-    <div class="field">
-        <label>Arco</label>
-        <select id="chapterArc"></select>
-    </div>
-
-    <div class="field">
-        <label>Número do capítulo</label>
-        <input
-            type="number"
-            id="chapterNumber"
-            min="1"
-            placeholder="1"
-        >
-    </div>
-
-    <div class="field">
-        <label>Título</label>
-        <input
-            id="chapterTitle"
-            placeholder="Título do capítulo"
-        >
-    </div>
-
-    <div class="field">
-
-        <label>Texto</label>
-
-        <textarea
-            class="editor"
-            id="chapterText"
-            placeholder="Escreva o capítulo aqui...
-
-Separe os parágrafos deixando uma linha vazia."
-        ></textarea>
-
-    </div>
-
-    <div class="field">
-        <label>Ilustração do capítulo</label>
-        <input
-            type="file"
-            accept="image/*"
-            id="chapterImage"
-        >
-    </div>
-
-    <button class="secondary" onclick="saveChapterDraft()">
-        💾 Salvar rascunho
-    </button>
-
-    <button class="primary" onclick="publishChapter()">
-        🚀 Publicar
-    </button>
-
-    <div class="message" id="chapterMessage"></div>
-
-</section>
-
-<!-- PERSONAGENS -->
-
-<section class="tab-content" id="author-characters">
-
-    <h3>Ficha de personagem</h3>
-
-    <p style="color:var(--muted);margin:8px 0 15px;">
-        Área extra para conhecer o personagem.
-        Não precisa representar informações oficiais da história.
+    <p>
+      Este painel é separado do editor da rota principal. Escolha uma das seis rotas e escreva seu capítulo alternativo.
     </p>
 
     <div class="field">
-        <label>Nome</label>
-        <input id="characterName">
+      <label for="routeChoice">Rota</label>
+
+      <select id="routeChoice" onchange="loadRouteDraft()">
+        <option>Rota da Ganância</option>
+        <option>Rota da Ira</option>
+        <option>Rota da Inveja</option>
+        <option>Rota da Preguiça</option>
+        <option>Rota da Luxúria</option>
+        <option>Rota do Orgulho</option>
+      </select>
     </div>
 
     <div class="field">
-        <label>Imagem</label>
-        <input
-            type="file"
-            accept="image/*"
-            id="characterImage"
-        >
+      <label for="routeChapterTitle">Título do capítulo</label>
+      <input id="routeChapterTitle" placeholder="Ex.: Capítulo 1: A escolha">
     </div>
 
     <div class="field">
-        <label>Aniversário</label>
-        <input
-            type="text"
-            id="characterBirthday"
-            placeholder="Ex: 23/09"
-        >
+      <label for="routeChapterText">Texto da rota alternativa</label>
+      <textarea id="routeChapterText" style="min-height:280px" placeholder="Escreva aqui o capítulo desta rota..."></textarea>
     </div>
 
-    <div class="field">
-        <label>Gosta de</label>
-        <input id="characterLikes">
-    </div>
-
-    <div class="field">
-        <label>Não gosta de</label>
-        <input id="characterDislikes">
-    </div>
-
-    <div class="field">
-        <label>Descrição / curiosidades</label>
-        <textarea id="characterDescription"></textarea>
-    </div>
-
-    <button class="primary" onclick="createCharacter()">
-        + Adicionar personagem
+    <button class="primary" style="width:100%" onclick="applyRouteText()">
+      Aplicar texto à rota escolhida
     </button>
 
-    <div class="admin-list" id="adminCharacterList"></div>
-
-</section>
-
-<!-- AVISOS -->
-
-<section class="tab-content" id="author-notices">
-
-    <h3>Aviso do autor</h3>
-
-    <div class="field">
-        <textarea
-            id="authorNoticeText"
-            placeholder="Escreva o aviso..."
-        ></textarea>
-    </div>
-
-    <button class="primary" onclick="publishNotice('author')">
-        📢 Publicar aviso
+    <button class="secondary" style="width:100%;margin-top:9px" onclick="saveRouteDraft()">
+      Salvar rascunho da rota
     </button>
 
-    <hr style="border:0;border-top:1px solid var(--border);margin:25px 0;">
-
-    <h3>Aviso de conteúdo</h3>
-
-    <div class="field">
-        <textarea
-            id="contentNoticeText"
-            placeholder="Ex: Este capítulo contém temas sensíveis..."
-        ></textarea>
-    </div>
-
-    <button class="primary" onclick="publishNotice('content')">
-        ⚠️ Publicar aviso
-    </button>
-
-    <div class="admin-list" id="adminNoticeList"></div>
-
-</section>
-
-<div class="route-admin-button">
-
-    <strong>🔀 Rotas alternativas</strong>
-
-    <p style="color:var(--muted);margin:7px 0 12px;">
-        As rotas possuem um painel separado da obra principal.
+    <p style="font-size:12px">
+      A prévia guarda os rascunhos apenas enquanto esta página está aberta. Armazenamento online será necessário para salvar permanentemente.
     </p>
 
-    <button class="primary" onclick="openRouteAuthor()">
-        Abrir painel das rotas
-    </button>
-
-</div>
-
-</div>
-</div>
-</div>
-
-<!-- SEGUNDO PAINEL -->
-
-<div class="modal" id="routeAuthorModal">
-
-<div class="modal-box">
-
-<div class="modal-head">
-
-    <h2>🔀 Painel das Rotas</h2>
-
-    <button class="icon-btn" onclick="closeRouteAuthor()">
-        ✕
-    </button>
-
-</div>
-
-<div class="modal-body">
-
-    <div class="field">
-
-        <label>Escolha a rota</label>
-
-        <select
-            id="routeSelect"
-            onchange="loadRouteEditor()"
-        ></select>
-
-    </div>
-
-    <div class="field">
-
-        <label>Número do capítulo</label>
-
-        <input
-            type="number"
-            id="routeChapterNumber"
-            min="1"
-        >
-
-    </div>
-
-    <div class="field">
-
-        <label>Título</label>
-
-        <input id="routeChapterTitle">
-
-    </div>
-
-    <div class="field">
-
-        <label>Texto</label>
-
-        <textarea
-            class="editor"
-            id="routeChapterText"
-            placeholder="Escreva a rota alternativa aqui..."
-        ></textarea>
-
-    </div>
-
-    <button class="secondary" onclick="saveRouteDraft()">
-        💾 Salvar rascunho
-    </button>
-
-    <button class="primary" onclick="publishRouteChapter()">
-        🚀 Publicar na rota
-    </button>
-
-    <div class="message" id="routeMessage"></div>
-
-</div>
-</div>
+  </aside>
 </div>
 
 <script>
-
-/* =========================
-   BANCO LOCAL
-========================= */
-
-const STORAGE_KEY = "SO_MLD_SITE_V1";
-
-const ROUTES = [
-    "Rota da Ganância",
-    "Rota da Ira",
-    "Rota da Inveja",
-    "Rota da Preguiça",
-    "Rota da Luxúria",
-    "Rota do Orgulho"
+const palettes=[
+  ['Roxo','#7c5cff'],
+  ['Azul','#3478f6'],
+  ['Vermelho','#e53935'],
+  ['Verde','#26965c'],
+  ['Amarelo','#d5a600'],
+  ['Laranja','#ed7925'],
+  ['Rosa','#e84393'],
+  ['Ciano','#079db7'],
+  ['Preto','#30303a'],
+  ['Cinza','#777789']
 ];
 
-let data = {
-    site:{
-        title:"Só MLD",
-        synopsis:"Sua história começa aqui.",
-        cover:""
+let currentArc=1,currentChapter=1;
+const routeDrafts={};
+
+const sw=document.getElementById('swatches');
+
+palettes.forEach(([name,color],i)=>{
+  const b=document.createElement('button');
+
+  b.className='swatch'+(i===0?' selected':'');
+  b.style.background=color;
+  b.title=name;
+  b.setAttribute('aria-label','Tema '+name);
+
+  b.onclick=()=>{
+    document.documentElement.style.setProperty('--accent',color);
+
+    document.querySelectorAll('.swatch')
+      .forEach(x=>x.classList.remove('selected'));
+
+    b.classList.add('selected')
+  };
+
+  sw.appendChild(b)
+});
+
+function scrollToId(id){
+  document.getElementById(id)
+    .scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    })
+}
+
+function toggleMenu(){
+  const menu=document.getElementById('siteMenu');
+  menu.style.display=menu.style.display==='block'?'none':'block'
+}
+
+function openAuthorLogin(){
+  closeDrawer();
+
+  document.getElementById('authorOverlay').classList.add('open');
+  document.getElementById('authorLogin').style.display='block';
+  document.getElementById('authorPanel').style.display='none';
+  document.getElementById('authorPassword').value='';
+  document.getElementById('loginError').style.display='none';
+
+  toggleMenu()
+}
+
+function closeAuthorPanel(){
+  document.getElementById('authorOverlay').classList.remove('open');
+  document.getElementById('authorLogin').style.display='block';
+  document.getElementById('authorPanel').style.display='none';
+  document.getElementById('authorPassword').value='';
+}
+
+function checkAuthorPassword(){
+  const value=document.getElementById('authorPassword').value;
+
+  if(value==='1234321'){
+    document.getElementById('authorLogin').style.display='none';
+    document.getElementById('authorPanel').style.display='block';
+    document.getElementById('loginError').style.display='none'
+  }else{
+    document.getElementById('loginError').style.display='block'
+  }
+}
+
+function previewCover(event){
+  const file=event.target.files&&event.target.files[0];
+
+  if(!file)return;
+
+  if(!file.type.startsWith('image/'))
+    return alert('Escolha um arquivo de imagem.');
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    const img=document.getElementById('coverImage');
+
+    img.src=reader.result;
+    img.style.display='block';
+
+    document.getElementById('novelCover').style.background=
+      'linear-gradient(#0003,#0003)'
+  };
+
+  reader.readAsDataURL(file)
+}
+
+function previewChapterImage(event){
+  const file=event.target.files&&event.target.files[0];
+
+  if(!file)return;
+
+  if(!file.type.startsWith('image/'))
+    return alert('Escolha um arquivo de imagem.');
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    const img=document.getElementById('chapterIllustration');
+    img.src=reader.result
+  };
+
+  reader.readAsDataURL(file)
+}
+
+function applyChapterText(){
+  const title=
+    document.getElementById('chapterName').value.trim()||
+    ('Capítulo '+currentChapter);
+
+  const raw=document.getElementById('chapterText').value.trim();
+
+  if(!raw){
+    alert('Escreva o texto do capítulo antes de aplicar.');
+    return
+  }
+
+  document.getElementById('readerTitle').textContent=title;
+
+  const content=document.getElementById('chapterContent');
+
+  content.replaceChildren();
+
+  raw.split(/\n\s*\n/).forEach(paragraph=>{
+    const p=document.createElement('p');
+
+    p.textContent=paragraph.trim();
+    content.appendChild(p)
+  });
+
+  closeAuthorPanel();
+
+  document.getElementById('reader').classList.add('open');
+
+  document.getElementById('reader')
+    .scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    });
+
+  alert('Texto aplicado à prévia do capítulo! Isso ainda não publica nem salva online.')
+}
+
+function addCharacter(){
+  const name=document.getElementById('characterName').value.trim();
+  const description=document.getElementById('characterDescription').value.trim();
+  const file=document.getElementById('characterImage').files[0];
+
+  if(!name){
+    alert('Coloque o nome do personagem.');
+    return
+  }
+
+  const card=document.createElement('div');
+
+  card.className='notice';
+
+  const title=document.createElement('strong');
+
+  title.textContent=name;
+  card.appendChild(title);
+
+  if(description){
+    const p=document.createElement('p');
+
+    p.textContent=description;
+    p.style.marginBottom='0';
+
+    card.appendChild(p)
+  }
+
+  if(file&&file.type.startsWith('image/')){
+    const img=document.createElement('img');
+
+    img.alt='Imagem de '+name;
+    img.style.cssText=
+      'display:block;width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin:10px 0';
+
+    const reader=new FileReader();
+
+    reader.onload=()=>{
+      img.src=reader.result
+    };
+
+    reader.readAsDataURL(file);
+
+    card.insertBefore(img,card.lastChild)
+  }
+
+  document.getElementById('publicCharacters').appendChild(card);
+  document.getElementById('characterName').value='';
+  document.getElementById('characterDescription').value='';
+  document.getElementById('characterImage').value='';
+
+  alert('Ficha extra adicionada. Ela é apenas material de curiosidades, não canon.')
+}
+
+function publishNotice(id,label){
+  const value=document.getElementById(id).value.trim();
+
+  if(!value){
+    alert('Escreva o aviso antes de publicar.');
+    return
+  }
+
+  const box=document.getElementById('publishedNotices');
+
+  box.style.display='block';
+
+  const item=document.createElement('div');
+
+  item.style.marginTop='10px';
+
+  const strong=document.createElement('strong');
+
+  strong.textContent=label;
+
+  const p=document.createElement('p');
+
+  p.textContent=value;
+  p.style.margin='5px 0 0';
+
+  item.appendChild(strong);
+  item.appendChild(p);
+
+  box.appendChild(item);
+
+  document.getElementById(id).value='';
+
+  alert('Aviso adicionado à prévia. Ainda não foi publicado online.')
+}
+
+function openRoutePanel(){
+  document.getElementById('routeOverlay').classList.add('open');
+  loadRouteDraft()
+}
+
+function closeRoutePanel(){
+  document.getElementById('routeOverlay').classList.remove('open')
+}
+
+function loadRouteDraft(){
+  const route=document.getElementById('routeChoice').value;
+
+  const draft=routeDrafts[route]||{
+    title:'',
+    text:''
+  };
+
+  document.getElementById('routeChapterTitle').value=draft.title;
+  document.getElementById('routeChapterText').value=draft.text
+}
+
+function saveRouteDraft(){
+  const route=document.getElementById('routeChoice').value;
+
+  routeDrafts[route]={
+    title:document.getElementById('routeChapterTitle').value,
+    text:document.getElementById('routeChapterText').value
+  };
+
+  alert('Rascunho guardado nesta sessão para '+route+'.')
+}
+
+function applyRouteText(){
+  const route=document.getElementById('routeChoice').value;
+
+  const title=
+    document.getElementById('routeChapterTitle').value.trim()||
+    route+' — Capítulo alternativo';
+
+  const raw=document.getElementById('routeChapterText').value.trim();
+
+  if(!raw){
+    alert('Escreva o texto da rota antes de aplicar.');
+    return
+  }
+
+  routeDrafts[route]={
+    title,
+    text:raw
+  };
+
+  const cards=document.getElementById('publicRoutes').children;
+
+  const names=
+    Array.from(document.getElementById('routeChoice').options)
+      .map(o=>o.value);
+
+  const idx=names.indexOf(route);
+
+  if(cards[idx]){
+    cards[idx].replaceChildren();
+
+    const h=document.createElement('h3');
+    h.textContent=route;
+
+    const t=document.createElement('strong');
+    t.textContent=title;
+
+    const p=document.createElement('p');
+    p.textContent=raw.slice(0,180)+(raw.length>180?'…':'');
+
+    cards[idx].append(h,t,p)
+  }
+
+  closeRoutePanel();
+
+  alert('Texto aplicado à prévia de '+route+'. A rota principal não foi alterada.')
+}
+
+function openDrawer(){
+  document.getElementById('drawer').classList.add('open')
+}
+
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open')
+}
+
+function toggleDark(){
+  const dark=document.body.classList.toggle('dark');
+
+  document.getElementById('bgMode').value=
+    dark?'dark':'light'
+}
+
+function setMode(mode){
+  document.body.classList.toggle('dark',mode==='dark')
+}
+
+function setFontSize(size){
+  document.querySelector('.reader-body').style.fontSize=size+'px'
+}
+
+function setReaderWidth(width){
+  document.querySelector('.reader-body').style.maxWidth=width+'px'
+}
+
+function selectArc(n,el){
+  currentArc=n;
+
+  document.querySelectorAll('.arc')
+    .forEach(a=>a.classList.remove('active'));
+
+  el.classList.add('active');
+
+  document.getElementById('chapterLabel').textContent='ARCO '+n;
+
+  document.getElementById('chapterHeading').textContent=
+    n===3?'Capítulos em breve':'Capítulos do Arco '+n;
+
+  const list=document.getElementById('chapterList');
+
+  list.innerHTML='';
+
+  if(n===3){
+    list.innerHTML='<p>O autor ainda não publicou este arco.</p>';
+    return
+  }
+
+  const count=n===1?4:4;
+
+  const names=n===1
+    ?['O início','Um novo dia','Algo estranho','Segredos']
+    :['Novos caminhos','O encontro','Revelações','Consequências'];
+
+  names.forEach((name,i)=>{
+    const row=document.createElement('div');
+
+    row.className='chapter';
+
+    row.innerHTML=
+      '<span class="num">'+
+      String(i+1).padStart(2,'0')+
+      '</span><span class="title">Capítulo '+
+      (i+1)+': '+name+
+      '</span><button onclick="openReader('+
+      (i+1)+')">Ler</button>';
+
+    list.appendChild(row)
+  })
+}
+
+function openReader(n){
+  currentChapter=n;
+
+  document.getElementById('readerTitle').textContent=
+    'Capítulo '+n+': '+
+    (['O início','Um novo dia','Algo estranho','Segredos'][n-1]||
+    'Leitura de demonstração');
+
+  document.getElementById('readerArc').textContent='ARCO '+currentArc;
+
+  document.getElementById('reader').classList.add('open');
+
+  document.getElementById('reader')
+    .scrollIntoView({
+      behavior:'smooth',
+      block:'start'
+    })
+}
+
+function closeReader(){
+  document.getElementById('reader').classList.remove('open')
+}
+
+function changeReader(delta){
+  openReader(Math.max(1,currentChapter+delta))
+}
+
+/* Funcionalidade persistente no navegador.
+   Dados locais não sincronizam entre dispositivos. */
+
+const STORE_KEY='somld_site_v1';
+
+const ROUTE_NAMES=[
+  'Rota da Ganância',
+  'Rota da Ira',
+  'Rota da Inveja',
+  'Rota da Preguiça',
+  'Rota da Luxúria',
+  'Rota do Orgulho'
+];
+
+let siteData={
+  arcs:[
+    {
+      id:1,
+      name:'Arco 1',
+      description:'O começo da história',
+      chapters:[]
     },
+    {
+      id:2,
+      name:'Arco 2',
+      description:'Novos acontecimentos',
+      chapters:[]
+    },
+    {
+      id:3,
+      name:'Arco 3',
+      description:'A definir pelo autor',
+      chapters:[]
+    }
+  ],
+  characters:[],
+  notices:[],
+  routes:{},
+  settings:{},
+  cover:'',
+  chapterImage:'',
+  title:'Só MLD',
+  synopsis:'Um mundo de segredos, personagens marcantes e acontecimentos que escondem mais do que parecem.',
+  drafts:{}
+};
 
-    arcs:[],
+function persist(){
+  try{
+    localStorage.setItem(
+      STORE_KEY,
+      JSON.stringify(siteData)
+    );
 
-    characters:[],
+    return true
+  }catch(e){
+    alert('Não foi possível salvar no navegador. Tente usar imagens menores.');
+    return false
+  }
+}
 
-    notices:[],
+function restore(){
+  try{
+    const saved=localStorage.getItem(STORE_KEY);
 
-    routes:{},
+    if(saved)
+      siteData={
+        ...siteData,
+        ...JSON.parse(saved)
+      }
+  }catch(e){
+    console.warn('Dados locais indisponíveis',e)
+  }
+}
 
-    drafts:{
-        main
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+
+    r.onload=()=>resolve(r.result);
+    r.onerror=reject;
+
+    r.readAsDataURL(file)
+  })
+}
+
+function renderArcList(){
+  const list=document.getElementById('arcList');
+
+  if(!list)return;
+
+  list.replaceChildren();
+
+  siteData.arcs.forEach((a,i)=>{
+    const b=document.createElement('button');
+
+    b.className='arc'+
+      (a.id===currentArc?' active':'');
+
+    b.onclick=()=>selectArc(a.id,b);
+
+    const n=document.createElement('span');
+
+    n.className='arc-num';
+    n.textContent=String(i+1).padStart(2,'0');
+
+    const main=document.createElement('span');
+
+    main.className='arc-main';
+
+    const strong=document.createElement('strong');
+    strong.textContent=a.name;
+
+    const small=document.createElement('small');
+    small.textContent=a.description||'Arco da história';
+
+    main.append(strong,small);
+
+    const count=document.createElement('span');
+
+    count.className='count';
+    count.textContent=a.chapters.length+' capítulo(s)';
+
+    b.append(n,main,count);
+    list.appendChild(b)
+  });
+
+  const sel=document.getElementById('chapterArcSelect');
+
+  if(sel){
+    const old=sel.value;
+
+    sel.replaceChildren();
+
+    siteData.arcs.forEach(a=>{
+      const o=document.createElement('option');
+
+      o.value=a.id;
+      o.textContent=a.name;
+
+      sel.appendChild(o)
+    });
+
+    if(siteData.arcs.some(a=>String(a.id)===old))
+      sel.value=old
+  }
+}
+
+function renderChapters(){
+  const arc=
+    siteData.arcs.find(a=>a.id===currentArc)||
+    siteData.arcs[0];
+
+  if(!arc)return;
+
+  const list=document.getElementById('chapterList');
+
+  list.replaceChildren();
+
+  document.getElementById('chapterLabel').textContent='ÍNDICE';
+  document.getElementById('chapterHeading').textContent=arc.name;
+
+  if(!arc.chapters.length){
+    const p=document.createElement('p');
+
+    p.textContent='Ainda não há capítulos publicados neste arco.';
+
+    list.appendChild(p);
+    return
+  }
+
+  arc.chapters.forEach((c,i)=>{
+    const row=document.createElement('div');
+
+    row.className='chapter';
+
+    const n=document.createElement('span');
+
+    n.className='num';
+    n.textContent=String(i+1).padStart(2,'0');
+
+    const t=document.createElement('span');
+
+    t.className='title';
+    t.textContent=c.title;
+
+    const b=document.createElement('button');
+
+    b.textContent='Ler';
+    b.onclick=()=>openSavedChapter(arc.id,c.id);
+
+    row.append(n,t,b);
+    list.appendChild(row)
+  })
+}
+
+function selectArc(n,el){
+  currentArc=Number(n);
+
+  document.querySelectorAll('.arc')
+    .forEach(a=>a.classList.remove('active'));
+
+  if(el)el.classList.add('active');
+
+  renderArcList();
+  renderChapters()
+}
+
+function createArc(){
+  const name=document.getElementById('arcName').value.trim();
+
+  if(!name)
+    return alert('Digite o nome do arco.');
+
+  siteData.arcs.push({
+    id:Date.now(),
+    name,
+    description:'Novo arco',
+    chapters:[]
+  });
+
+  currentArc=siteData.arcs.at(-1).id;
+
+  document.getElementById('arcName').value='';
+
+  persist();
+  renderArcList();
+  renderChapters();
+
+  alert('Arco criado e salvo neste navegador.')
+}
+
+async function previewCover(event){
+  const f=event.target.files&&event.target.files[0];
+
+  if(!f)return;
+
+  if(!f.type.startsWith('image/'))
+    return alert('Escolha uma imagem.');
+
+  try{
+    siteData.cover=await readFileAsDataURL(f);
+
+    const img=document.getElementById('coverImage');
+
+    img.src=siteData.cover;
+    img.style.display='block';
+
+    persist()
+  }catch(e){
+    alert('Não foi possível carregar a imagem.')
+  }
+}
+
+async function previewChapterImage(event){
+  const f=event.target.files&&event.target.files[0];
+
+  if(!f)return;
+
+  if(!f.type.startsWith('image/'))
+    return alert('Escolha uma imagem.');
+
+  try{
+    siteData.chapterImage=await readFileAsDataURL(f);
+
+    const img=document.getElementById('chapterIllustration');
+
+    img.src=siteData.chapterImage;
+    img.style.display='block';
+
+    persist()
+  }catch(e){
+    alert('Não foi possível carregar a imagem.')
+  }
+}
+
+async function addCharacter(){
+  const name=document.getElementById('characterName').value.trim();
+  const description=document.getElementById('characterDescription').value.trim();
+  const f=document.getElementById('characterImage').files[0];
+
+  if(!name)
+    return alert('Coloque o nome do personagem.');
+
+  let image='';
+
+  if(f){
+    if(!f.type.startsWith('image/'))
+      return alert('Escolha uma imagem válida.');
+
+    try{
+      image=await readFileAsDataURL(f)
+    }catch(e){
+      return alert('Não foi possível ler a imagem.')
+    }
+  }
+
+  siteData.characters.push({
+    id:Date.now(),
+    name,
+    description,
+    image
+  });
+
+  persist();
+  renderCharacters();
+
+  document.getElementById('characterName').value='';
+  document.getElementById('characterDescription').value='';
+  document.getElementById('characterImage').value='';
+
+  alert('Ficha extra salva. Não faz parte do cânone.')
+}function renderCharacters(){
+  const box=document.getElementById('publicCharacters');
+  box.replaceChildren();
+
+  siteData.characters.forEach(c=>{
+    const card=document.createElement('div');
+    card.className='notice';
+
+    if(c.image){
+      const im=document.createElement('img');
+      im.src=c.image;
+      im.alt='Imagem de '+c.name;
+      im.style.cssText='display:block;width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:10px';
+      card.appendChild(im)
+    }
+
+    const h=document.createElement('strong');
+    h.textContent=c.name;
+
+    const p=document.createElement('p');
+    p.textContent=c.description;
+    p.style.marginBottom='0';
+
+    card.append(h,p);
+    box.appendChild(card)
+  })
+}
+
+function publishNotice(id,label){
+  const text=document.getElementById(id).value.trim();
+
+  if(!text)
+    return alert('Escreva o aviso antes de publicar.');
+
+  siteData.notices.unshift({
+    id:Date.now(),
+    label,
+    text
+  });
+
+  persist();
+  renderNotices();
+
+  document.getElementById(id).value='';
+
+  alert('Aviso salvo e exibido neste navegador.')
+}
+
+function renderNotices(){
+  const box=document.getElementById('publishedNotices');
+
+  box.replaceChildren();
+  box.style.display=siteData.notices.length?'block':'none';
+
+  siteData.notices.forEach(n=>{
+    const item=document.createElement('div');
+    item.style.marginTop='10px';
+
+    const h=document.createElement('strong');
+    h.textContent=n.label;
+
+    const p=document.createElement('p');
+    p.textContent=n.text;
+    p.style.margin='5px 0 0';
+
+    item.append(h,p);
+    box.appendChild(item)
+  })
+}
+
+function saveMainDraft(){
+  siteData.title=
+    document.getElementById('coverTitle').value.trim()||
+    'Só MLD';
+
+  siteData.synopsis=
+    document.getElementById('synopsis').value.trim();
+
+  siteData.drafts.main={
+    title:document.getElementById('chapterName').value,
+    text:document.getElementById('chapterText').value,
+    arcId:Number(
+      document.getElementById('chapterArcSelect').value||
+      currentArc
+    )
+  };
+
+  persist();
+
+  alert('Rascunho salvo neste navegador.')
+}
+
+function renderChapter(c,arcId){
+  document.getElementById('readerArc').textContent=
+    siteData.arcs.find(a=>a.id===arcId)?.name||
+    String(arcId||'ROTA ALTERNATIVA');
+
+  document.getElementById('readerTitle').textContent=c.title;
+
+  const content=document.getElementById('chapterContent');
+
+  content.replaceChildren();
+
+  c.text.split(/\n\s*\n/).forEach(t=>{
+    const p=document.createElement('p');
+
+    p.textContent=t.trim();
+
+    content.appendChild(p)
+  });
+
+  const img=document.getElementById('chapterIllustration');
+
+  if(c.image){
+    img.src=c.image;
+    img.style.display='block'
+  }else{
+    img.removeAttribute('src');
+    img.style.display='none'
+  }
+}
+
+function openSavedChapter(arcId,id){
+  const a=siteData.arcs.find(x=>x.id===arcId);
+
+  const c=a&&a.chapters.find(x=>x.id===id);
+
+  if(!c)return;
+
+  renderChapter(c,arcId);
+
+  document.getElementById('reader').classList.add('open');
+
+  document.getElementById('reader').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  })
+}
+
+function publishMainChapter(){
+  const title=
+    document.getElementById('chapterName').value.trim()||
+    'Capítulo sem título';
+
+  const text=
+    document.getElementById('chapterText').value.trim();
+
+  const arcId=
+    Number(
+      document.getElementById('chapterArcSelect').value||
+      currentArc
+    );
+
+  const arc=
+    siteData.arcs.find(a=>a.id===arcId);
+
+  if(!text)
+    return alert('Escreva o capítulo antes de publicar.');
+
+  if(!arc)
+    return alert('Selecione um arco válido.');
+
+  const c={
+    id:Date.now(),
+    title,
+    text,
+    image:siteData.chapterImage||''
+  };
+
+  arc.chapters.push(c);
+
+  siteData.drafts.main=null;
+
+  persist();
+
+  renderArcList();
+  renderChapters();
+  renderChapter(c,arcId);
+
+  document.getElementById('reader').classList.add('open');
+
+  document.getElementById('reader').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+  alert(
+    'Capítulo publicado nesta instalação e salvo neste navegador. '+
+    'Para todos os leitores verem, falta conectar um banco online.'
+  )
+}
+
+function applyChapterText(){
+  const title=
+    document.getElementById('chapterName').value.trim()||
+    'Capítulo sem título';
+
+  const text=
+    document.getElementById('chapterText').value.trim();
+
+  const arcId=
+    Number(
+      document.getElementById('chapterArcSelect').value||
+      currentArc
+    );
+
+  if(!text)
+    return alert('Escreva o texto do capítulo antes de aplicar.');
+
+  siteData.title=
+    document.getElementById('coverTitle').value.trim()||
+    'Só MLD';
+
+  siteData.synopsis=
+    document.getElementById('synopsis').value.trim();
+
+  persist();
+
+  renderChapter({
+    title,
+    text,
+    image:siteData.chapterImage||''
+  },arcId);
+
+  closeAuthorPanel();
+
+  document.getElementById('reader').classList.add('open');
+
+  document.getElementById('reader').scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  })
+}
+
+function saveRouteDraft(){
+  const route=
+    document.getElementById('routeChoice').value;
+
+  siteData.routes[route]={
+    title:document.getElementById('routeChapterTitle').value,
+    text:document.getElementById('routeChapterText').value
+  };
+
+  routeDrafts[route]=siteData.routes[route];
+
+  persist();
+
+  alert(
+    'Rascunho de '+route+
+    ' salvo neste navegador.'
+  )
+}
+
+function loadRouteDraft(){
+  const route=
+    document.getElementById('routeChoice').value;
+
+  const d=
+    siteData.routes[route]||
+    {
+      title:'',
+      text:''
+    };
+
+  document.getElementById('routeChapterTitle').value=
+    d.title||'';
+
+  document.getElementById('routeChapterText').value=
+    d.text||''
+}
+
+function applyRouteText(){
+  const route=
+    document.getElementById('routeChoice').value;
+
+  const title=
+    document.getElementById('routeChapterTitle').value.trim()||
+    route+' — Capítulo alternativo';
+
+  const text=
+    document.getElementById('routeChapterText').value.trim();
+
+  if(!text)
+    return alert('Escreva o texto da rota antes de aplicar.');
+
+  siteData.routes[route]={
+    title,
+    text
+  };
+
+  persist();
+
+  const card=
+    document.getElementById('publicRoutes')
+      .children[ROUTE_NAMES.indexOf(route)];
+
+  if(card){
+    card.replaceChildren();
+
+    const h=document.createElement('h3');
+    h.textContent=route;
+
+    const t=document.createElement('strong');
+    t.textContent=title;
+
+    const p=document.createElement('p');
+
+    p.textContent=
+      text.slice(0,180)+
+      (text.length>180?'…':'');
+
+    const b=document.createElement('button');
+
+    b.className='secondary';
+    b.textContent='Ler rota';
+
+    b.onclick=()=>{
+      renderChapter({
+        title,
+        text,
+        image:''
+      },route);
+
+      document.getElementById('reader')
+        .classList.add('open');
+
+      document.getElementById('reader')
+        .scrollIntoView({
+          behavior:'smooth'
+        })
+    };
+
+    card.append(h,t,p,b)
+  }
+
+  closeRoutePanel();
+
+  alert(
+    'Texto aplicado à '+route+
+    '. A rota principal permanece separada.'
+  )
+}
+
+function setMode(mode){
+  document.body.classList.toggle(
+    'dark',
+    mode==='dark'
+  );
+
+  siteData.settings.mode=mode;
+
+  persist()
+}
+
+function toggleDark(){
+  const d=
+    document.body.classList.toggle('dark');
+
+  document.getElementById('bgMode').value=
+    d?'dark':'light';
+
+  siteData.settings.mode=
+    d?'dark':'light';
+
+  persist()
+}
+
+function setFontSize(size){
+  document.querySelector('.reader-body')
+    .style.fontSize=size+'px';
+
+  siteData.settings.fontSize=size;
+
+  persist()
+}
+
+function setReaderWidth(width){
+  document.querySelector('.reader-body')
+    .style.maxWidth=width+'px';
+
+  siteData.settings.width=width;
+
+  persist()
+}
+
+function openAuthorLogin(){
+  closeDrawer();
+
+  document.getElementById('siteMenu')
+    .style.display='none';
+
+  document.getElementById('authorOverlay')
+    .classList.add('open');
+
+  document.getElementById('authorLogin')
+    .style.display='block';
+
+  document.getElementById('authorPanel')
+    .style.display='none';
+
+  document.getElementById('authorPassword')
+    .value='';
+
+  document.getElementById('loginError')
+    .style.display='none'
+}
+
+function checkAuthorPassword(){
+  if(
+    document.getElementById('authorPassword').value===
+    '1234321'
+  ){
+    document.getElementById('authorLogin')
+      .style.display='none';
+
+    document.getElementById('authorPanel')
+      .style.display='block';
+
+    document.getElementById('loginError')
+      .style.display='none';
+
+    const d=siteData.drafts.main;
+
+    if(d){
+      document.getElementById('chapterName').value=
+        d.title||'';
+
+      document.getElementById('chapterText').value=
+        d.text||'';
+
+      document.getElementById('chapterArcSelect').value=
+        d.arcId||currentArc
+    }
+
+    document.getElementById('coverTitle').value=
+      siteData.title||'Só MLD';
+
+    document.getElementById('synopsis').value=
+      siteData.synopsis||''
+
+  }else{
+    document.getElementById('loginError')
+      .style.display='block'
+  }
+}
+
+function closeAuthorPanel(){
+  document.getElementById('authorOverlay')
+    .classList.remove('open');
+
+  document.getElementById('authorLogin')
+    .style.display='block';
+
+  document.getElementById('authorPanel')
+    .style.display='none';
+
+  document.getElementById('authorPassword')
+    .value=''
+}
+
+function setModeNoSave(mode){
+  document.body.classList.toggle(
+    'dark',
+    mode==='dark'
+  );
+
+  document.getElementById('bgMode').value=
+    mode
+}
+
+function restoreUI(){
+  restore();
+
+  if(siteData.cover){
+    const im=document.getElementById('coverImage');
+
+    im.src=siteData.cover;
+    im.style.display='block'
+  }
+
+  if(siteData.chapterImage){
+    const im=
+      document.getElementById('chapterIllustration');
+
+    im.src=siteData.chapterImage;
+    im.style.display='block'
+  }
+
+  if(siteData.title){
+    document.querySelector('.hero-copy h1')
+      .textContent=siteData.title;
+
+    document.title=
+      siteData.title+' — Só MLD'
+  }
+
+  if(siteData.synopsis){
+    document.querySelector('.hero-desc')
+      .textContent=siteData.synopsis
+  }
+
+  renderArcList();
+  renderChapters();
+  renderCharacters();
+  renderNotices();
+
+  ROUTE_NAMES.forEach((name,i)=>{
+    const d=siteData.routes[name];
+
+    const card=
+      document.getElementById('publicRoutes')
+        .children[i];
+
+    if(d&&card){
+      card.replaceChildren();
+
+      const h=document.createElement('h3');
+      h.textContent=name;
+
+      const t=document.createElement('strong');
+      t.textContent=d.title;
+
+      const p=document.createElement('p');
+
+      p.textContent=
+        d.text.slice(0,180)+
+        (d.text.length>180?'…':'');
+
+      card.append(h,t,p)
+    }
+  });
+
+  if(siteData.settings.mode){
+    setModeNoSave(siteData.settings.mode)
+  }
+
+  if(siteData.settings.fontSize){
+    document.querySelector('.reader-body')
+      .style.fontSize=
+      siteData.settings.fontSize+'px';
+
+    document.getElementById('fontSize').value=
+      siteData.settings.fontSize
+  }
+
+  if(siteData.settings.width){
+    document.querySelector('.reader-body')
+      .style.maxWidth=
+      siteData.settings.width+'px';
+
+    document.getElementById('widthMode').value=
+      siteData.settings.width
+  }
+}
+
+document.addEventListener(
+  'DOMContentLoaded',
+  restoreUI
+);
+
+</script>
+</body>
+        </html>
