@@ -1,393 +1,1250 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Light Novel</title>
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #222;
-            --card: #f5f5f5;
-            --accent: #6366f1;
-            --border: #ddd;
-        }
-        .dark-mode {
-            --bg: #121212;
-            --text: #e0e0e0;
-            --card: #1e1e1e;
-            --accent: #818cf8;
-            --border: #333;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
-        body { background: var(--bg); color: var(--text); font-family: Arial, sans-serif; min-height: 100vh; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-        .logo { font-size: 1.2rem; font-weight: bold; color: var(--accent); }
-        button { padding: 0.5rem 0.9rem; border: none; border-radius: 5px; background: var(--accent); color: white; cursor: pointer; font-size: 0.9rem; }
-        button:hover { opacity: 0.9; }
-        button.danger { background: #ef4444; padding: 0.3rem 0.5rem; font-size: 0.8rem; }
-        .icon-btn { background: transparent; color: var(--text); font-size: 1.3rem; padding: 0.2rem; }
-        .menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 200; display: none; }
-        .menu-panel { position: fixed; top: 0; left: 0; width: 270px; height: 100%; background: var(--card); z-index: 201; padding: 1.5rem; transform: translateX(-100%); transition: transform 0.3s; overflow-y: auto; }
-        .menu-panel.open { transform: translateX(0); }
-        .menu-item { padding: 0.7rem 0; cursor: pointer; border-bottom: 1px solid var(--border); }
-        .menu-item:hover { color: var(--accent); }
-        .arcos-lista { margin-top: 0.5rem; padding-left: 0; display: none; }
-        .arco-nome { padding: 0.6rem; cursor: pointer; border-radius: 5px; }
-        .arco-nome:hover { background: rgba(99,102,241,0.1); color: var(--accent); }
-        .capitulos-lista { padding-left: 1rem; display: none; }
-        .capitulo-link { padding: 0.5rem; cursor: pointer; border-radius: 4px; }
-        .capitulo-link:hover { background: rgba(99,102,241,0.1); color: var(--accent); }
-        .page { padding: 1rem; max-width: 800px; margin: 0 auto; display: none; }
-        .page.active { display: block; }
-        h2 { text-align: center; margin-bottom: 1rem; color: var(--accent); }
-        .home-content { text-align: center; padding: 2rem 1rem; }
-        .texto-capitulo { font-size: 1rem; line-height: 1.8; background: var(--card); padding: 1.2rem; border-radius: 8px; margin-bottom: 1rem; }
-        .texto-capitulo img { max-width: 100%; border-radius: 6px; margin: 1rem auto; display: block; }
-        .navegacao { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
-        .personagens-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
-        .personagem-card { background: var(--card); border-radius: 8px; overflow: hidden; }
-        .personagem-foto { width: 100%; height: 160px; object-fit: cover; background: var(--border); }
-        .personagem-info { padding: 1rem; }
-        .personagem-nome { font-size: 1rem; font-weight: bold; margin-bottom: 0.5rem; }
-        .personagem-detalhes { font-size: 0.9rem; line-height: 1.6; }
-        input, textarea { width: 100%; padding: 0.7rem; margin: 0.5rem 0; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 5px; font-size: 0.95rem; }
-        textarea { min-height: 120px; resize: vertical; }
-        .senha-area { text-align: center; padding: 2rem 1rem; }
-        .lista-item { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem; background: var(--card); border-radius: 5px; margin: 0.5rem 0; }
-        .abas-autor { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
-        .aba-btn { padding: 0.5rem 0.8rem; background: var(--card); border: none; border-radius: 5px; }
-        .aba-btn.active { background: var(--accent); color: white; }
-        .dica { font-size: 0.85rem; color: #888; margin-top: -0.3rem; margin-bottom: 0.5rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17131f">
+<title>Só MLD</title>
+
+<style>
+:root{
+    --bg:#f7f5fa;
+    --surface:#ffffff;
+    --surface2:#f0ecf5;
+    --text:#211b29;
+    --muted:#746b7d;
+    --accent:#7c3aed;
+    --accent2:#a855f7;
+    --border:#ded7e7;
+    --danger:#dc2626;
+    --warning:#d97706;
+    --success:#16a34a;
+    --shadow:0 10px 35px rgba(30,15,50,.12);
+    --reader-size:18px;
+    --reader-width:760px;
+}
+
+body.dark{
+    --bg:#0e0b12;
+    --surface:#17131f;
+    --surface2:#211a2c;
+    --text:#eee8f5;
+    --muted:#aaa0b5;
+    --border:#352b42;
+    --shadow:0 12px 40px rgba(0,0,0,.35);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    transition:.25s;
+}
+
+button,input,textarea,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+header{
+    height:64px;
+    background:rgba(255,255,255,.92);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(12px);
+}
+
+body.dark header{
+    background:rgba(23,19,31,.92);
+}
+
+.logo{
+    font-weight:900;
+    letter-spacing:.5px;
+    color:var(--accent);
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:12px;
+    background:var(--surface2);
+    color:var(--text);
+    font-size:20px;
+}
+
+.primary,
+.secondary,
+.danger{
+    border:0;
+    border-radius:10px;
+    padding:11px 15px;
+    font-weight:700;
+}
+
+.primary{
+    background:var(--accent);
+    color:#fff;
+}
+
+.secondary{
+    background:var(--surface2);
+    color:var(--text);
+    border:1px solid var(--border);
+}
+
+.danger{
+    background:var(--danger);
+    color:white;
+}
+
+.full{
+    width:100%;
+}
+
+.page{
+    display:none;
+    width:min(1100px,100%);
+    margin:auto;
+    padding:22px 16px 70px;
+}
+
+.page.active{
+    display:block;
+}
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.58);
+    display:none;
+    z-index:80;
+}
+
+.overlay.open{
+    display:block;
+}
+
+.side-menu{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:min(320px,86vw);
+    background:var(--surface);
+    z-index:90;
+    transform:translateX(-105%);
+    transition:.25s;
+    padding:20px;
+    overflow:auto;
+}
+
+.side-menu.open{
+    transform:translateX(0);
+}
+
+.menu-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.menu-item{
+    padding:14px 10px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+    font-weight:700;
+}
+
+.menu-item:hover{
+    color:var(--accent);
+}
+
+.menu-sub{
+    display:none;
+    padding:8px 0 8px 14px;
+}
+
+.menu-sub.open{
+    display:block;
+}
+
+.menu-arc{
+    margin:5px 0;
+}
+
+.menu-arc-title{
+    padding:10px;
+    border-radius:8px;
+    background:var(--surface2);
+    cursor:pointer;
+}
+
+.menu-caps{
+    padding-left:12px;
+}
+
+.menu-cap{
+    padding:9px;
+    color:var(--muted);
+    cursor:pointer;
+}
+
+.menu-cap:hover{
+    color:var(--accent);
+}
+
+.hero{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:28px;
+    align-items:center;
+    padding:35px 0;
+}
+
+.cover{
+    width:100%;
+    aspect-ratio:2/3;
+    background:
+        radial-gradient(circle at 30% 20%,#8b5cf6 0,transparent 32%),
+        linear-gradient(145deg,#191120,#3a1756);
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    position:relative;
+}
+
+.cover img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.cover-placeholder{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:30px;
+    font-weight:900;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:clamp(35px,8vw,64px);
+    line-height:.95;
+    margin-bottom:16px;
+}
+
+.hero p{
+    line-height:1.7;
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.section-title{
+    margin:25px 0 14px;
+}
+
+.card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+    box-shadow:var(--shadow);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+}
+
+.arc-card{
+    cursor:pointer;
+}
+
+.arc-card:hover{
+    border-color:var(--accent);
+}
+
+.arc-card small{
+    color:var(--muted);
+}
+
+.notice{
+    margin:10px 0;
+    border-left:4px solid var(--accent);
+}
+
+.notice.content-warning{
+    border-left-color:var(--warning);
+}
+
+.reader{
+    max-width:var(--reader-width);
+    margin:auto;
+}
+
+.reader-meta{
+    color:var(--accent);
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    margin-bottom:7px;
+}
+
+.reader h1{
+    margin-bottom:20px;
+}
+
+.reader-content{
+    font-size:var(--reader-size);
+    line-height:1.9;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:clamp(18px,5vw,40px);
+}
+
+.reader-content p{
+    margin-bottom:1.3em;
+}
+
+.reader-content img{
+    display:block;
+    max-width:100%;
+    max-height:700px;
+    object-fit:contain;
+    margin:25px auto;
+    border-radius:12px;
+}
+
+.reader-nav{
+    display:flex;
+    gap:10px;
+    justify-content:space-between;
+    margin-top:15px;
+}
+
+.character{
+    overflow:hidden;
+    padding:0;
+}
+
+.character img{
+    width:100%;
+    height:260px;
+    object-fit:cover;
+    background:var(--surface2);
+}
+
+.character-body{
+    padding:16px;
+}
+
+.character-body h3{
+    margin-bottom:8px;
+}
+
+.character-body p{
+    line-height:1.6;
+    color:var(--muted);
+    white-space:pre-wrap;
+}
+
+.route-card{
+    min-height:180px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.route-card h3{
+    color:var(--accent);
+    margin-bottom:8px;
+}
+
+.route-card p{
+    color:var(--muted);
+    line-height:1.5;
+    margin-bottom:12px;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:120;
+    background:rgba(0,0,0,.7);
+    display:none;
+    padding:16px;
+    overflow:auto;
+}
+
+.modal.open{
+    display:block;
+}
+
+.modal-box{
+    width:min(900px,100%);
+    background:var(--surface);
+    margin:30px auto;
+    border-radius:18px;
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+.modal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px;
+    border-bottom:1px solid var(--border);
+}
+
+.modal-body{
+    padding:18px;
+}
+
+.field{
+    margin-bottom:15px;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    font-weight:800;
+    margin-bottom:6px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    background:var(--bg);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px;
+    outline:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:var(--accent);
+}
+
+textarea{
+    min-height:140px;
+    resize:vertical;
+    line-height:1.6;
+}
+
+.editor{
+    min-height:330px;
+}
+
+.tabs{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding-bottom:12px;
+    margin-bottom:15px;
+}
+
+.tab{
+    white-space:nowrap;
+    border:1px solid var(--border);
+    background:var(--surface2);
+    color:var(--text);
+    border-radius:10px;
+    padding:10px 13px;
+}
+
+.tab.active{
+    background:var(--accent);
+    color:white;
+}
+
+.tab-content{
+    display:none;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+.admin-list{
+    margin-top:15px;
+}
+
+.admin-item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center;
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin-bottom:8px;
+}
+
+.admin-item button{
+    padding:7px 9px;
+}
+
+.settings-row{
+    margin-bottom:18px;
+}
+
+.range-info{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.message{
+    margin-top:10px;
+    font-size:14px;
+    font-weight:700;
+}
+
+.empty{
+    color:var(--muted);
+    text-align:center;
+    padding:25px;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:999px;
+    background:var(--surface2);
+    color:var(--muted);
+    font-size:12px;
+    margin-bottom:8px;
+}
+
+.route-admin-button{
+    margin-top:18px;
+    padding:16px;
+    border:1px dashed var(--accent);
+    border-radius:14px;
+    background:rgba(124,58,237,.08);
+}
+
+@media(max-width:650px){
+    .hero{
+        grid-template-columns:1fr;
+    }
+
+    .cover{
+        width:min(230px,75%);
+        margin:auto;
+    }
+
+    .hero-copy{
+        text-align:center;
+    }
+
+    .reader-nav{
+        flex-direction:column;
+    }
+
+    .reader-nav button{
+        width:100%;
+    }
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <button class="icon-btn" id="menuToggle">☰</button>
-        <div class="logo">Light Novel</div>
-        <div>
-            <button id="themeToggle">🌙</button>
-            <button id="autorBtn">✍️</button>
-        </div>
-    </header>
 
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <div class="menu-panel" id="menuPanel">
-        <h3 style="margin-bottom: 1rem; color: var(--accent);">Menu</h3>
-        <div class="menu-item" id="irInicio">🏠 Página Inicial</div>
-        <div class="menu-item" id="arcosToggle">📚 Arcos e Capítulos ▼</div>
-        <div class="arcos-lista" id="arcosLista"></div>
-        <div class="menu-item" id="irPersonagens">👤 Personagens</div>
+<header>
+    <button class="icon-btn" onclick="openMenu()">☰</button>
+    <div class="logo" id="headerTitle">SÓ MLD</div>
+    <button class="icon-btn" onclick="openSettings()">⚙️</button>
+</header>
+
+<div class="overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+<aside class="side-menu" id="sideMenu">
+    <div class="menu-head">
+        <h2>Menu</h2>
+        <button class="icon-btn" onclick="closeMenu()">✕</button>
     </div>
 
-    <div class="page active" id="paginaInicial">
-        <div class="home-content">
-            <h1>Bem-vindo ✨</h1>
-            <p>Sua história, seus personagens, seu mundo.</p>
-            <button style="margin-top: 1rem; padding: 0.7rem 2rem; font-size: 1rem;" id="btnComecarLer">📖 Começar a Ler</button>
-        </div>
+    <div class="menu-item" onclick="showPage('home')">🏠 Início</div>
+
+    <div class="menu-item" onclick="toggleArcMenu()">
+        📚 Arcos e capítulos
     </div>
 
-    <div class="page" id="paginaLeitura">
-        <h2 id="tituloCapitulo">Escolha um capítulo</h2>
-        <div class="texto-capitulo" id="textoCapitulo">
-            <p style="text-align:center;opacity:0.7">Abra o menu e escolha um capítulo 📖</p>
-        </div>
-        <div class="navegacao">
-            <button id="btnAnterior">← Anterior</button>
-            <button id="btnProximo">Próximo →</button>
-        </div>
+    <div class="menu-sub" id="arcMenu"></div>
+
+    <div class="menu-item" onclick="showPage('characters')">
+        👤 Personagens
     </div>
 
-    <div class="page" id="paginaPersonagens">
-        <h2>👤 Personagens</h2>
-        <div class="personagens-grid" id="personagensLista">
-            <p style="grid-column:1/-1;text-align:center;opacity:0.7;padding:2rem;">Nenhum personagem ainda.</p>
-        </div>
+    <div class="menu-item" onclick="showPage('routes')">
+        🔀 Rotas alternativas
     </div>
 
-    <div class="senha-area page" id="senhaAutor">
-        <h2>🔐 Entrar</h2>
-        <input type="password" id="senhaInput" placeholder="Senha">
-        <button id="entrarAutor">Entrar</button>
+    <div class="menu-item" onclick="showPage('notices')">
+        📢 Avisos
     </div>
 
-    <div class="page" id="painelAutor">
-        <h2>✍️ Painel do Autor</h2>
-        <div class="abas-autor">
-            <button class="aba-btn active" data-aba="arcos">📚 Arcos</button>
-            <button class="aba-btn" data-aba="capitulos">📝 Capítulos</button>
-            <button class="aba-btn" data-aba="personagens">👤 Personagens</button>
-        </div>
-
-        <div id="aba-arcos">
-            <h3 style="margin-top: 1rem;">Novo Arco</h3>
-            <input type="text" id="novoArcoNome" placeholder="Nome do arco">
-            <button id="btnAdicionarArco">➕ Criar</button>
-            <div id="listaArcoAutor" style="margin-top: 1rem;"></div>
-        </div>
-
-        <div id="aba-capitulos" style="display: none;">
-            <h3 style="margin-top: 1rem;">Novo Capítulo</h3>
-            <select id="selArco">
-                <option value="">Escolha o arco</option>
-            </select>
-            <input type="number" id="selCapitulo" placeholder="Nº do capítulo">
-            <input type="text" id="tituloNovo" placeholder="Título">
-            <textarea id="textoNovo" placeholder="Escreva seu capítulo aqui...&#10;&#10;Para adicionar imagem, cole o link da imagem em uma linha separada."></textarea>
-            <p class="dica">💡 Para imagem: pegue o link de uma imagem na internet e cole no texto. Vai aparecer automaticamente.</p>
-            <button id="btnPublicar">🚀 Publicar</button>
-            <p id="msgPublicacao" style="margin-top: 0.5rem;"></p>
-        </div>
-
-        <div id="aba-personagens" style="display: none;">
-            <h3 style="margin-top: 1rem;">Novo Personagem</h3>
-            <input type="text" id="nomePersonagem" placeholder="Nome">
-            <input type="text" id="fotoLink" placeholder="Link da foto (opcional)">
-            <input type="date" id="aniversarioPersonagem">
-            <input type="text" id="gostaPersonagem" placeholder="Gosta de">
-            <input type="text" id="naoGostaPersonagem" placeholder="Não gosta de">
-            <textarea id="descPersonagem" placeholder="Descrição"></textarea>
-            <button id="btnAddPersonagem">➕ Adicionar</button>
-            <p id="msgPersonagem" style="margin-top: 0.5rem;"></p>
-            <h3 style="margin-top: 2rem;">Lista</h3>
-            <div id="listaPersonagensAutor"></div>
-        </div>
-
-        <button style="margin-top: 2rem; background: #888;" id="sairAutor">Sair</button>
+    <div class="menu-item" onclick="openAuthorLogin()">
+        🔐 Painel do Autor
     </div>
+</aside>
+
+<!-- INÍCIO -->
+
+<main class="page active" id="page-home">
+
+    <section class="hero">
+
+        <div class="cover">
+            <div class="cover-placeholder" id="coverPlaceholder">
+                SÓ<br>MLD
+            </div>
+            <img id="coverImage" alt="Capa da novel">
+        </div>
+
+        <div class="hero-copy">
+            <span class="badge">LIGHT NOVEL</span>
+
+            <h1 id="novelTitle">
+                Só MLD
+            </h1>
+
+            <p id="novelSynopsis">
+                Sua história começa aqui.
+            </p>
+
+            <button class="primary" onclick="startReading()">
+                📖 Começar a ler
+            </button>
+        </div>
+
+    </section>
+
+    <h2 class="section-title">Arcos</h2>
+
+    <div class="grid" id="homeArcs"></div>
+
+    <h2 class="section-title">Últimos avisos</h2>
+
+    <div id="homeNotices"></div>
+
+</main>
+
+<!-- LEITOR -->
+
+<main class="page" id="page-reader">
+
+    <div class="reader">
+
+        <div class="reader-meta" id="readerArc">
+            Capítulo
+        </div>
+
+        <h1 id="readerTitle">
+            Escolha um capítulo
+        </h1>
+
+        <div class="reader-content" id="readerContent">
+            <p>Abra o menu e escolha um capítulo.</p>
+        </div>
+
+        <div class="reader-nav">
+            <button class="secondary" onclick="previousChapter()">
+                ← Anterior
+            </button>
+
+            <button class="secondary" onclick="showPage('home')">
+                🏠 Início
+            </button>
+
+            <button class="primary" onclick="nextChapter()">
+                Próximo →
+            </button>
+        </div>
+
+    </div>
+
+</main>
+
+<!-- PERSONAGENS -->
+
+<main class="page" id="page-characters">
+
+    <h1 class="section-title">Personagens</h1>
+
+    <p style="color:var(--muted);margin-bottom:20px;">
+        Fichas extras para conhecer melhor os personagens.
+        Estas informações não precisam fazer parte oficialmente da obra.
+    </p>
+
+    <div class="grid" id="charactersGrid"></div>
+
+</main>
+
+<!-- ROTAS -->
+
+<main class="page" id="page-routes">
+
+    <h1 class="section-title">Rotas alternativas</h1>
+
+    <p style="color:var(--muted);margin-bottom:20px;">
+        Histórias alternativas separadas da rota principal.
+    </p>
+
+    <div class="grid" id="routesGrid"></div>
+
+</main>
+
+<!-- AVISOS -->
+
+<main class="page" id="page-notices">
+
+    <h1 class="section-title">Avisos</h1>
+
+    <div id="noticesList"></div>
+
+</main>
+
+<!-- CONFIGURAÇÕES -->
+
+<div class="modal" id="settingsModal">
+
+    <div class="modal-box" style="max-width:550px;">
+
+        <div class="modal-head">
+            <h2>⚙️ Leitura</h2>
+            <button class="icon-btn" onclick="closeSettings()">✕</button>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="settings-row">
+
+                <label>Modo</label>
+
+                <select id="themeSetting" onchange="changeTheme()">
+                    <option value="light">Claro</option>
+                    <option value="dark">Escuro</option>
+                </select>
+
+            </div>
+
+            <div class="settings-row">
+
+                <label>Tamanho da fonte</label>
+
+                <input
+                    type="range"
+                    min="14"
+                    max="28"
+                    value="18"
+                    id="fontSetting"
+                    oninput="changeFont()"
+                >
+
+                <div class="range-info" id="fontValue">
+                    18px
+                </div>
+
+            </div>
+
+            <div class="settings-row">
+
+                <label>Largura do leitor</label>
+
+                <input
+                    type="range"
+                    min="500"
+                    max="1000"
+                    value="760"
+                    id="widthSetting"
+                    oninput="changeWidth()"
+                >
+
+                <div class="range-info" id="widthValue">
+                    760px
+                </div>
+
+            </div>
+
+            <div class="settings-row">
+
+                <label>Cor principal</label>
+
+                <select id="accentSetting" onchange="changeAccent()">
+
+                    <option value="#7c3aed">Roxo</option>
+                    <option value="#2563eb">Azul</option>
+                    <option value="#dc2626">Vermelho</option>
+                    <option value="#db2777">Rosa</option>
+                    <option value="#059669">Verde</option>
+                    <option value="#d97706">Laranja</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- LOGIN -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box" style="max-width:450px;">
+
+        <div class="modal-head">
+            <h2>🔐 Autor</h2>
+            <button class="icon-btn" onclick="closeLogin()">✕</button>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="field">
+                <label>Senha</label>
+                <input
+                    type="password"
+                    id="authorPassword"
+                    placeholder="Digite sua senha"
+                >
+            </div>
+
+            <button class="primary full" onclick="loginAuthor()">
+                Entrar
+            </button>
+
+            <div class="message" id="loginMessage"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- PAINEL PRINCIPAL -->
+
+<div class="modal" id="authorModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+    <h2>✍️ Painel do Autor</h2>
+
+    <button class="icon-btn" onclick="closeAuthor()">
+        ✕
+    </button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="tabs">
+
+    <button class="tab active" onclick="authorTab('site',this)">
+        Site
+    </button>
+
+    <button class="tab" onclick="authorTab('arcs',this)">
+        Arcos
+    </button>
+
+    <button class="tab" onclick="authorTab('chapters',this)">
+        Capítulos
+    </button>
+
+    <button class="tab" onclick="authorTab('characters',this)">
+        Personagens
+    </button>
+
+    <button class="tab" onclick="authorTab('notices',this)">
+        Avisos
+    </button>
+
+</div>
+
+<!-- SITE -->
+
+<section class="tab-content active" id="author-site">
+
+    <h3>Informações da novel</h3>
+
+    <div class="field">
+        <label>Título</label>
+        <input id="editNovelTitle">
+    </div>
+
+    <div class="field">
+        <label>Sinopse</label>
+        <textarea id="editSynopsis"></textarea>
+    </div>
+
+    <div class="field">
+        <label>Capa</label>
+        <input
+            type="file"
+            accept="image/*"
+            id="coverUpload"
+        >
+    </div>
+
+    <button class="primary" onclick="saveSiteInfo()">
+        💾 Salvar alterações
+    </button>
+
+</section>
+
+<!-- ARCOS -->
+
+<section class="tab-content" id="author-arcs">
+
+    <h3>Criar arco</h3>
+
+    <div class="field">
+        <label>Nome</label>
+        <input
+            id="newArcName"
+            placeholder="Ex: Arco Sirius"
+        >
+    </div>
+
+    <div class="field">
+        <label>Descrição</label>
+        <input
+            id="newArcDescription"
+            placeholder="Descrição curta"
+        >
+    </div>
+
+    <button class="primary" onclick="createArc()">
+        + Criar arco
+    </button>
+
+    <div class="admin-list" id="adminArcList"></div>
+
+</section>
+
+<!-- CAPÍTULOS -->
+
+<section class="tab-content" id="author-chapters">
+
+    <h3>Editor da obra principal</h3>
+
+    <div class="field">
+        <label>Arco</label>
+        <select id="chapterArc"></select>
+    </div>
+
+    <div class="field">
+        <label>Número do capítulo</label>
+        <input
+            type="number"
+            id="chapterNumber"
+            min="1"
+            placeholder="1"
+        >
+    </div>
+
+    <div class="field">
+        <label>Título</label>
+        <input
+            id="chapterTitle"
+            placeholder="Título do capítulo"
+        >
+    </div>
+
+    <div class="field">
+
+        <label>Texto</label>
+
+        <textarea
+            class="editor"
+            id="chapterText"
+            placeholder="Escreva o capítulo aqui...
+
+Separe os parágrafos deixando uma linha vazia."
+        ></textarea>
+
+    </div>
+
+    <div class="field">
+        <label>Ilustração do capítulo</label>
+        <input
+            type="file"
+            accept="image/*"
+            id="chapterImage"
+        >
+    </div>
+
+    <button class="secondary" onclick="saveChapterDraft()">
+        💾 Salvar rascunho
+    </button>
+
+    <button class="primary" onclick="publishChapter()">
+        🚀 Publicar
+    </button>
+
+    <div class="message" id="chapterMessage"></div>
+
+</section>
+
+<!-- PERSONAGENS -->
+
+<section class="tab-content" id="author-characters">
+
+    <h3>Ficha de personagem</h3>
+
+    <p style="color:var(--muted);margin:8px 0 15px;">
+        Área extra para conhecer o personagem.
+        Não precisa representar informações oficiais da história.
+    </p>
+
+    <div class="field">
+        <label>Nome</label>
+        <input id="characterName">
+    </div>
+
+    <div class="field">
+        <label>Imagem</label>
+        <input
+            type="file"
+            accept="image/*"
+            id="characterImage"
+        >
+    </div>
+
+    <div class="field">
+        <label>Aniversário</label>
+        <input
+            type="text"
+            id="characterBirthday"
+            placeholder="Ex: 23/09"
+        >
+    </div>
+
+    <div class="field">
+        <label>Gosta de</label>
+        <input id="characterLikes">
+    </div>
+
+    <div class="field">
+        <label>Não gosta de</label>
+        <input id="characterDislikes">
+    </div>
+
+    <div class="field">
+        <label>Descrição / curiosidades</label>
+        <textarea id="characterDescription"></textarea>
+    </div>
+
+    <button class="primary" onclick="createCharacter()">
+        + Adicionar personagem
+    </button>
+
+    <div class="admin-list" id="adminCharacterList"></div>
+
+</section>
+
+<!-- AVISOS -->
+
+<section class="tab-content" id="author-notices">
+
+    <h3>Aviso do autor</h3>
+
+    <div class="field">
+        <textarea
+            id="authorNoticeText"
+            placeholder="Escreva o aviso..."
+        ></textarea>
+    </div>
+
+    <button class="primary" onclick="publishNotice('author')">
+        📢 Publicar aviso
+    </button>
+
+    <hr style="border:0;border-top:1px solid var(--border);margin:25px 0;">
+
+    <h3>Aviso de conteúdo</h3>
+
+    <div class="field">
+        <textarea
+            id="contentNoticeText"
+            placeholder="Ex: Este capítulo contém temas sensíveis..."
+        ></textarea>
+    </div>
+
+    <button class="primary" onclick="publishNotice('content')">
+        ⚠️ Publicar aviso
+    </button>
+
+    <div class="admin-list" id="adminNoticeList"></div>
+
+</section>
+
+<div class="route-admin-button">
+
+    <strong>🔀 Rotas alternativas</strong>
+
+    <p style="color:var(--muted);margin:7px 0 12px;">
+        As rotas possuem um painel separado da obra principal.
+    </p>
+
+    <button class="primary" onclick="openRouteAuthor()">
+        Abrir painel das rotas
+    </button>
+
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- SEGUNDO PAINEL -->
+
+<div class="modal" id="routeAuthorModal">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+    <h2>🔀 Painel das Rotas</h2>
+
+    <button class="icon-btn" onclick="closeRouteAuthor()">
+        ✕
+    </button>
+
+</div>
+
+<div class="modal-body">
+
+    <div class="field">
+
+        <label>Escolha a rota</label>
+
+        <select
+            id="routeSelect"
+            onchange="loadRouteEditor()"
+        ></select>
+
+    </div>
+
+    <div class="field">
+
+        <label>Número do capítulo</label>
+
+        <input
+            type="number"
+            id="routeChapterNumber"
+            min="1"
+        >
+
+    </div>
+
+    <div class="field">
+
+        <label>Título</label>
+
+        <input id="routeChapterTitle">
+
+    </div>
+
+    <div class="field">
+
+        <label>Texto</label>
+
+        <textarea
+            class="editor"
+            id="routeChapterText"
+            placeholder="Escreva a rota alternativa aqui..."
+        ></textarea>
+
+    </div>
+
+    <button class="secondary" onclick="saveRouteDraft()">
+        💾 Salvar rascunho
+    </button>
+
+    <button class="primary" onclick="publishRouteChapter()">
+        🚀 Publicar na rota
+    </button>
+
+    <div class="message" id="routeMessage"></div>
+
+</div>
+</div>
+</div>
 
 <script>
-let novelData = { arcos: {}, personagens: [], proximoId: 1, leituraAtual: { a: null, c: null } };
 
-function carregar() {
-    const s = localStorage.getItem('novelDataV7');
-    if (s) novelData = JSON.parse(s);
-    atualizarTudo();
-}
-function salvar() {
-    localStorage.setItem('novelDataV7', JSON.stringify(novelData));
-    atualizarTudo();
-}
-function atualizarTudo() {
-    atualizarMenuArcos();
-    atualizarSelectArcos();
-    atualizarListaArco();
-    atualizarLeitura();
-    atualizarPersonagens();
-}
-function mostrarPagina(id) {
-    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-    document.getElementById(id).style.display = 'block';
-    fecharMenu();
-}
-function fecharMenu() {
-    document.getElementById('menuOverlay').style.display = 'none';
-    document.getElementById('menuPanel').classList.remove('open');
-    document.getElementById('arcosLista').style.display = 'none';
-}
-function abrirMenu() {
-    document.getElementById('menuOverlay').style.display = 'block';
-    document.getElementById('menuPanel').classList.add('open');
-}
-function atualizarMenuArcos() {
-    const c = document.getElementById('arcosLista');
-    c.innerHTML = '';
-    const ids = Object.keys(novelData.arcos).sort((a,b)=>Number(a)-Number(b));
-    ids.forEach(id => {
-        const arco = novelData.arcos[id];
-        const div = document.createElement('div');
-        div.className = 'arco-nome';
-        div.textContent = '📁 ' + arco.nome;
-        div.onclick = () => {
-            const caps = document.getElementById('caps-'+id);
-            caps.style.display = caps.style.display === 'block' ? 'none' : 'block';
-        };
-        const capsDiv = document.createElement('div');
-        capsDiv.id = 'caps-'+id;
-        capsDiv.className = 'capitulos-lista';
-        const nums = Object.keys(arco.capitulos).map(Number).sort((a,b)=>a-b);
-        nums.forEach(n => {
-            const capDiv = document.createElement('div');
-            capDiv.className = 'capitulo-link';
-            capDiv.textContent = n + '. ' + arco.capitulos[n].titulo;
-            capDiv.onclick = () => abrirCapitulo(id, n);
-            capsDiv.appendChild(capDiv);
-        });
-        c.appendChild(div);
-        c.appendChild(capsDiv);
-    });
-}
-function atualizarSelectArcos() {
-    const s = document.getElementById('selArco');
-    s.innerHTML = '<option value="">Escolha o arco</option>';
-    Object.keys(novelData.arcos).forEach(id => {
-        const o = document.createElement('option');
-        o.value = id;
-        o.textContent = novelData.arcos[id].nome;
-        s.appendChild(o);
-    });
-}
-function atualizarListaArco() {
-    const c = document.getElementById('listaArcoAutor');
-    c.innerHTML = '';
-    Object.keys(novelData.arcos).forEach(id => {
-        const arco = novelData.arcos[id];
-        const div = document.createElement('div');
-        div.className = 'lista-item';
-        div.innerHTML = `<span>${arco.nome} (${Object.keys(arco.capitulos).length} capítulos)</span>
-            <button class="danger" data-id="${id}">🗑️</button>`;
-        div.querySelector('.danger').onclick = () => {
-            if (confirm('Excluir?')) { delete novelData.arcos[id]; salvar(); }
-        };
-        c.appendChild(div);
-    });
-}
-function abrirCapitulo(a, c) {
-    novelData.leituraAtual = { a, c };
-    mostrarPagina('paginaLeitura');
-    atualizarLeitura();
-}
-function atualizarLeitura() {
-    const {a, c} = novelData.leituraAtual;
-    if (!a || !novelData.arcos[a]) {
-        document.getElementById('tituloCapitulo').textContent = 'Escolha um capítulo';
-        document.getElementById('textoCapitulo').innerHTML = '<p style="text-align:center;opacity:0.7">Abra o menu 📖</p>';
-        return;
-    }
-    const arco = novelData.arcos[a];
-    const cap = arco.capitulos[c];
-    document.getElementById('tituloCapitulo').textContent = arco.nome + ' — Capítulo ' + c;
-    document.getElementById('textoCapitulo').innerHTML = cap.texto;
-}
-function atualizarPersonagens() {
-    const c = document.getElementById('personagensLista');
-    if (!novelData.personagens.length) {
-        c.innerHTML = '<p style="grid-column:1/-1;text-align:center;opacity:0.7;padding:2rem;">Nenhum personagem ainda.</p>';
-    } else {
-        c.innerHTML = '';
-        novelData.personagens.forEach(p => {
-            const card = document.createElement('div');
-            card.className = 'personagem-card';
-            card.innerHTML = `
-                <img src="${p.foto}" class="personagem-foto" alt="${p.nome}">
-                <div class="personagem-info">
-                    <div class="personagem-nome">${p.nome}</div>
-                    <div class="personagem-detalhes">
-                        ${p.aniversario ? `<p>🎂 ${p.aniversario}</p>` : ''}
-                        ${p.gosta ? `<p>❤️ ${p.gosta}</p>` : ''}
-                        ${p.naoGosta ? `<p>💔 ${p.naoGosta}</p>` : ''}
-                        ${p.descricao ? `<p style="margin-top:0.5rem">${p.descricao}</p>` : ''}
-                    </div>
-                </div>`;
-            c.appendChild(card);
-        });
-    }
-    const listaAutor = document.getElementById('listaPersonagensAutor');
-    listaAutor.innerHTML = '';
-    novelData.personagens.forEach((p, i) => {
-        const div = document.createElement('div');
-        div.className = 'lista-item';
-        div.innerHTML = `<span>${p.nome}</span><button class="danger" data-i="${i}">🗑️</button>`;
-        div.querySelector('.danger').onclick = () => {
-            if (confirm('Excluir?')) { novelData.personagens.splice(i, 1); salvar(); }
-        };
-        listaAutor.appendChild(div);
-    });
-}
-function processarTexto(texto) {
-    const linhas = texto.split('\n');
-    let html = '';
-    linhas.forEach(l => {
-        const t = l.trim();
-        if (t.match(/\.(jpg|jpeg|png|gif|webp)$/i) && (t.startsWith('http://') || t.startsWith('https://'))) {
-            html += `<img src="${t}" alt="Imagem">`;
-        } else {
-            html += (l || '&nbsp;') + '<br>';
-        }
-    });
-    return html;
-}
+/* =========================
+   BANCO LOCAL
+========================= */
 
-// EVENTOS
-document.getElementById('menuToggle').onclick = abrirMenu;
-document.getElementById('menuOverlay').onclick = fecharMenu;
-document.getElementById('irInicio').onclick = () => mostrarPagina('paginaInicial');
-document.getElementById('irPersonagens').onclick = () => mostrarPagina('paginaPersonagens');
-document.getElementById('arcosToggle').onclick = () => {
-    const l = document.getElementById('arcosLista');
-    l.style.display = l.style.display === 'block' ? 'none' : 'block';
-};
-document.getElementById('themeToggle').onclick = () => {
-    document.body.classList.toggle('dark-mode');
-};
-document.getElementById('btnComecarLer').onclick = () => mostrarPagina('paginaLeitura');
-document.getElementById('autorBtn').onclick = () => mostrarPagina('senhaAutor');
-document.getElementById('entrarAutor').onclick = () => {
-    if (document.getElementById('senhaInput').value === '1234') mostrarPagina('painelAutor');
-    else alert('Senha errada');
-};
-document.getElementById('sairAutor').onclick = () => mostrarPagina('paginaInicial');
-document.getElementById('btnAdicionarArco').onclick = () => {
-    const n = document.getElementById('novoArcoNome').value.trim();
-    if (!n) return alert('Digite o nome');
-    novelData.arcos[novelData.proximoId++] = { nome: n, capitulos: {} };
-    salvar();
-    document.getElementById('novoArcoNome').value = '';
-};
-document.querySelectorAll('.aba-btn').forEach(btn => {
-    btn.onclick = () => {
-        document.querySelectorAll('.aba-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const aba = btn.dataset.aba;
-        document.getElementById('aba-arcos').style.display = aba === 'arcos' ? 'block' : 'none';
-        document.getElementById('aba-capitulos').style.display = aba === 'capitulos' ? 'block' : 'none';
-        document.getElementById('aba-personagens').style.display = aba === 'personagens' ? 'block' : 'none';
-    };
-});
-document.getElementById('btnPublicar').onclick = () => {
-    const a = document.getElementById('selArco').value;
-    const c = document.getElementById('selCapitulo').value;
-    const t = document.getElementById('tituloNovo').value || 'Capítulo ' + c;
-    const tx = document.getElementById('textoNovo').value;
-    const msg = document.getElementById('msgPublicacao');
-    if (!a) { msg.textContent = '⚠️ Escolha um arco'; msg.style.color = 'red'; return; }
-    if (!c || !tx.trim()) { msg.textContent = '⚠️ Preencha tudo'; msg.style.color = 'red'; return; }
-    novelData.arcos[a].capitulos[c] = { titulo: t, texto: processarTexto(tx) };
-    salvar();
-    msg.textContent = '✅ Publicado!'; msg.style.color = 'green';
-    document.getElementById('selCapitulo').value = '';
-    document.getElementById('tituloNovo').value = '';
-    document.getElementById('textoNovo').value = '';
-    setTimeout(() => msg.textContent = '', 3000);
-};
-document.getElementById('btnAddPersonagem').onclick = () => {
-    const n = document.getElementById('nomePersonagem').value.trim();
-    if (!n) return alert('Digite o nome');
-    const link = document.getElementById('fotoLink').value.trim();
-    const foto = link || 'https://via.placeholder.com/300x200?text=Sem+Imagem';
-    const data = document.getElementById('aniversarioPersonagem').value;
-    const aniversario = data ? data.split('-').reverse().join('/') : '';
-    novelData.personagens.push({
-        nome: n,
-        foto: foto,
-        aniversario: aniversario,
-        gosta: document.getElementById('gostaPersonagem').value.trim(),
-        naoGosta: document.getElementById('naoGostaPersonagem').value.trim(),
-        descricao: document.getElementById('descPersonagem').value.trim()
-    });
-    salvar();
-    document.getElementById('nomePersonagem').value = '';
-    document.getElementById('fotoLink').value = '';
-    document.getElementById('aniversarioPersonagem').value = '';
-    document.getElementById('gostaPersonagem').value = '';
-    document.getElementById('naoGostaPersonagem').value = '';
-    document.getElementById('descPersonagem').value = '';
-};
-document.getElementById('btnAnterior').onclick = () => alert('Navegue pelo menu para mudar de capítulo');
-document.getElementById('btnProximo').onclick = () => alert('Navegue pelo menu para mudar de capítulo');
+const STORAGE_KEY = "SO_MLD_SITE_V1";
 
-carregar();
-</script>
-</body>
-</html>
+const ROUTES = [
+    "Rota da Ganância",
+    "Rota da Ira",
+    "Rota da Inveja",
+    "Rota da Preguiça",
+    "Rota da Luxúria",
+    "Rota do Orgulho"
+];
+
+let data = {
+    site:{
+        title:"Só MLD",
+        synopsis:"Sua história começa aqui.",
+        cover:""
+    },
+
+    arcs:[],
+
+    characters:[],
+
+    notices:[],
+
+    routes:{},
+
+    drafts:{
+        main
