@@ -3,502 +3,617 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Só MLD — Prévia do site</title>
+<title>Só MLD</title>
+
 <style>
-:root{--accent:#7c5cff;--bg:#f5f5fa;--panel:#fff;--text:#202033;--muted:#73738a;--line:#e7e5ef;--soft:#eeeaff;--shadow:0 12px 35px #28204d12}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;transition:.2s}
-body.dark{--bg:#111117;--panel:#1b1b25;--text:#f4f2ff;--muted:#aaa7bf;--line:#333240;--soft:#2a2540;--shadow:0 12px 35px #0003}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer;border:0}
+:root{
+  --accent:#7c5cff;
+  --bg:#f5f5fa;
+  --panel:#fff;
+  --text:#202033;
+  --muted:#73738a;
+  --line:#e7e5ef;
+  --soft:#eeeaff;
+  --shadow:0 12px 35px #28204d12
+}
+
+*{
+  box-sizing:border-box
+}
+
+html{
+  scroll-behavior:smooth
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  transition:.2s
+}
+
+body.dark{
+  --bg:#111117;
+  --panel:#1b1b25;
+  --text:#f4f2ff;
+  --muted:#aaa7bf;
+  --line:#333240;
+  --soft:#2a2540;
+  --shadow:0 12px 35px #0003
+}
+
+button,
+input,
+textarea,
+select{
+  font:inherit
+}
+
+button{
+  cursor:pointer;
+  border:0
+}
 
 .topbar{
-height:68px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 max(20px,calc((100vw - 1120px)/2));
-background:var(--panel);
-border-bottom:1px solid var(--line);
-position:sticky;
-top:0;
-z-index:5
+  height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 max(20px,calc((100vw - 1120px)/2));
+  background:var(--panel);
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:5
 }
 
 .brand{
-display:flex;
-gap:11px;
-align-items:center;
-font-weight:850;
-letter-spacing:.2px
+  display:flex;
+  gap:11px;
+  align-items:center;
+  font-weight:850;
+  letter-spacing:.2px
 }
 
 .brand-mark{
-height:39px;
-width:39px;
-border-radius:13px;
-background:var(--accent);
-display:grid;
-place-items:center;
-color:#fff;
-font-weight:900;
-font-size:19px
+  height:39px;
+  width:39px;
+  border-radius:13px;
+  background:var(--accent);
+  display:grid;
+  place-items:center;
+  color:#fff;
+  font-weight:900;
+  font-size:19px
 }
 
 .nav{
-display:flex;
-align-items:center;
-gap:8px
+  display:flex;
+  align-items:center;
+  gap:8px
 }
 
-.nav button,.iconbtn{
-background:transparent;
-color:var(--text);
-padding:9px 12px;
-border-radius:10px
+.nav button,
+.iconbtn{
+  background:transparent;
+  color:var(--text);
+  padding:9px 12px;
+  border-radius:10px
 }
 
-.nav button:hover,.iconbtn:hover{
-background:var(--soft)
+.nav button:hover,
+.iconbtn:hover{
+  background:var(--soft)
 }
 
 .container{
-max-width:1120px;
-margin:auto;
-padding:26px 20px 70px
+  max-width:1120px;
+  margin:auto;
+  padding:26px 20px 70px
 }
 
 .hero{
-display:grid;
-grid-template-columns:minmax(200px,310px) 1fr;
-gap:34px;
-align-items:center;
-background:var(--panel);
-border:1px solid var(--line);
-border-radius:24px;
-padding:26px;
-box-shadow:var(--shadow)
+  display:grid;
+  grid-template-columns:minmax(200px,310px) 1fr;
+  gap:34px;
+  align-items:center;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:26px;
+  box-shadow:var(--shadow)
 }
 
 .cover{
-aspect-ratio:3/4;
-border-radius:17px;
-overflow:hidden;
-position:relative;
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-padding:22px;
-color:#fff;
-background:
-radial-gradient(circle at 70% 20%,#c7a2ff 0,transparent 23%),
-radial-gradient(circle at 30% 65%,#503a9b 0,transparent 34%),
-linear-gradient(145deg,#111326,#39266d 50%,#d06d83);
-box-shadow:0 16px 32px #2a174533
+  aspect-ratio:3/4;
+  border-radius:17px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:22px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 70% 20%,#c7a2ff 0,transparent 23%),
+    radial-gradient(circle at 30% 65%,#503a9b 0,transparent 34%),
+    linear-gradient(145deg,#111326,#39266d 50%,#d06d83);
+  box-shadow:0 16px 32px #2a174533
 }
 
 .cover:before{
-content:"";
-position:absolute;
-inset:12px;
-border:1px solid #ffffff60;
-border-radius:10px
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid #ffffff60;
+  border-radius:10px;
+  z-index:1;
+  pointer-events:none
 }
 
 .cover>*{
-position:relative
+  position:relative;
+  z-index:2
+}
+
+.cover #coverImage{
+  z-index:0
 }
 
 .cover .eyebrow{
-font-size:10px;
-letter-spacing:4px;
-text-transform:uppercase;
-opacity:.8
+  font-size:10px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  opacity:.8
 }
 
 .cover h2{
-font:900 clamp(38px,5vw,58px)/.92 Georgia,serif;
-letter-spacing:2px;
-margin:0;
-text-shadow:0 3px 14px #0008
+  font:900 clamp(38px,5vw,58px)/.92 Georgia,serif;
+  letter-spacing:2px;
+  margin:0;
+  text-shadow:0 3px 14px #0008
 }
 
 .cover .cover-bottom{
-font-size:11px;
-letter-spacing:3px;
-text-transform:uppercase
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase
 }
 
 .pill{
-display:inline-flex;
-align-items:center;
-gap:6px;
-border-radius:999px;
-padding:6px 10px;
-background:var(--soft);
-color:var(--accent);
-font-size:12px;
-font-weight:750
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  border-radius:999px;
+  padding:6px 10px;
+  background:var(--soft);
+  color:var(--accent);
+  font-size:12px;
+  font-weight:750
 }
 
 h1{
-font-size:clamp(34px,5vw,54px);
-line-height:1.05;
-letter-spacing:-1.5px;
-margin:15px 0 13px
+  font-size:clamp(34px,5vw,54px);
+  line-height:1.05;
+  letter-spacing:-1.5px;
+  margin:15px 0 13px
 }
 
 h2{
-letter-spacing:-.5px
+  letter-spacing:-.5px
 }
 
 p{
-color:var(--muted)
+  color:var(--muted)
 }
 
 .hero-desc{
-max-width:580px;
-font-size:16px;
-line-height:1.8
+  max-width:580px;
+  font-size:16px;
+  line-height:1.8
 }
 
 .actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:23px
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:23px
 }
 
 .primary{
-background:var(--accent);
-color:#fff;
-padding:12px 18px;
-border-radius:12px;
-font-weight:750;
-box-shadow:0 7px 18px color-mix(in srgb,var(--accent) 25%,transparent)
+  background:var(--accent);
+  color:#fff;
+  padding:12px 18px;
+  border-radius:12px;
+  font-weight:750;
+  box-shadow:0 7px 18px color-mix(in srgb,var(--accent) 25%,transparent)
 }
 
 .secondary{
-background:var(--soft);
-color:var(--text);
-padding:12px 16px;
-border-radius:12px;
-font-weight:700
+  background:var(--soft);
+  color:var(--text);
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:700
 }
 
 .section-head{
-display:flex;
-align-items:end;
-justify-content:space-between;
-gap:12px;
-margin:34px 0 15px
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:12px;
+  margin:34px 0 15px
 }
 
 .section-head h2{
-margin:0;
-font-size:24px
+  margin:0;
+  font-size:24px
 }
 
 .section-head p{
-margin:4px 0 0;
-font-size:13px
+  margin:4px 0 0;
+  font-size:13px
 }
 
 .grid{
-display:grid;
-grid-template-columns:1.15fr .85fr;
-gap:18px
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  gap:18px
 }
 
 .card{
-background:var(--panel);
-border:1px solid var(--line);
-border-radius:19px;
-padding:20px;
-box-shadow:var(--shadow)
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:19px;
+  padding:20px;
+  box-shadow:var(--shadow)
 }
 
 .arc-list{
-display:grid;
-gap:10px
+  display:grid;
+  gap:10px
 }
 
 .arc{
-width:100%;
-display:flex;
-align-items:center;
-gap:12px;
-text-align:left;
-padding:14px;
-background:var(--bg);
-border:1px solid var(--line);
-border-radius:14px;
-color:var(--text)
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+  padding:14px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:14px;
+  color:var(--text)
 }
 
 .arc.active{
-border-color:var(--accent);
-background:var(--soft)
+  border-color:var(--accent);
+  background:var(--soft)
 }
 
 .arc-num{
-width:39px;
-height:39px;
-display:grid;
-place-items:center;
-border-radius:12px;
-background:var(--panel);
-font-weight:850;
-color:var(--accent)
+  width:39px;
+  height:39px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:var(--panel);
+  font-weight:850;
+  color:var(--accent)
 }
 
 .arc-main{
-flex:1
+  flex:1
 }
 
 .arc-main strong{
-display:block
+  display:block
 }
 
 .arc-main small{
-color:var(--muted)
+  color:var(--muted)
 }
 
 .count{
-font-size:12px;
-color:var(--muted);
-white-space:nowrap
+  font-size:12px;
+  color:var(--muted);
+  white-space:nowrap
 }
 
 .chapters{
-display:grid;
-gap:8px;
-margin-top:14px
+  display:grid;
+  gap:8px;
+  margin-top:14px
 }
 
 .chapter{
-display:flex;
-align-items:center;
-gap:12px;
-padding:12px;
-border:1px solid var(--line);
-border-radius:12px
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px
 }
 
 .chapter .num{
-color:var(--accent);
-font-weight:850
+  color:var(--accent);
+  font-weight:850
 }
 
 .chapter .title{
-flex:1;
-font-weight:650
+  flex:1;
+  font-weight:650
 }
 
 .chapter button{
-background:var(--soft);
-color:var(--accent);
-padding:8px 10px;
-border-radius:9px;
-font-weight:700;
-font-size:12px
+  background:var(--soft);
+  color:var(--accent);
+  padding:8px 10px;
+  border-radius:9px;
+  font-weight:700;
+  font-size:12px
 }
 
 .feature-list{
-display:grid;
-gap:12px
+  display:grid;
+  gap:12px
 }
 
 .feature{
-display:flex;
-gap:12px;
-align-items:flex-start
+  display:flex;
+  gap:12px;
+  align-items:flex-start
 }
 
 .feature-icon{
-flex:0 0 38px;
-height:38px;
-display:grid;
-place-items:center;
-background:var(--soft);
-border-radius:12px;
-font-size:18px
+  flex:0 0 38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  background:var(--soft);
+  border-radius:12px;
+  font-size:18px
 }
 
 .feature strong{
-display:block
+  display:block
 }
 
 .feature small{
-color:var(--muted);
-display:block;
-margin-top:2px
+  color:var(--muted);
+  display:block;
+  margin-top:2px
 }
 
 .reader{
-display:none;
-margin-top:20px
+  display:none;
+  margin-top:20px
 }
 
 .reader.open{
-display:block
+  display:block
 }
 
 .reader-top{
-display:flex;
-justify-content:space-between;
-gap:10px;
-align-items:center
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center
 }
 
 .reader-body{
-max-width:680px;
-margin:25px auto;
-font:18px/1.95 Georgia,serif
+  max-width:680px;
+  margin:25px auto;
+  font:18px/1.95 Georgia,serif
 }
 
 .reader-body h2{
-text-align:center;
-font-size:30px
+  text-align:center;
+  font-size:30px
 }
 
 .reader-body p{
-color:var(--text)
+  color:var(--text)
 }
 
 .reader-nav{
-display:flex;
-justify-content:space-between;
-gap:10px;
-margin-top:22px
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:22px
 }
 
 footer{
-text-align:center;
-padding:26px 20px;
-color:var(--muted);
-font-size:13px
+  text-align:center;
+  padding:32px 20px 10px;
+  color:var(--muted);
+  font-size:13px
 }
 
 .overlay{
-display:none;
-position:fixed;
-inset:0;
-background:#09091188;
-z-index:10;
-justify-content:flex-end
+  display:none;
+  position:fixed;
+  inset:0;
+  background:#09091188;
+  z-index:10;
+  justify-content:flex-end
 }
 
 .overlay.open{
-display:flex
+  display:flex
 }
 
 .drawer{
-width:min(440px,100%);
-height:100%;
-overflow:auto;
-background:var(--panel);
-padding:22px
+  width:min(440px,100%);
+  height:100%;
+  overflow:auto;
+  background:var(--panel);
+  padding:22px
 }
 
 .drawer-head{
-display:flex;
-justify-content:space-between;
-align-items:center
+  display:flex;
+  justify-content:space-between;
+  align-items:center
 }
 
 .close{
-background:var(--soft);
-color:var(--text);
-border-radius:10px;
-padding:8px 12px
+  background:var(--soft);
+  color:var(--text);
+  border-radius:10px;
+  padding:8px 12px
 }
 
 .drawer h2{
-margin-top:25px
+  margin-top:25px
 }
 
 .drawer p{
-font-size:13px
+  font-size:13px
 }
 
 .field{
-display:grid;
-gap:6px;
-margin:14px 0
+  display:grid;
+  gap:6px;
+  margin:14px 0
 }
 
 .field label{
-font-size:13px;
-font-weight:750
+  font-size:13px;
+  font-weight:750
 }
 
 .field input,
 .field textarea,
 .field select{
-width:100%;
-padding:11px 12px;
-border-radius:10px;
-border:1px solid var(--line);
-background:var(--bg);
-color:var(--text)
+  width:100%;
+  padding:11px 12px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:var(--bg);
+  color:var(--text)
 }
 
 .field textarea{
-min-height:82px;
-resize:vertical
+  min-height:82px;
+  resize:vertical
 }
 
 .color-row{
-display:flex;
-gap:9px;
-flex-wrap:wrap
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap
 }
 
 .swatch{
-width:30px;
-height:30px;
-border-radius:50%;
-border:3px solid var(--panel);
-outline:1px solid var(--line)
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  border:3px solid var(--panel);
+  outline:1px solid var(--line)
 }
 
 .swatch.selected{
-outline:3px solid var(--accent)
+  outline:3px solid var(--accent)
 }
 
 .notice{
-padding:12px 14px;
-border-radius:12px;
-background:var(--soft);
-font-size:13px;
-color:var(--text);
-margin-top:14px
+  padding:12px 14px;
+  border-radius:12px;
+  background:var(--soft);
+  font-size:13px;
+  color:var(--text);
+  margin-top:14px
 }
 
 .tagline{
-font-size:11px;
-text-transform:uppercase;
-letter-spacing:2px;
-color:var(--muted);
-font-weight:800
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--muted);
+  font-weight:800
+}
+
+.character-card{
+  margin-top:12px
+}
+
+.character-card img{
+  display:block;
+  width:100%;
+  max-height:240px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:10px
+}
+
+.route-card button{
+  margin-top:8px
 }
 
 @media(max-width:760px){
-.topbar{padding:0 15px}
-.nav button:not(.iconbtn){display:none}
-.container{padding:16px 13px 45px}
-.hero{grid-template-columns:1fr;gap:22px;padding:17px}
-.cover{max-width:250px;width:100%;margin:auto}
-.hero-copy{text-align:center}
-.hero-desc{font-size:14px}
-.actions{justify-content:center}
-.grid{grid-template-columns:1fr}
-.section-head{align-items:start;flex-direction:column}
-.chapter{gap:8px}
-.chapter .title{font-size:13px}
-.count{font-size:11px}
-.brand span{font-size:14px}
+  .topbar{
+    padding:0 15px
+  }
+
+  .nav button:not(.iconbtn){
+    display:none
+  }
+
+  .container{
+    padding:16px 13px 45px
+  }
+
+  .hero{
+    grid-template-columns:1fr;
+    gap:22px;
+    padding:17px
+  }
+
+  .cover{
+    max-width:250px;
+    width:100%;
+    margin:auto
+  }
+
+  .hero-copy{
+    text-align:center
+  }
+
+  .hero-desc{
+    font-size:14px
+  }
+
+  .actions{
+    justify-content:center
+  }
+
+  .grid{
+    grid-template-columns:1fr
+  }
+
+  .section-head{
+    align-items:start;
+    flex-direction:column
+  }
+
+  .chapter{
+    gap:8px
+  }
+
+  .chapter .title{
+    font-size:13px
+  }
+
+  .count{
+    font-size:11px
+  }
+
+  .brand span{
+    font-size:14px
+  }
 }
 </style>
 </head>
@@ -506,69 +621,104 @@ font-weight:800
 <body>
 
 <header class="topbar">
+
   <div class="brand">
     <div class="brand-mark">M</div>
     <span>SÓ MLD</span>
   </div>
 
   <nav class="nav">
-    <button onclick="scrollToId('arcos')">Arcos</button>
-    <button onclick="scrollToId('novidades')">Novidades</button>
-    <button onclick="openDrawer()">Personalizar</button>
-    <button class="iconbtn"
-            aria-label="Alternar modo claro/escuro"
-            onclick="toggleDark()">☾</button>
-    <button class="iconbtn"
-            aria-label="Abrir menu"
-            onclick="toggleMenu()">☰</button>
+
+    <button onclick="scrollToId('arcos')">
+      Arcos
+    </button>
+
+    <button onclick="scrollToId('novidades')">
+      Novidades
+    </button>
+
+    <button onclick="openDrawer()">
+      Personalizar
+    </button>
+
+    <button
+      class="iconbtn"
+      aria-label="Alternar modo claro ou escuro"
+      onclick="toggleDark()">
+      ☾
+    </button>
+
+    <button
+      class="iconbtn"
+      aria-label="Abrir menu"
+      onclick="toggleMenu()">
+      ☰
+    </button>
+
   </nav>
+
 </header>
 
-<div id="siteMenu"
-     style="display:none;
-     position:sticky;
-     top:68px;
-     z-index:4;
-     background:var(--panel);
-     border-bottom:1px solid var(--line);
-     padding:12px max(20px,calc((100vw - 1120px)/2));">
+<div
+  id="siteMenu"
+  style="
+    display:none;
+    position:sticky;
+    top:68px;
+    z-index:4;
+    background:var(--panel);
+    border-bottom:1px solid var(--line);
+    padding:12px max(20px,calc((100vw - 1120px)/2));
+  ">
 
-  <button class="secondary"
-          onclick="openAuthorLogin()">
+  <button
+    class="secondary"
+    onclick="openAuthorLogin()">
     ⚙ Painel do Autor
   </button>
+
 </div>
 
 <main class="container">
 
 <section class="hero" id="inicio">
 
-  <div class="cover"
-       id="novelCover"
-       aria-label="Capa demonstrativa da Só MLD">
+  <div
+    class="cover"
+    id="novelCover"
+    aria-label="Capa da Só MLD">
 
-    <img id="coverImage"
-         alt="Imagem da capa da Só MLD"
-         style="display:none;
-         position:absolute;
-         inset:0;
-         width:100%;
-         height:100%;
-         object-fit:cover;
-         z-index:0">
+    <img
+      id="coverImage"
+      alt="Capa da Só MLD"
+      style="
+        display:none;
+        position:absolute;
+        inset:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+      ">
 
     <div class="eyebrow">
       Uma light novel original
     </div>
 
     <div>
-      <h2>SÓ<br>MLD</h2>
 
-      <div style="margin-top:14px;
-                  font-size:12px;
-                  letter-spacing:2px">
+      <h2>
+        SÓ<br>MLD
+      </h2>
+
+      <div
+        style="
+          margin-top:14px;
+          font-size:12px;
+          letter-spacing:2px
+        ">
         MISTÉRIO • DRAMA • FANTASIA
       </div>
+
     </div>
 
     <div class="cover-bottom">
@@ -583,7 +733,9 @@ font-weight:800
       ✦ LIGHT NOVEL
     </span>
 
-    <h1>Só MLD</h1>
+    <h1 id="publicNovelTitle">
+      Só MLD
+    </h1>
 
     <p class="hero-desc">
       Um mundo de segredos, personagens marcantes e acontecimentos
@@ -593,22 +745,19 @@ font-weight:800
 
     <div class="actions">
 
-      <button class="primary"
-              onclick="scrollToId('arcos')">
-        Começar a ler&nbsp; →
+      <button
+        class="primary"
+        onclick="scrollToId('arcos')">
+        Começar a ler →
       </button>
 
-      <button class="secondary"
-              onclick="openDrawer()">
+      <button
+        class="secondary"
+        onclick="openDrawer()">
         Personalizar leitura
       </button>
 
     </div>
-
-    <p style="font-size:12px;margin-top:18px">
-      Capa e sinopse demonstrativas.
-      O autor poderá editar tudo pelo painel.
-    </p>
 
   </div>
 
@@ -618,557 +767,1081 @@ font-weight:800
 
   <div>
     <h2>Explore a história</h2>
+
     <p>
       Escolha um arco e continue a leitura no seu ritmo.
     </p>
   </div>
 
   <span class="pill">
-    3 arcos de exemplo
+    Arcos da história
   </span>
 
 </div>
 
 <section class="grid">
 
-<div class="card">
+  <div class="card">
 
-  <div class="tagline">
-    Índice da novel
+    <div class="tagline">
+      Índice da novel
+    </div>
+
+    <h2 style="margin:8px 0 14px">
+      Arcos da história
+    </h2>
+
+    <div
+      class="arc-list"
+      id="arcList">
+    </div>
+
   </div>
 
-  <h2 style="margin:8px 0 14px">
-    Arcos da história
-  </h2>
+  <div class="card">
 
-  <div class="arc-list"
-       id="arcList">
-
-    <button class="arc active"
-            onclick="selectArc(1,this)">
-
-      <span class="arc-num">
-        01
-      </span>
-
-      <span class="arc-main">
-        <strong>Arco 1</strong>
-        <small>O começo da história</small>
-      </span>
-
-      <span class="count">
-        19 capítulos⌄
-      </span>
-
-    </button>
-
-    <button class="arc"
-            onclick="selectArc(2,this)">
-
-      <span class="arc-num">
-        02
-      </span>
-
-      <span class="arc-main">
-        <strong>Arco 2</strong>
-        <small>Novos acontecimentos</small>
-      </span>
-
-      <span class="count">
-        50 capítulos›
-      </span>
-
-    </button>
-
-    <button class="arc"
-            onclick="selectArc(3,this)">
-
-      <span class="arc-num">
-        03
-      </span>
-
-      <span class="arc-main">
-        <strong>Arco 3</strong>
-        <small>A definir pelo autor</small>
-      </span>
-
-      <span class="count">
-        Em breve›
-      </span>
-
-    </button>
-
-  </div>      <div class="notice">No site final, o autor poderá adicionar, renomear e organizar os arcos. A contagem de capítulos será atualizada automaticamente.</div>
+    <div
+      class="tagline"
+      id="chapterLabel">
+      ÍNDICE
     </div>
 
-    <div class="card">
-      <div class="tagline" id="chapterLabel">ARCO 1</div>
-      <h2 style="margin:8px 0 4px" id="chapterHeading">Capítulos</h2>
-      <p style="margin:0 0 13px;font-size:13px">Selecione um capítulo para abrir a prévia de leitura.</p>
+    <h2
+      style="margin:8px 0 4px"
+      id="chapterHeading">
+      Capítulos
+    </h2>
 
-      <div class="chapters" id="chapterList">
-        <div class="chapter"><span class="num">01</span><span class="title">Capítulo 1: O início</span><button onclick="openReader(1)">Ler</button></div>
-        <div class="chapter"><span class="num">02</span><span class="title">Capítulo 2: Um novo dia</span><button onclick="openReader(2)">Ler</button></div>
-        <div class="chapter"><span class="num">03</span><span class="title">Capítulo 3: Algo estranho</span><button onclick="openReader(3)">Ler</button></div>
-        <div class="chapter"><span class="num">04</span><span class="title">Capítulo 4: Segredos</span><button onclick="openReader(4)">Ler</button></div>
-      </div>
+    <p
+      style="
+        margin:0 0 13px;
+        font-size:13px
+      ">
+      Selecione um capítulo para começar a leitura.
+    </p>
 
-      <button class="secondary" style="width:100%;margin-top:12px" onclick="alert('Na versão final, esta ação abrirá a lista completa de capítulos do arco.')">Ver todos os capítulos</button>
-    </div>
-  </section>
-
-  <section class="reader card" id="reader">
-    <div class="reader-top">
-      <span class="pill" id="readerArc">ARCO 1</span>
-      <button class="close" onclick="closeReader()">Fechar leitura ×</button>
+    <div
+      class="chapters"
+      id="chapterList">
     </div>
 
-    <div class="reader-body">
-      <div class="tagline" style="text-align:center">SÓ MLD</div>
-      <h2 id="readerTitle">Capítulo 1: O início</h2>
-
-      <div id="chapterContent">
-        <p>Esta é uma prévia visual do leitor de capítulos. O texto definitivo será escrito e publicado pelo autor no Painel do Autor.</p>
-
-        <p>As ilustrações poderão aparecer entre os parágrafos, com opções para ajustar o tamanho e a posição. O leitor também poderá mudar a aparência do texto conforme sua preferência.</p>
-
-        <p>Algumas histórias começam com uma pergunta. Outras começam com um segredo que ninguém deveria descobrir.</p>
-      </div>
-
-      <figure style="margin:24px 0">
-        <img id="chapterIllustration"
-             src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80"
-             alt="Ilustração demonstrativa de fantasia para um capítulo"
-             style="display:block;width:100%;max-height:420px;object-fit:cover;border-radius:14px">
-
-        <figcaption style="text-align:center;font:12px system-ui;color:var(--muted);margin-top:8px">
-          Ilustração demonstrativa. Na versão final, você poderá inserir suas próprias imagens.
-        </figcaption>
-      </figure>
-
-      <div class="reader-nav">
-        <button class="secondary" onclick="changeReader(-1)">← Anterior</button>
-        <button class="primary" onclick="changeReader(1)">Próximo →</button>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-head" id="novidades">
-    <div>
-      <h2>Novidades da MLD</h2>
-      <p>Um lugar para destacar capítulos recentes e avisos do autor.</p>
-    </div>
   </div>
 
-  <section class="grid">
-    <div class="card">
-      <div class="feature-list">
+</section>
 
-        <div class="feature">
-          <div class="feature-icon">✦</div>
-          <div>
-            <strong>Capítulos recentes</strong>
-            <small>Os capítulos publicados mais recentemente aparecerão aqui.</small>
-          </div>
-        </div>
+<section
+  class="reader card"
+  id="reader">
 
-        <div class="feature">
-          <div class="feature-icon">📣</div>
-          <div>
-            <strong>Avisos do autor</strong>
-            <small>Comunicados sobre atualizações, pausas e novidades da história.</small>
-          </div>
-        </div>
+  <div class="reader-top">
 
-        <div class="feature">
-          <div class="feature-icon">⚠</div>
-          <div>
-            <strong>Avisos de conteúdo</strong>
-            <small>Informações antes de capítulos com temas que mereçam aviso.</small>
-          </div>
-        </div>
+    <span
+      class="pill"
+      id="readerArc">
+      ARCO
+    </span>
 
-        <div id="publishedNotices" class="notice" style="display:none"></div>
-      </div>
+    <button
+      class="close"
+      onclick="closeReader()">
+      Fechar leitura ×
+    </button>
+
+  </div>
+
+  <div class="reader-body">
+
+    <div
+      class="tagline"
+      style="text-align:center">
+      SÓ MLD
     </div>
 
-    <div class="card">
-      <div class="tagline">Sua leitura</div>
-      <h2 style="margin:8px 0 10px">Continue de onde parou</h2>
+    <h2 id="readerTitle">
+      Capítulo
+    </h2>
 
-      <p style="font-size:14px">
-        O site poderá guardar seu progresso e seus marcadores neste dispositivo.
+    <div id="chapterContent">
+      <p>
+        Selecione um capítulo publicado para começar a leitura.
       </p>
-
-      <div class="notice">
-        🔖 Seus marcadores e histórico serão pessoais neste protótipo. A sincronização entre dispositivos exigirá uma conta ou serviço de armazenamento.
-      </div>
-
-      <div style="margin-top:15px;display:flex;gap:8px;flex-wrap:wrap">
-        <button class="secondary" onclick="alert('Na versão final, aqui ficará seu histórico de leitura.')">Histórico</button>
-        <button class="secondary" onclick="alert('Na versão final, aqui ficarão os trechos marcados.')">Marcadores</button>
-        <button class="secondary" onclick="alert('Na versão final, os leitores poderão avaliar a novel.')">☆ Avaliar</button>
-      </div>
     </div>
-  </section>
 
-  <div class="section-head">
-    <div>
-      <h2>O universo da história</h2>
-      <p>Informações extras para quem gosta de investigar cada detalhe.</p>
+    <figure
+      id="chapterFigure"
+      style="display:none;margin:24px 0">
+
+      <img
+        id="chapterIllustration"
+        src=""
+        alt="Ilustração do capítulo"
+        style="
+          display:block;
+          width:100%;
+          max-height:420px;
+          object-fit:cover;
+          border-radius:14px
+        ">
+
+    </figure>
+
+    <div class="reader-nav">
+
+      <button
+        class="secondary"
+        onclick="changeReader(-1)">
+        ← Anterior
+      </button>
+
+      <button
+        class="primary"
+        onclick="changeReader(1)">
+        Próximo →
+      </button>
+
     </div>
+
   </div>
 
-  <section class="grid">
-    <div class="card">
-      <div class="feature">
-        <div class="feature-icon">👥</div>
-        <div>
-          <strong>Personagens</strong>
-          <small>Fichas extras para conhecer melhor cada personagem, sem fazer parte da obra oficial/canon.</small>
-        </div>
-      </div>
+</section>
 
-      <div id="publicCharacters" style="margin-top:14px"></div>
+<div
+  class="section-head"
+  id="novidades">
 
-      <button class="secondary" style="margin-top:15px" onclick="scrollToId('publicCharacters')">
-        Ver personagens
-      </button>
-    </div>
+  <div>
 
-    <div class="card">
-      <div class="feature">
-        <div class="feature-icon">🌌</div>
-        <div>
-          <strong>Enciclopédia do universo</strong>
-          <small>Lugares, organizações, poderes e conceitos importantes da MLD.</small>
-        </div>
-      </div>
+    <h2>
+      Novidades da MLD
+    </h2>
 
-      <button class="secondary" style="margin-top:15px" onclick="alert('A enciclopédia será construída na versão final.')">
-        Explorar universo
-      </button>
-    </div>
-  </section>
+    <p>
+      Capítulos recentes e avisos do autor.
+    </p>
 
-  <div class="section-head">
-    <div>
-      <h2>Rotas alternativas</h2>
-      <p>Seis caminhos alternativos, separados da rota principal da obra.</p>
-    </div>
   </div>
 
-  <section class="grid" id="publicRoutes">
-    <div class="card"><h3>Rota da Ganância</h3><p>Uma possibilidade alternativa.</p></div>
-    <div class="card"><h3>Rota da Ira</h3><p>Uma possibilidade alternativa.</p></div>
-    <div class="card"><h3>Rota da Inveja</h3><p>Uma possibilidade alternativa.</p></div>
-    <div class="card"><h3>Rota da Preguiça</h3><p>Uma possibilidade alternativa.</p></div>
-    <div class="card"><h3>Rota da Luxúria</h3><p>Uma possibilidade alternativa.</p></div>
-    <div class="card"><h3>Rota do Orgulho</h3><p>Uma possibilidade alternativa.</p></div>
-  </section>
+</div>
 
-  <footer>
-    SÓ MLD · Prévia de design ·
-    <button class="iconbtn" onclick="toggleMenu()">Abrir menu ☰</button>
-    <br>
-    Este protótipo usa conteúdo fictício de demonstração.
-  </footer>
+<section class="grid">
+
+  <div class="card">
+
+    <div class="feature-list">
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ✦
+        </div>
+
+        <div>
+          <strong>
+            Capítulos recentes
+          </strong>
+
+          <small>
+            Os capítulos mais recentes da obra ficam disponíveis nos arcos.
+          </small>
+        </div>
+
+      </div>
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          📣
+        </div>
+
+        <div>
+          <strong>
+            Avisos do autor
+          </strong>
+
+          <small>
+            Comunicados sobre atualizações, pausas e novidades.
+          </small>
+        </div>
+
+      </div>
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          ⚠
+        </div>
+
+        <div>
+          <strong>
+            Avisos de conteúdo
+          </strong>
+
+          <small>
+            Informações importantes sobre o conteúdo da obra.
+          </small>
+        </div>
+
+      </div>
+
+      <div
+        id="publishedNotices"
+        class="notice"
+        style="display:none">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="tagline">
+      Só MLD
+    </div>
+
+    <h2 style="margin:8px 0 10px">
+      Acompanhe a história
+    </h2>
+
+    <p style="font-size:14px">
+      Acesse os arcos e escolha o capítulo que deseja ler.
+    </p>
+
+    <button
+      class="primary"
+      onclick="scrollToId('arcos')">
+      Ver capítulos
+    </button>
+
+  </div>
+
+</section>
+
+<div class="section-head">
+
+  <div>
+
+    <h2>
+      O universo da história
+    </h2>
+
+    <p>
+      Informações extras para conhecer melhor o mundo de MLD.
+    </p>
+
+  </div>
+
+</div>
+
+<section class="grid">
+
+  <div class="card">
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        👥
+      </div>
+
+      <div>
+
+        <strong>
+          Personagens
+        </strong>
+
+        <small>
+          Fichas extras para conhecer melhor cada personagem.
+          Essas informações não alteram o cânone da obra.
+        </small>
+
+      </div>
+
+    </div>
+
+    <div
+      id="publicCharacters"
+      style="margin-top:14px">
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="feature">
+
+      <div class="feature-icon">
+        🌌
+      </div>
+
+      <div>
+
+        <strong>
+          Enciclopédia do universo
+        </strong>
+
+        <small>
+          Lugares, organizações, poderes e conceitos importantes da MLD.
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<div class="section-head">
+
+  <div>
+
+    <h2>
+      Rotas alternativas
+    </h2>
+
+    <p>
+      Seis caminhos alternativos separados da rota principal.
+    </p>
+
+  </div>
+
+</div>
+
+<section
+  class="grid"
+  id="publicRoutes">
+
+  <div class="card route-card">
+    <h3>Rota da Ganância</h3>
+    <p>Nenhum capítulo publicado.</p>
+  </div>
+
+  <div class="card route-card">
+    <h3>Rota da Ira</h3>
+    <p>Nenhum capítulo publicado.</p>
+  </div>
+
+  <div class="card route-card">
+    <h3>Rota da Inveja</h3>
+    <p>Nenhum capítulo publicado.</p>
+  </div>
+
+  <div class="card route-card">
+    <h3>Rota da Preguiça</h3>
+    <p>Nenhum capítulo publicado.</p>
+  </div>
+
+  <div class="card route-card">
+    <h3>Rota da Luxúria</h3>
+    <p>Nenhum capítulo publicado.</p>
+  </div>
+
+  <div class="card route-card">
+    <h3>Rota do Orgulho</h3>
+    <p>Nenhum capítulo publicado.</p>
+  </div>
+
+</section>
+
+<footer>
+  SÓ MLD · Light Novel
+  <br>
+  Todos os direitos da obra pertencem ao autor.
+</footer>
+
 </main>
 
-<div class="overlay" id="drawer" onclick="if(event.target===this)closeDrawer()">
+<div
+  class="overlay"
+  id="drawer"
+  onclick="if(event.target===this)closeDrawer()">
+
   <aside class="drawer">
 
     <div class="drawer-head">
+
       <div>
-        <div class="tagline">Configurações</div>
-        <h2 style="margin:3px 0">Personalizar site</h2>
+
+        <div class="tagline">
+          Configurações
+        </div>
+
+        <h2 style="margin:3px 0">
+          Personalizar site
+        </h2>
+
       </div>
 
-      <button class="close" onclick="closeDrawer()">Fechar ×</button>
+      <button
+        class="close"
+        onclick="closeDrawer()">
+        Fechar ×
+      </button>
+
     </div>
 
-    <p>Teste as opções visuais. Elas afetam apenas esta prévia no seu navegador.</p>
+    <p>
+      Personalize a aparência do site e do leitor.
+    </p>
 
-    <h3>Cor do tema</h3>
-    <div class="color-row" id="swatches"></div>
+    <h3>
+      Cor do tema
+    </h3>
 
-    <div class="field">
-      <label for="bgMode">Fundo do site</label>
-
-      <select id="bgMode" onchange="setMode(this.value)">
-        <option value="light">Modo claro</option>
-        <option value="dark">Modo escuro</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label for="fontSize">Tamanho do texto de leitura</label>
-
-      <select id="fontSize" onchange="setFontSize(this.value)">
-        <option value="16">Pequeno</option>
-        <option value="18" selected>Médio</option>
-        <option value="21">Grande</option>
-        <option value="24">Extra grande</option>
-      </select>
+    <div
+      class="color-row"
+      id="swatches">
     </div>
 
     <div class="field">
-      <label for="widthMode">Largura do texto</label>
 
-      <select id="widthMode" onchange="setReaderWidth(this.value)">
-        <option value="620">Estreita</option>
-        <option value="680" selected>Confortável</option>
-        <option value="820">Larga</option>
+      <label for="bgMode">
+        Fundo do site
+      </label>
+
+      <select
+        id="bgMode"
+        onchange="setMode(this.value)">
+
+        <option value="light">
+          Modo claro
+        </option>
+
+        <option value="dark">
+          Modo escuro
+        </option>
+
       </select>
+
+    </div>
+
+    <div class="field">
+
+      <label for="fontSize">
+        Tamanho do texto de leitura
+      </label>
+
+      <select
+        id="fontSize"
+        onchange="setFontSize(this.value)">
+
+        <option value="16">
+          Pequeno
+        </option>
+
+        <option
+          value="18"
+          selected>
+          Médio
+        </option>
+
+        <option value="21">
+          Grande
+        </option>
+
+        <option value="24">
+          Extra grande
+        </option>
+
+      </select>
+
+    </div>
+
+    <div class="field">
+
+      <label for="widthMode">
+        Largura do texto
+      </label>
+
+      <select
+        id="widthMode"
+        onchange="setReaderWidth(this.value)">
+
+        <option value="620">
+          Estreita
+        </option>
+
+        <option
+          value="680"
+          selected>
+          Confortável
+        </option>
+
+        <option value="820">
+          Larga
+        </option>
+
+      </select>
+
     </div>
 
     <div class="notice">
-      As opções são interativas nesta demonstração. No site final, as preferências poderão ser salvas para a próxima visita.
+      Suas preferências são salvas neste navegador.
     </div>
 
   </aside>
-</div>
 
-<div class="overlay" id="authorOverlay" onclick="if(event.target===this)closeAuthorPanel()">
+  </div><div
+  class="overlay"
+  id="authorOverlay"
+  onclick="if(event.target===this)closeAuthorPanel()">
+
   <aside class="drawer">
 
     <div class="drawer-head">
+
       <div>
-        <div class="tagline">Área restrita</div>
-        <h2 style="margin:3px 0">Painel do Autor</h2>
+
+        <div class="tagline">
+          Área restrita
+        </div>
+
+        <h2 style="margin:3px 0">
+          Painel do Autor
+        </h2>
+
       </div>
 
-      <button class="close" onclick="closeAuthorPanel()">Fechar ×</button>
+      <button
+        class="close"
+        onclick="closeAuthorPanel()">
+        Fechar ×
+      </button>
+
     </div>
 
     <div id="authorLogin">
-      <div class="tagline">Área do autor</div>
-      <h2 style="margin:6px 0">Painel do Autor</h2>
 
-      <p>Digite a senha para abrir as opções demonstrativas do autor.</p>
-
-      <div class="field">
-        <label for="authorPassword">Senha</label>
-        <input id="authorPassword" type="password" inputmode="numeric" placeholder="Digite a senha">
+      <div class="tagline">
+        Área do autor
       </div>
 
-      <button class="primary" style="width:100%" onclick="checkAuthorPassword()">
+      <h2 style="margin:6px 0">
+        Painel do Autor
+      </h2>
+
+      <p>
+        Digite a senha para acessar o painel.
+      </p>
+
+      <div class="field">
+
+        <label for="authorPassword">
+          Senha
+        </label>
+
+        <input
+          id="authorPassword"
+          type="password"
+          inputmode="numeric"
+          placeholder="Digite a senha">
+
+      </div>
+
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="checkAuthorPassword()">
         Entrar no painel
       </button>
 
-      <p id="loginError" style="color:#e05252;display:none">
+      <p
+        id="loginError"
+        style="
+          color:#e05252;
+          display:none
+        ">
         Senha incorreta.
       </p>
 
-      <p style="font-size:12px">
-        A senha nesta prévia é apenas uma demonstração visual, não uma proteção real.
-      </p>
     </div>
 
-    <div id="authorPanel" style="display:none">
+    <div
+      id="authorPanel"
+      style="display:none">
 
-      <div class="tagline">Área demonstrativa</div>
-      <h2 style="margin:6px 0">Painel do Autor</h2>
+      <div class="tagline">
+        Gerenciamento
+      </div>
+
+      <h2 style="margin:6px 0">
+        Painel do Autor
+      </h2>
 
       <p>
-        Na versão final, esta área permitirá gerenciar capas, sinopse, arcos, capítulos, imagens, personagens, rascunhos, backups e publicações.
+        Gerencie o conteúdo da Só MLD neste dispositivo.
       </p>
 
       <div class="field">
-        <label for="coverUpload">Imagem da capa</label>
-        <input id="coverUpload" type="file" accept="image/*" onchange="previewCover(event)">
-        <small style="color:var(--muted)">Escolha uma imagem do seu dispositivo para testar a capa nesta prévia.</small>
+
+        <label for="coverUpload">
+          Imagem da capa
+        </label>
+
+        <input
+          id="coverUpload"
+          type="file"
+          accept="image/*"
+          onchange="previewCover(event)">
+
+        <small style="color:var(--muted)">
+          Escolha uma imagem para usar como capa.
+        </small>
+
       </div>
 
       <div class="field">
-        <label for="chapterUpload">Imagem de capítulo</label>
-        <input id="chapterUpload" type="file" accept="image/*" onchange="previewChapterImage(event)">
-        <small style="color:var(--muted)">A imagem aparecerá no capítulo de demonstração.</small>
+
+        <label for="chapterUpload">
+          Imagem do capítulo
+        </label>
+
+        <input
+          id="chapterUpload"
+          type="file"
+          accept="image/*"
+          onchange="previewChapterImage(event)">
+
+        <small style="color:var(--muted)">
+          A imagem será usada no capítulo atual.
+        </small>
+
       </div>
 
       <div class="field">
-        <label for="coverTitle">Título da novel</label>
-        <input id="coverTitle" value="Só MLD">
+
+        <label for="coverTitle">
+          Título da novel
+        </label>
+
+        <input
+          id="coverTitle"
+          value="Só MLD">
+
       </div>
 
       <div class="field">
-        <label for="synopsis">Sinopse</label>
+
+        <label for="synopsis">
+          Sinopse
+        </label>
+
         <textarea id="synopsis">Um mundo de segredos, personagens marcantes e acontecimentos que escondem mais do que parecem.</textarea>
+
+      </div>
+
+      <button
+        class="secondary"
+        style="width:100%"
+        onclick="saveNovelInfo()">
+        Salvar título e sinopse
+      </button>
+
+      <hr
+        style="
+          border:0;
+          border-top:1px solid var(--line);
+          margin:24px 0
+        ">
+
+      <h3>
+        Arcos
+      </h3>
+
+      <div class="field">
+
+        <label for="arcName">
+          Nome do novo arco
+        </label>
+
+        <input
+          id="arcName"
+          placeholder="Ex.: Arco 4">
+
       </div>
 
       <div class="field">
-        <label for="arcName">Nome de um novo arco (demonstração)</label>
-        <input id="arcName" placeholder="Ex.: Arco 4">
+
+        <label for="arcDescription">
+          Descrição do arco
+        </label>
+
+        <input
+          id="arcDescription"
+          placeholder="Ex.: O início da jornada">
+
+      </div>
+
+      <button
+        class="secondary"
+        style="width:100%"
+        onclick="createArc()">
+        Criar arco
+      </button>
+
+      <hr
+        style="
+          border:0;
+          border-top:1px solid var(--line);
+          margin:24px 0
+        ">
+
+      <h3>
+        Capítulos
+      </h3>
+
+      <div class="field">
+
+        <label for="chapterArcSelect">
+          Arco do capítulo
+        </label>
+
+        <select id="chapterArcSelect">
+        </select>
+
       </div>
 
       <div class="field">
-        <label for="chapterName">Título do capítulo</label>
-        <input id="chapterName" placeholder="Ex.: Capítulo 1: O início" value="Capítulo 1: O início">
+
+        <label for="chapterName">
+          Título do capítulo
+        </label>
+
+        <input
+          id="chapterName"
+          placeholder="Ex.: Capítulo 1: O início">
+
       </div>
 
       <div class="field">
-        <label for="chapterText">Texto do capítulo</label>
 
-        <textarea id="chapterText" style="min-height:260px" placeholder="Comece a escrever seu capítulo aqui...
+        <label for="chapterText">
+          Texto do capítulo
+        </label>
+
+        <textarea
+          id="chapterText"
+          style="min-height:260px"
+          placeholder="Comece a escrever seu capítulo aqui...
 
 Separe os parágrafos com uma linha em branco."></textarea>
 
         <small style="color:var(--muted)">
-          Escreva o capítulo inteiro aqui. As linhas em branco serão usadas para separar os parágrafos na leitura.
+          Separe os parágrafos usando uma linha em branco.
         </small>
+
       </div>
 
-      <button class="primary" style="width:100%" onclick="applyChapterText()">
-        Aplicar texto ao capítulo
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="applyChapterText()">
+        Visualizar capítulo
       </button>
 
-      <button class="secondary" style="width:100%;margin-top:9px" onclick="saveMainDraft()">
+      <button
+        class="secondary"
+        style="
+          width:100%;
+          margin-top:9px
+        "
+        onclick="saveMainDraft()">
         Salvar rascunho
       </button>
 
-      <button class="secondary" style="width:100%;margin-top:9px" onclick="publishMainChapter()">
-        Publicar capítulo nesta instalação
+      <button
+        class="primary"
+        style="
+          width:100%;
+          margin-top:9px
+        "
+        onclick="publishMainChapter()">
+        Salvar capítulo
       </button>
 
-      <div class="field">
-        <label for="chapterArcSelect">Arco do capítulo</label>
+      <hr
+        style="
+          border:0;
+          border-top:1px solid var(--line);
+          margin:24px 0
+        ">
 
-        <select id="chapterArcSelect">
-          <option value="1">Arco 1</option>
-          <option value="2">Arco 2</option>
-          <option value="3">Arco 3</option>
-        </select>
-      </div>
-
-      <button class="secondary" style="width:100%;margin-top:9px" onclick="createArc()">
-        Criar arco
-      </button>
-
-      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
-
-      <h3>Conhecer personagem (extra, não canon)</h3>
+      <h3>
+        Personagens
+      </h3>
 
       <p>
-        Estas fichas são só para conhecer melhor os personagens. Não alteram a história oficial.
+        Crie fichas extras para apresentar os personagens aos leitores.
+        Essas fichas não alteram o cânone da obra.
       </p>
 
       <div class="field">
-        <label for="characterName">Nome do personagem</label>
-        <input id="characterName" placeholder="Nome">
+
+        <label for="characterName">
+          Nome do personagem
+        </label>
+
+        <input
+          id="characterName"
+          placeholder="Nome do personagem">
+
       </div>
 
       <div class="field">
-        <label for="characterImage">Imagem do personagem</label>
-        <input id="characterImage" type="file" accept="image/*">
+
+        <label for="characterImage">
+          Imagem do personagem
+        </label>
+
+        <input
+          id="characterImage"
+          type="file"
+          accept="image/*">
+
       </div>
 
       <div class="field">
-        <label for="characterDescription">Descrição / curiosidades</label>
-        <textarea id="characterDescription" placeholder="Personalidade, gostos, curiosidades..."></textarea>
+
+        <label for="characterDescription">
+          Descrição e curiosidades
+        </label>
+
+        <textarea
+          id="characterDescription"
+          placeholder="Personalidade, gostos, curiosidades..."></textarea>
+
       </div>
 
-      <button class="primary" style="width:100%" onclick="addCharacter()">
-        Adicionar ficha de personagem
+      <button
+        class="primary"
+        style="width:100%"
+        onclick="addCharacter()">
+        Adicionar personagem
       </button>
 
-      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+      <hr
+        style="
+          border:0;
+          border-top:1px solid var(--line);
+          margin:24px 0
+        ">
 
-      <h3>Avisos do site</h3>
+      <h3>
+        Avisos
+      </h3>
 
       <div class="field">
-        <label for="authorNotice">Aviso do autor</label>
-        <textarea id="authorNotice" placeholder="Comunicado, atualização, pausa..."></textarea>
+
+        <label for="authorNotice">
+          Aviso do autor
+        </label>
+
+        <textarea
+          id="authorNotice"
+          placeholder="Atualização, comunicado, pausa..."></textarea>
+
       </div>
 
-      <button class="secondary" style="width:100%" onclick="publishNotice('authorNotice','📣 Aviso do autor')">
+      <button
+        class="secondary"
+        style="width:100%"
+        onclick="publishNotice(
+          'authorNotice',
+          '📣 Aviso do autor'
+        )">
         Publicar aviso do autor
       </button>
 
       <div class="field">
-        <label for="contentWarning">Aviso de conteúdo</label>
-        <textarea id="contentWarning" placeholder="Temas sensíveis presentes em capítulo específico..."></textarea>
+
+        <label for="contentWarning">
+          Aviso de conteúdo
+        </label>
+
+        <textarea
+          id="contentWarning"
+          placeholder="Escreva aqui o aviso de conteúdo..."></textarea>
+
       </div>
 
-      <button class="secondary" style="width:100%" onclick="publishNotice('contentWarning','⚠ Aviso de conteúdo')">
+      <button
+        class="secondary"
+        style="width:100%"
+        onclick="publishNotice(
+          'contentWarning',
+          '⚠ Aviso de conteúdo'
+        )">
         Publicar aviso de conteúdo
       </button>
 
-      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+      <hr
+        style="
+          border:0;
+          border-top:1px solid var(--line);
+          margin:24px 0
+        ">
 
-      <h3>Rotas alternativas</h3>
+      <h3>
+        Rotas alternativas
+      </h3>
 
       <p>
-        Escolha uma rota para escrever nela. Cada rota tem seu próprio texto demonstrativo.
+        As seis rotas alternativas possuem conteúdo separado
+        da história principal.
       </p>
 
-      <button class="secondary" style="width:100%" onclick="openRoutePanel()">
-        Abrir segundo painel: escrever nas 6 rotas
+      <button
+        class="secondary"
+        style="width:100%"
+        onclick="openRoutePanel()">
+        Abrir editor das rotas
       </button>
 
-      <p style="font-size:12px;margin-top:12px">
-        Importante: esta é uma prévia. A senha embutida no navegador não protege um site publicado; a versão final precisará de autenticação real.
-      </p>
-
     </div>
+
   </aside>
+
 </div>
 
-<div class="overlay" id="routeOverlay" onclick="if(event.target===this)closeRoutePanel()">
+
+<div
+  class="overlay"
+  id="routeOverlay"
+  onclick="if(event.target===this)closeRoutePanel()">
 
   <aside class="drawer">
 
     <div class="drawer-head">
+
       <div>
-        <div class="tagline">Área restrita · painel 2</div>
-        <h2 style="margin:3px 0">Editor das rotas alternativas</h2>
+
+        <div class="tagline">
+          Rotas alternativas
+        </div>
+
+        <h2 style="margin:3px 0">
+          Editor das rotas
+        </h2>
+
       </div>
 
-      <button class="close" onclick="closeRoutePanel()">Fechar ×</button>
+      <button
+        class="close"
+        onclick="closeRoutePanel()">
+        Fechar ×
+      </button>
+
     </div>
 
     <p>
-      Este painel é separado do editor da rota principal. Escolha uma das seis rotas e escreva seu capítulo alternativo.
+      Escolha uma rota e escreva o conteúdo dela.
+      A rota principal permanece separada.
     </p>
 
     <div class="field">
-      <label for="routeChoice">Rota</label>
 
-      <select id="routeChoice" onchange="loadRouteDraft()">
-        <option>Rota da Ganância</option>
-        <option>Rota da Ira</option>
-        <option>Rota da Inveja</option>
-        <option>Rota da Preguiça</option>
-        <option>Rota da Luxúria</option>
-        <option>Rota do Orgulho</option>
+      <label for="routeChoice">
+        Rota
+      </label>
+
+      <select
+        id="routeChoice"
+        onchange="loadRouteDraft()">
+
+        <option>
+          Rota da Ganância
+        </option>
+
+        <option>
+          Rota da Ira
+        </option>
+
+        <option>
+          Rota da Inveja
+        </option>
+
+        <option>
+          Rota da Preguiça
+        </option>
+
+        <option>
+          Rota da Luxúria
+        </option>
+
+        <option>
+          Rota do Orgulho
+        </option>
+
       </select>
+
     </div>
 
     <div class="field">
-      <label for="routeChapterTitle">Título do capítulo</label>
-      <input id="routeChapterTitle" placeholder="Ex.: Capítulo 1: A escolha">
+
+      <label for="routeChapterTitle">
+        Título do capítulo
+      </label>
+
+      <input
+        id="routeChapterTitle"
+        placeholder="Ex.: Capítulo 1: A escolha">
+
     </div>
 
     <div class="field">
-      <label for="routeChapterText">Texto da rota alternativa</label>
-      <textarea id="routeChapterText" style="min-height:280px" placeholder="Escreva aqui o capítulo desta rota..."></textarea>
+
+      <label for="routeChapterText">
+        Texto da rota alternativa
+      </label>
+
+      <textarea
+        id="routeChapterText"
+        style="min-height:280px"
+        placeholder="Escreva aqui o capítulo desta rota..."></textarea>
+
     </div>
 
-    <button class="primary" style="width:100%" onclick="applyRouteText()">
-      Aplicar texto à rota escolhida
+    <button
+      class="primary"
+      style="width:100%"
+      onclick="applyRouteText()">
+      Salvar conteúdo da rota
     </button>
 
-    <button class="secondary" style="width:100%;margin-top:9px" onclick="saveRouteDraft()">
-      Salvar rascunho da rota
+    <button
+      class="secondary"
+      style="
+        width:100%;
+        margin-top:9px
+      "
+      onclick="saveRouteDraft()">
+      Salvar rascunho
     </button>
 
-    <p style="font-size:12px">
-      A prévia guarda os rascunhos apenas enquanto esta página está aberta. Armazenamento online será necessário para salvar permanentemente.
-    </p>
+    <div class="notice">
+      Os dados deste editor são armazenados neste navegador.
+    </div>
 
   </aside>
+
 </div>
 
+
 <script>
+
+const STORE_KEY='somld_site_v2';
+
+const AUTHOR_PASSWORD='1234321';
+
+const ROUTE_NAMES=[
+  'Rota da Ganância',
+  'Rota da Ira',
+  'Rota da Inveja',
+  'Rota da Preguiça',
+  'Rota da Luxúria',
+  'Rota do Orgulho'
+];
+
 const palettes=[
   ['Roxo','#7c5cff'],
   ['Azul','#3478f6'],
@@ -1182,434 +1855,8 @@ const palettes=[
   ['Cinza','#777789']
 ];
 
-let currentArc=1,currentChapter=1;
-const routeDrafts={};
-
-const sw=document.getElementById('swatches');
-
-palettes.forEach(([name,color],i)=>{
-  const b=document.createElement('button');
-
-  b.className='swatch'+(i===0?' selected':'');
-  b.style.background=color;
-  b.title=name;
-  b.setAttribute('aria-label','Tema '+name);
-
-  b.onclick=()=>{
-    document.documentElement.style.setProperty('--accent',color);
-
-    document.querySelectorAll('.swatch')
-      .forEach(x=>x.classList.remove('selected'));
-
-    b.classList.add('selected')
-  };
-
-  sw.appendChild(b)
-});
-
-function scrollToId(id){
-  document.getElementById(id)
-    .scrollIntoView({
-      behavior:'smooth',
-      block:'start'
-    })
-}
-
-function toggleMenu(){
-  const menu=document.getElementById('siteMenu');
-  menu.style.display=menu.style.display==='block'?'none':'block'
-}
-
-function openAuthorLogin(){
-  closeDrawer();
-
-  document.getElementById('authorOverlay').classList.add('open');
-  document.getElementById('authorLogin').style.display='block';
-  document.getElementById('authorPanel').style.display='none';
-  document.getElementById('authorPassword').value='';
-  document.getElementById('loginError').style.display='none';
-
-  toggleMenu()
-}
-
-function closeAuthorPanel(){
-  document.getElementById('authorOverlay').classList.remove('open');
-  document.getElementById('authorLogin').style.display='block';
-  document.getElementById('authorPanel').style.display='none';
-  document.getElementById('authorPassword').value='';
-}
-
-function checkAuthorPassword(){
-  const value=document.getElementById('authorPassword').value;
-
-  if(value==='1234321'){
-    document.getElementById('authorLogin').style.display='none';
-    document.getElementById('authorPanel').style.display='block';
-    document.getElementById('loginError').style.display='none'
-  }else{
-    document.getElementById('loginError').style.display='block'
-  }
-}
-
-function previewCover(event){
-  const file=event.target.files&&event.target.files[0];
-
-  if(!file)return;
-
-  if(!file.type.startsWith('image/'))
-    return alert('Escolha um arquivo de imagem.');
-
-  const reader=new FileReader();
-
-  reader.onload=()=>{
-    const img=document.getElementById('coverImage');
-
-    img.src=reader.result;
-    img.style.display='block';
-
-    document.getElementById('novelCover').style.background=
-      'linear-gradient(#0003,#0003)'
-  };
-
-  reader.readAsDataURL(file)
-}
-
-function previewChapterImage(event){
-  const file=event.target.files&&event.target.files[0];
-
-  if(!file)return;
-
-  if(!file.type.startsWith('image/'))
-    return alert('Escolha um arquivo de imagem.');
-
-  const reader=new FileReader();
-
-  reader.onload=()=>{
-    const img=document.getElementById('chapterIllustration');
-    img.src=reader.result
-  };
-
-  reader.readAsDataURL(file)
-}
-
-function applyChapterText(){
-  const title=
-    document.getElementById('chapterName').value.trim()||
-    ('Capítulo '+currentChapter);
-
-  const raw=document.getElementById('chapterText').value.trim();
-
-  if(!raw){
-    alert('Escreva o texto do capítulo antes de aplicar.');
-    return
-  }
-
-  document.getElementById('readerTitle').textContent=title;
-
-  const content=document.getElementById('chapterContent');
-
-  content.replaceChildren();
-
-  raw.split(/\n\s*\n/).forEach(paragraph=>{
-    const p=document.createElement('p');
-
-    p.textContent=paragraph.trim();
-    content.appendChild(p)
-  });
-
-  closeAuthorPanel();
-
-  document.getElementById('reader').classList.add('open');
-
-  document.getElementById('reader')
-    .scrollIntoView({
-      behavior:'smooth',
-      block:'start'
-    });
-
-  alert('Texto aplicado à prévia do capítulo! Isso ainda não publica nem salva online.')
-}
-
-function addCharacter(){
-  const name=document.getElementById('characterName').value.trim();
-  const description=document.getElementById('characterDescription').value.trim();
-  const file=document.getElementById('characterImage').files[0];
-
-  if(!name){
-    alert('Coloque o nome do personagem.');
-    return
-  }
-
-  const card=document.createElement('div');
-
-  card.className='notice';
-
-  const title=document.createElement('strong');
-
-  title.textContent=name;
-  card.appendChild(title);
-
-  if(description){
-    const p=document.createElement('p');
-
-    p.textContent=description;
-    p.style.marginBottom='0';
-
-    card.appendChild(p)
-  }
-
-  if(file&&file.type.startsWith('image/')){
-    const img=document.createElement('img');
-
-    img.alt='Imagem de '+name;
-    img.style.cssText=
-      'display:block;width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin:10px 0';
-
-    const reader=new FileReader();
-
-    reader.onload=()=>{
-      img.src=reader.result
-    };
-
-    reader.readAsDataURL(file);
-
-    card.insertBefore(img,card.lastChild)
-  }
-
-  document.getElementById('publicCharacters').appendChild(card);
-  document.getElementById('characterName').value='';
-  document.getElementById('characterDescription').value='';
-  document.getElementById('characterImage').value='';
-
-  alert('Ficha extra adicionada. Ela é apenas material de curiosidades, não canon.')
-}
-
-function publishNotice(id,label){
-  const value=document.getElementById(id).value.trim();
-
-  if(!value){
-    alert('Escreva o aviso antes de publicar.');
-    return
-  }
-
-  const box=document.getElementById('publishedNotices');
-
-  box.style.display='block';
-
-  const item=document.createElement('div');
-
-  item.style.marginTop='10px';
-
-  const strong=document.createElement('strong');
-
-  strong.textContent=label;
-
-  const p=document.createElement('p');
-
-  p.textContent=value;
-  p.style.margin='5px 0 0';
-
-  item.appendChild(strong);
-  item.appendChild(p);
-
-  box.appendChild(item);
-
-  document.getElementById(id).value='';
-
-  alert('Aviso adicionado à prévia. Ainda não foi publicado online.')
-}
-
-function openRoutePanel(){
-  document.getElementById('routeOverlay').classList.add('open');
-  loadRouteDraft()
-}
-
-function closeRoutePanel(){
-  document.getElementById('routeOverlay').classList.remove('open')
-}
-
-function loadRouteDraft(){
-  const route=document.getElementById('routeChoice').value;
-
-  const draft=routeDrafts[route]||{
-    title:'',
-    text:''
-  };
-
-  document.getElementById('routeChapterTitle').value=draft.title;
-  document.getElementById('routeChapterText').value=draft.text
-}
-
-function saveRouteDraft(){
-  const route=document.getElementById('routeChoice').value;
-
-  routeDrafts[route]={
-    title:document.getElementById('routeChapterTitle').value,
-    text:document.getElementById('routeChapterText').value
-  };
-
-  alert('Rascunho guardado nesta sessão para '+route+'.')
-}
-
-function applyRouteText(){
-  const route=document.getElementById('routeChoice').value;
-
-  const title=
-    document.getElementById('routeChapterTitle').value.trim()||
-    route+' — Capítulo alternativo';
-
-  const raw=document.getElementById('routeChapterText').value.trim();
-
-  if(!raw){
-    alert('Escreva o texto da rota antes de aplicar.');
-    return
-  }
-
-  routeDrafts[route]={
-    title,
-    text:raw
-  };
-
-  const cards=document.getElementById('publicRoutes').children;
-
-  const names=
-    Array.from(document.getElementById('routeChoice').options)
-      .map(o=>o.value);
-
-  const idx=names.indexOf(route);
-
-  if(cards[idx]){
-    cards[idx].replaceChildren();
-
-    const h=document.createElement('h3');
-    h.textContent=route;
-
-    const t=document.createElement('strong');
-    t.textContent=title;
-
-    const p=document.createElement('p');
-    p.textContent=raw.slice(0,180)+(raw.length>180?'…':'');
-
-    cards[idx].append(h,t,p)
-  }
-
-  closeRoutePanel();
-
-  alert('Texto aplicado à prévia de '+route+'. A rota principal não foi alterada.')
-}
-
-function openDrawer(){
-  document.getElementById('drawer').classList.add('open')
-}
-
-function closeDrawer(){
-  document.getElementById('drawer').classList.remove('open')
-}
-
-function toggleDark(){
-  const dark=document.body.classList.toggle('dark');
-
-  document.getElementById('bgMode').value=
-    dark?'dark':'light'
-}
-
-function setMode(mode){
-  document.body.classList.toggle('dark',mode==='dark')
-}
-
-function setFontSize(size){
-  document.querySelector('.reader-body').style.fontSize=size+'px'
-}
-
-function setReaderWidth(width){
-  document.querySelector('.reader-body').style.maxWidth=width+'px'
-}
-
-function selectArc(n,el){
-  currentArc=n;
-
-  document.querySelectorAll('.arc')
-    .forEach(a=>a.classList.remove('active'));
-
-  el.classList.add('active');
-
-  document.getElementById('chapterLabel').textContent='ARCO '+n;
-
-  document.getElementById('chapterHeading').textContent=
-    n===3?'Capítulos em breve':'Capítulos do Arco '+n;
-
-  const list=document.getElementById('chapterList');
-
-  list.innerHTML='';
-
-  if(n===3){
-    list.innerHTML='<p>O autor ainda não publicou este arco.</p>';
-    return
-  }
-
-  const count=n===1?4:4;
-
-  const names=n===1
-    ?['O início','Um novo dia','Algo estranho','Segredos']
-    :['Novos caminhos','O encontro','Revelações','Consequências'];
-
-  names.forEach((name,i)=>{
-    const row=document.createElement('div');
-
-    row.className='chapter';
-
-    row.innerHTML=
-      '<span class="num">'+
-      String(i+1).padStart(2,'0')+
-      '</span><span class="title">Capítulo '+
-      (i+1)+': '+name+
-      '</span><button onclick="openReader('+
-      (i+1)+')">Ler</button>';
-
-    list.appendChild(row)
-  })
-}
-
-function openReader(n){
-  currentChapter=n;
-
-  document.getElementById('readerTitle').textContent=
-    'Capítulo '+n+': '+
-    (['O início','Um novo dia','Algo estranho','Segredos'][n-1]||
-    'Leitura de demonstração');
-
-  document.getElementById('readerArc').textContent='ARCO '+currentArc;
-
-  document.getElementById('reader').classList.add('open');
-
-  document.getElementById('reader')
-    .scrollIntoView({
-      behavior:'smooth',
-      block:'start'
-    })
-}
-
-function closeReader(){
-  document.getElementById('reader').classList.remove('open')
-}
-
-function changeReader(delta){
-  openReader(Math.max(1,currentChapter+delta))
-}
-
-/* Funcionalidade persistente no navegador.
-   Dados locais não sincronizam entre dispositivos. */
-
-const STORE_KEY='somld_site_v1';
-
-const ROUTE_NAMES=[
-  'Rota da Ganância',
-  'Rota da Ira',
-  'Rota da Inveja',
-  'Rota da Preguiça',
-  'Rota da Luxúria',
-  'Rota do Orgulho'
-];
+let currentArc=1;
+let currentChapterIndex=-1;
 
 let siteData={
   arcs:[
@@ -1632,674 +1879,191 @@ let siteData={
       chapters:[]
     }
   ],
+
   characters:[],
+
   notices:[],
+
   routes:{},
-  settings:{},
+
+  settings:{
+    mode:'light',
+    fontSize:'18',
+    width:'680',
+    accent:'#7c5cff'
+  },
+
   cover:'',
+
   chapterImage:'',
+
   title:'Só MLD',
-  synopsis:'Um mundo de segredos, personagens marcantes e acontecimentos que escondem mais do que parecem.',
-  drafts:{}
+
+  synopsis:
+    'Um mundo de segredos, personagens marcantes e acontecimentos que escondem mais do que parecem. Entre nessa história e descubra o que existe por trás de cada capítulo.',
+
+  drafts:{
+    main:null,
+    routes:{}
+  }
 };
 
+
 function persist(){
+
   try{
+
     localStorage.setItem(
       STORE_KEY,
       JSON.stringify(siteData)
     );
 
-    return true
-  }catch(e){
-    alert('Não foi possível salvar no navegador. Tente usar imagens menores.');
-    return false
+    return true;
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível salvar os dados neste navegador. '+
+      'Imagens muito grandes podem ocupar todo o armazenamento disponível.'
+    );
+
+    return false;
   }
 }
+
 
 function restore(){
-  try{
-    const saved=localStorage.getItem(STORE_KEY);
 
-    if(saved)
-      siteData={
-        ...siteData,
-        ...JSON.parse(saved)
+  try{
+
+    const saved=
+      localStorage.getItem(STORE_KEY);
+
+    if(!saved){
+      return;
+    }
+
+    const parsed=
+      JSON.parse(saved);
+
+    siteData={
+      ...siteData,
+      ...parsed,
+
+      settings:{
+        ...siteData.settings,
+        ...(parsed.settings||{})
+      },
+
+      drafts:{
+        ...siteData.drafts,
+        ...(parsed.drafts||{})
       }
-  }catch(e){
-    console.warn('Dados locais indisponíveis',e)
+    };
+
+    if(!Array.isArray(siteData.arcs)){
+      siteData.arcs=[];
+    }
+
+    if(!Array.isArray(siteData.characters)){
+      siteData.characters=[];
+    }
+
+    if(!Array.isArray(siteData.notices)){
+      siteData.notices=[];
+    }
+
+    if(!siteData.routes){
+      siteData.routes={};
+    }
+
+  }catch(error){
+
+    console.error(
+      'Não foi possível restaurar os dados.',
+      error
+    );
   }
 }
+
 
 function readFileAsDataURL(file){
-  return new Promise((resolve,reject)=>{
-    const r=new FileReader();
 
-    r.onload=()=>resolve(r.result);
-    r.onerror=reject;
+  return new Promise(
+    (resolve,reject)=>{
 
-    r.readAsDataURL(file)
-  })
-}
+      const reader=
+        new FileReader();
 
-function renderArcList(){
-  const list=document.getElementById('arcList');
+      reader.onload=()=>{
+        resolve(reader.result);
+      };
 
-  if(!list)return;
+      reader.onerror=()=>{
+        reject(reader.error);
+      };
 
-  list.replaceChildren();
-
-  siteData.arcs.forEach((a,i)=>{
-    const b=document.createElement('button');
-
-    b.className='arc'+
-      (a.id===currentArc?' active':'');
-
-    b.onclick=()=>selectArc(a.id,b);
-
-    const n=document.createElement('span');
-
-    n.className='arc-num';
-    n.textContent=String(i+1).padStart(2,'0');
-
-    const main=document.createElement('span');
-
-    main.className='arc-main';
-
-    const strong=document.createElement('strong');
-    strong.textContent=a.name;
-
-    const small=document.createElement('small');
-    small.textContent=a.description||'Arco da história';
-
-    main.append(strong,small);
-
-    const count=document.createElement('span');
-
-    count.className='count';
-    count.textContent=a.chapters.length+' capítulo(s)';
-
-    b.append(n,main,count);
-    list.appendChild(b)
-  });
-
-  const sel=document.getElementById('chapterArcSelect');
-
-  if(sel){
-    const old=sel.value;
-
-    sel.replaceChildren();
-
-    siteData.arcs.forEach(a=>{
-      const o=document.createElement('option');
-
-      o.value=a.id;
-      o.textContent=a.name;
-
-      sel.appendChild(o)
-    });
-
-    if(siteData.arcs.some(a=>String(a.id)===old))
-      sel.value=old
-  }
-}
-
-function renderChapters(){
-  const arc=
-    siteData.arcs.find(a=>a.id===currentArc)||
-    siteData.arcs[0];
-
-  if(!arc)return;
-
-  const list=document.getElementById('chapterList');
-
-  list.replaceChildren();
-
-  document.getElementById('chapterLabel').textContent='ÍNDICE';
-  document.getElementById('chapterHeading').textContent=arc.name;
-
-  if(!arc.chapters.length){
-    const p=document.createElement('p');
-
-    p.textContent='Ainda não há capítulos publicados neste arco.';
-
-    list.appendChild(p);
-    return
-  }
-
-  arc.chapters.forEach((c,i)=>{
-    const row=document.createElement('div');
-
-    row.className='chapter';
-
-    const n=document.createElement('span');
-
-    n.className='num';
-    n.textContent=String(i+1).padStart(2,'0');
-
-    const t=document.createElement('span');
-
-    t.className='title';
-    t.textContent=c.title;
-
-    const b=document.createElement('button');
-
-    b.textContent='Ler';
-    b.onclick=()=>openSavedChapter(arc.id,c.id);
-
-    row.append(n,t,b);
-    list.appendChild(row)
-  })
-}
-
-function selectArc(n,el){
-  currentArc=Number(n);
-
-  document.querySelectorAll('.arc')
-    .forEach(a=>a.classList.remove('active'));
-
-  if(el)el.classList.add('active');
-
-  renderArcList();
-  renderChapters()
-}
-
-function createArc(){
-  const name=document.getElementById('arcName').value.trim();
-
-  if(!name)
-    return alert('Digite o nome do arco.');
-
-  siteData.arcs.push({
-    id:Date.now(),
-    name,
-    description:'Novo arco',
-    chapters:[]
-  });
-
-  currentArc=siteData.arcs.at(-1).id;
-
-  document.getElementById('arcName').value='';
-
-  persist();
-  renderArcList();
-  renderChapters();
-
-  alert('Arco criado e salvo neste navegador.')
-}
-
-async function previewCover(event){
-  const f=event.target.files&&event.target.files[0];
-
-  if(!f)return;
-
-  if(!f.type.startsWith('image/'))
-    return alert('Escolha uma imagem.');
-
-  try{
-    siteData.cover=await readFileAsDataURL(f);
-
-    const img=document.getElementById('coverImage');
-
-    img.src=siteData.cover;
-    img.style.display='block';
-
-    persist()
-  }catch(e){
-    alert('Não foi possível carregar a imagem.')
-  }
-}
-
-async function previewChapterImage(event){
-  const f=event.target.files&&event.target.files[0];
-
-  if(!f)return;
-
-  if(!f.type.startsWith('image/'))
-    return alert('Escolha uma imagem.');
-
-  try{
-    siteData.chapterImage=await readFileAsDataURL(f);
-
-    const img=document.getElementById('chapterIllustration');
-
-    img.src=siteData.chapterImage;
-    img.style.display='block';
-
-    persist()
-  }catch(e){
-    alert('Não foi possível carregar a imagem.')
-  }
-}
-
-async function addCharacter(){
-  const name=document.getElementById('characterName').value.trim();
-  const description=document.getElementById('characterDescription').value.trim();
-  const f=document.getElementById('characterImage').files[0];
-
-  if(!name)
-    return alert('Coloque o nome do personagem.');
-
-  let image='';
-
-  if(f){
-    if(!f.type.startsWith('image/'))
-      return alert('Escolha uma imagem válida.');
-
-    try{
-      image=await readFileAsDataURL(f)
-    }catch(e){
-      return alert('Não foi possível ler a imagem.')
+      reader.readAsDataURL(file);
     }
-  }
-
-  siteData.characters.push({
-    id:Date.now(),
-    name,
-    description,
-    image
-  });
-
-  persist();
-  renderCharacters();
-
-  document.getElementById('characterName').value='';
-  document.getElementById('characterDescription').value='';
-  document.getElementById('characterImage').value='';
-
-  alert('Ficha extra salva. Não faz parte do cânone.')
-}function renderCharacters(){
-  const box=document.getElementById('publicCharacters');
-  box.replaceChildren();
-
-  siteData.characters.forEach(c=>{
-    const card=document.createElement('div');
-    card.className='notice';
-
-    if(c.image){
-      const im=document.createElement('img');
-      im.src=c.image;
-      im.alt='Imagem de '+c.name;
-      im.style.cssText='display:block;width:100%;max-height:220px;object-fit:cover;border-radius:10px;margin-bottom:10px';
-      card.appendChild(im)
-    }
-
-    const h=document.createElement('strong');
-    h.textContent=c.name;
-
-    const p=document.createElement('p');
-    p.textContent=c.description;
-    p.style.marginBottom='0';
-
-    card.append(h,p);
-    box.appendChild(card)
-  })
-}
-
-function publishNotice(id,label){
-  const text=document.getElementById(id).value.trim();
-
-  if(!text)
-    return alert('Escreva o aviso antes de publicar.');
-
-  siteData.notices.unshift({
-    id:Date.now(),
-    label,
-    text
-  });
-
-  persist();
-  renderNotices();
-
-  document.getElementById(id).value='';
-
-  alert('Aviso salvo e exibido neste navegador.')
-}
-
-function renderNotices(){
-  const box=document.getElementById('publishedNotices');
-
-  box.replaceChildren();
-  box.style.display=siteData.notices.length?'block':'none';
-
-  siteData.notices.forEach(n=>{
-    const item=document.createElement('div');
-    item.style.marginTop='10px';
-
-    const h=document.createElement('strong');
-    h.textContent=n.label;
-
-    const p=document.createElement('p');
-    p.textContent=n.text;
-    p.style.margin='5px 0 0';
-
-    item.append(h,p);
-    box.appendChild(item)
-  })
-}
-
-function saveMainDraft(){
-  siteData.title=
-    document.getElementById('coverTitle').value.trim()||
-    'Só MLD';
-
-  siteData.synopsis=
-    document.getElementById('synopsis').value.trim();
-
-  siteData.drafts.main={
-    title:document.getElementById('chapterName').value,
-    text:document.getElementById('chapterText').value,
-    arcId:Number(
-      document.getElementById('chapterArcSelect').value||
-      currentArc
-    )
-  };
-
-  persist();
-
-  alert('Rascunho salvo neste navegador.')
-}
-
-function renderChapter(c,arcId){
-  document.getElementById('readerArc').textContent=
-    siteData.arcs.find(a=>a.id===arcId)?.name||
-    String(arcId||'ROTA ALTERNATIVA');
-
-  document.getElementById('readerTitle').textContent=c.title;
-
-  const content=document.getElementById('chapterContent');
-
-  content.replaceChildren();
-
-  c.text.split(/\n\s*\n/).forEach(t=>{
-    const p=document.createElement('p');
-
-    p.textContent=t.trim();
-
-    content.appendChild(p)
-  });
-
-  const img=document.getElementById('chapterIllustration');
-
-  if(c.image){
-    img.src=c.image;
-    img.style.display='block'
-  }else{
-    img.removeAttribute('src');
-    img.style.display='none'
-  }
-}
-
-function openSavedChapter(arcId,id){
-  const a=siteData.arcs.find(x=>x.id===arcId);
-
-  const c=a&&a.chapters.find(x=>x.id===id);
-
-  if(!c)return;
-
-  renderChapter(c,arcId);
-
-  document.getElementById('reader').classList.add('open');
-
-  document.getElementById('reader').scrollIntoView({
-    behavior:'smooth',
-    block:'start'
-  })
-}
-
-function publishMainChapter(){
-  const title=
-    document.getElementById('chapterName').value.trim()||
-    'Capítulo sem título';
-
-  const text=
-    document.getElementById('chapterText').value.trim();
-
-  const arcId=
-    Number(
-      document.getElementById('chapterArcSelect').value||
-      currentArc
-    );
-
-  const arc=
-    siteData.arcs.find(a=>a.id===arcId);
-
-  if(!text)
-    return alert('Escreva o capítulo antes de publicar.');
-
-  if(!arc)
-    return alert('Selecione um arco válido.');
-
-  const c={
-    id:Date.now(),
-    title,
-    text,
-    image:siteData.chapterImage||''
-  };
-
-  arc.chapters.push(c);
-
-  siteData.drafts.main=null;
-
-  persist();
-
-  renderArcList();
-  renderChapters();
-  renderChapter(c,arcId);
-
-  document.getElementById('reader').classList.add('open');
-
-  document.getElementById('reader').scrollIntoView({
-    behavior:'smooth',
-    block:'start'
-  });
-
-  alert(
-    'Capítulo publicado nesta instalação e salvo neste navegador. '+
-    'Para todos os leitores verem, falta conectar um banco online.'
-  )
-}
-
-function applyChapterText(){
-  const title=
-    document.getElementById('chapterName').value.trim()||
-    'Capítulo sem título';
-
-  const text=
-    document.getElementById('chapterText').value.trim();
-
-  const arcId=
-    Number(
-      document.getElementById('chapterArcSelect').value||
-      currentArc
-    );
-
-  if(!text)
-    return alert('Escreva o texto do capítulo antes de aplicar.');
-
-  siteData.title=
-    document.getElementById('coverTitle').value.trim()||
-    'Só MLD';
-
-  siteData.synopsis=
-    document.getElementById('synopsis').value.trim();
-
-  persist();
-
-  renderChapter({
-    title,
-    text,
-    image:siteData.chapterImage||''
-  },arcId);
-
-  closeAuthorPanel();
-
-  document.getElementById('reader').classList.add('open');
-
-  document.getElementById('reader').scrollIntoView({
-    behavior:'smooth',
-    block:'start'
-  })
-}
-
-function saveRouteDraft(){
-  const route=
-    document.getElementById('routeChoice').value;
-
-  siteData.routes[route]={
-    title:document.getElementById('routeChapterTitle').value,
-    text:document.getElementById('routeChapterText').value
-  };
-
-  routeDrafts[route]=siteData.routes[route];
-
-  persist();
-
-  alert(
-    'Rascunho de '+route+
-    ' salvo neste navegador.'
-  )
-}
-
-function loadRouteDraft(){
-  const route=
-    document.getElementById('routeChoice').value;
-
-  const d=
-    siteData.routes[route]||
-    {
-      title:'',
-      text:''
-    };
-
-  document.getElementById('routeChapterTitle').value=
-    d.title||'';
-
-  document.getElementById('routeChapterText').value=
-    d.text||''
-}
-
-function applyRouteText(){
-  const route=
-    document.getElementById('routeChoice').value;
-
-  const title=
-    document.getElementById('routeChapterTitle').value.trim()||
-    route+' — Capítulo alternativo';
-
-  const text=
-    document.getElementById('routeChapterText').value.trim();
-
-  if(!text)
-    return alert('Escreva o texto da rota antes de aplicar.');
-
-  siteData.routes[route]={
-    title,
-    text
-  };
-
-  persist();
-
-  const card=
-    document.getElementById('publicRoutes')
-      .children[ROUTE_NAMES.indexOf(route)];
-
-  if(card){
-    card.replaceChildren();
-
-    const h=document.createElement('h3');
-    h.textContent=route;
-
-    const t=document.createElement('strong');
-    t.textContent=title;
-
-    const p=document.createElement('p');
-
-    p.textContent=
-      text.slice(0,180)+
-      (text.length>180?'…':'');
-
-    const b=document.createElement('button');
-
-    b.className='secondary';
-    b.textContent='Ler rota';
-
-    b.onclick=()=>{
-      renderChapter({
-        title,
-        text,
-        image:''
-      },route);
-
-      document.getElementById('reader')
-        .classList.add('open');
-
-      document.getElementById('reader')
-        .scrollIntoView({
-          behavior:'smooth'
-        })
-    };
-
-    card.append(h,t,p,b)
-  }
-
-  closeRoutePanel();
-
-  alert(
-    'Texto aplicado à '+route+
-    '. A rota principal permanece separada.'
-  )
-}
-
-function setMode(mode){
-  document.body.classList.toggle(
-    'dark',
-    mode==='dark'
   );
-
-  siteData.settings.mode=mode;
-
-  persist()
 }
 
-function toggleDark(){
-  const d=
-    document.body.classList.toggle('dark');
 
-  document.getElementById('bgMode').value=
-    d?'dark':'light';
+function scrollToId(id){
 
-  siteData.settings.mode=
-    d?'dark':'light';
+  const element=
+    document.getElementById(id);
 
-  persist()
+  if(!element){
+    return;
+  }
+
+  element.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
 }
 
-function setFontSize(size){
-  document.querySelector('.reader-body')
-    .style.fontSize=size+'px';
 
-  siteData.settings.fontSize=size;
+function toggleMenu(){
 
-  persist()
+  const menu=
+    document.getElementById('siteMenu');
+
+  menu.style.display=
+    menu.style.display==='block'
+      ?'none'
+      :'block';
 }
 
-function setReaderWidth(width){
-  document.querySelector('.reader-body')
-    .style.maxWidth=width+'px';
 
-  siteData.settings.width=width;
+function openDrawer(){
 
-  persist()
+  document
+    .getElementById('drawer')
+    .classList.add('open');
 }
+
+
+function closeDrawer(){
+
+  document
+    .getElementById('drawer')
+    .classList.remove('open');
+}
+
 
 function openAuthorLogin(){
+
   closeDrawer();
 
   document.getElementById('siteMenu')
     .style.display='none';
 
-  document.getElementById('authorOverlay')
+  document
+    .getElementById('authorOverlay')
     .classList.add('open');
 
   document.getElementById('authorLogin')
@@ -2312,50 +2076,14 @@ function openAuthorLogin(){
     .value='';
 
   document.getElementById('loginError')
-    .style.display='none'
+    .style.display='none';
 }
 
-function checkAuthorPassword(){
-  if(
-    document.getElementById('authorPassword').value===
-    '1234321'
-  ){
-    document.getElementById('authorLogin')
-      .style.display='none';
-
-    document.getElementById('authorPanel')
-      .style.display='block';
-
-    document.getElementById('loginError')
-      .style.display='none';
-
-    const d=siteData.drafts.main;
-
-    if(d){
-      document.getElementById('chapterName').value=
-        d.title||'';
-
-      document.getElementById('chapterText').value=
-        d.text||'';
-
-      document.getElementById('chapterArcSelect').value=
-        d.arcId||currentArc
-    }
-
-    document.getElementById('coverTitle').value=
-      siteData.title||'Só MLD';
-
-    document.getElementById('synopsis').value=
-      siteData.synopsis||''
-
-  }else{
-    document.getElementById('loginError')
-      .style.display='block'
-  }
-}
 
 function closeAuthorPanel(){
-  document.getElementById('authorOverlay')
+
+  document
+    .getElementById('authorOverlay')
     .classList.remove('open');
 
   document.getElementById('authorLogin')
@@ -2365,103 +2093,1810 @@ function closeAuthorPanel(){
     .style.display='none';
 
   document.getElementById('authorPassword')
-    .value=''
+    .value='';
 }
 
-function setModeNoSave(mode){
+
+function checkAuthorPassword(){
+
+  const password=
+    document.getElementById('authorPassword')
+      .value;
+
+  if(password!==AUTHOR_PASSWORD){
+
+    document.getElementById('loginError')
+      .style.display='block';
+
+    return;
+  }
+
+  document.getElementById('loginError')
+    .style.display='none';
+
+  document.getElementById('authorLogin')
+    .style.display='none';
+
+  document.getElementById('authorPanel')
+    .style.display='block';
+
+  document.getElementById('coverTitle')
+    .value=siteData.title||'Só MLD';
+
+  document.getElementById('synopsis')
+    .value=siteData.synopsis||'';
+
+  renderArcSelect();
+
+  const draft=
+    siteData.drafts.main;
+
+  if(draft){
+
+    document.getElementById('chapterName')
+      .value=draft.title||'';
+
+    document.getElementById('chapterText')
+      .value=draft.text||'';
+
+    if(draft.arcId){
+
+      document.getElementById('chapterArcSelect')
+        .value=String(draft.arcId);
+    }
+  }
+}
+
+
+function saveNovelInfo(){
+
+  const title=
+    document.getElementById('coverTitle')
+      .value
+      .trim();
+
+  const synopsis=
+    document.getElementById('synopsis')
+      .value
+      .trim();
+
+  siteData.title=
+    title||'Só MLD';
+
+  siteData.synopsis=
+    synopsis;
+
+  persist();
+
+  renderNovelInfo();
+
+  alert(
+    'Título e sinopse salvos neste navegador.'
+  );
+}
+
+
+function renderNovelInfo(){
+
+  const title=
+    siteData.title||'Só MLD';
+
+  document.getElementById('publicNovelTitle')
+    .textContent=title;
+
+  document.title=title;
+
+  const description=
+    document.querySelector('.hero-desc');
+
+  if(description){
+
+    description.textContent=
+      siteData.synopsis||'';
+  }
+}
+
+
+function renderSwatches(){
+
+  const box=
+    document.getElementById('swatches');
+
+  box.replaceChildren();
+
+  palettes.forEach(
+    ([name,color])=>{
+
+      const button=
+        document.createElement('button');
+
+      button.className='swatch';
+
+      button.style.background=color;
+
+      button.title=name;
+
+      button.setAttribute(
+        'aria-label',
+        'Tema '+name
+      );
+
+      if(
+        siteData.settings.accent===color
+      ){
+
+        button.classList.add(
+          'selected'
+        );
+      }
+
+      button.onclick=()=>{
+
+        siteData.settings.accent=color;
+
+        document.documentElement
+          .style
+          .setProperty(
+            '--accent',
+            color
+          );
+
+        document
+          .querySelectorAll('.swatch')
+          .forEach(item=>{
+            item.classList.remove(
+              'selected'
+            );
+          });
+
+        button.classList.add(
+          'selected'
+        );
+
+        persist();
+      };
+
+      box.appendChild(button);
+    }
+  );
+}
+
+
+function setMode(mode){
+
+  const dark=
+    mode==='dark';
+
+  document.body
+    .classList
+    .toggle(
+      'dark',
+      dark
+    );
+
+  siteData.settings.mode=
+    dark?'dark':'light';
+
+  document.getElementById('bgMode')
+    .value=
+    siteData.settings.mode;
+
+  persist();
+}
+
+
+function toggleDark(){
+
+  const dark=
+    !document.body
+      .classList
+      .contains('dark');
+
+  setMode(
+    dark?'dark':'light'
+  );
+}
+
+
+function setFontSize(size){
+
+  document
+    .querySelector('.reader-body')
+    .style
+    .fontSize=
+    size+'px';
+
+  siteData.settings.fontSize=
+    String(size);
+
+  persist();
+}
+
+
+function setReaderWidth(width){
+
+  document
+    .querySelector('.reader-body')
+    .style
+    .maxWidth=
+    width+'px';
+
+  siteData.settings.width=
+    String(width);
+
+  persist();
+}
+
+
+function renderArcSelect(){
+
+  const select=
+    document.getElementById(
+      'chapterArcSelect'
+    );
+
+  if(!select){
+    return;
+  }
+
+  const previous=
+    select.value;
+
+  select.replaceChildren();
+
+  siteData.arcs.forEach(arc=>{
+
+    const option=
+      document.createElement('option');
+
+    option.value=
+      String(arc.id);
+
+    option.textContent=
+      arc.name;
+
+    select.appendChild(option);
+  });
+
+  if(
+    siteData.arcs.some(
+      arc=>
+        String(arc.id)===
+        previous
+    )
+  ){
+
+    select.value=
+      previous;
+
+  }else if(currentArc){
+
+    select.value=
+      String(currentArc);
+  }
+}
+
+
+function renderArcList(){
+
+  const list=
+    document.getElementById(
+      'arcList'
+    );
+
+  if(!list){
+    return;
+  }
+
+  list.replaceChildren();
+
+  if(!siteData.arcs.length){
+
+    const empty=
+      document.createElement('p');
+
+    empty.textContent=
+      'Nenhum arco cadastrado.';
+
+    list.appendChild(empty);
+
+    return;
+  }
+
+  if(
+    !siteData.arcs.some(
+      arc=>arc.id===currentArc
+    )
+  ){
+
+    currentArc=
+      siteData.arcs[0].id;
+  }
+
+  siteData.arcs.forEach(
+    (arc,index)=>{
+
+      const button=
+        document.createElement(
+          'button'
+        );
+
+      button.className=
+        'arc'+
+        (
+          arc.id===currentArc
+            ?' active'
+            :''
+        );
+
+      button.onclick=()=>{
+
+        currentArc=arc.id;
+
+        currentChapterIndex=-1;
+
+        renderArcList();
+        renderChapters();
+      };
+
+      const number=
+        document.createElement(
+          'span'
+        );
+
+      number.className=
+        'arc-num';
+
+      number.textContent=
+        String(index+1)
+          .padStart(2,'0');
+
+      const main=
+        document.createElement(
+          'span'
+        );
+
+      main.className=
+        'arc-main';
+
+      const strong=
+        document.createElement(
+          'strong'
+        );
+
+      strong.textContent=
+        arc.name;
+
+      const small=
+        document.createElement(
+          'small'
+        );
+
+      small.textContent=
+        arc.description||
+        'Arco da história';
+
+      main.append(
+        strong,
+        small
+      );
+
+      const count=
+        document.createElement(
+          'span'
+        );
+
+      count.className=
+        'count';
+
+      const total=
+        Array.isArray(arc.chapters)
+          ?arc.chapters.length
+          :0;
+
+      count.textContent=
+        total===1
+          ?'1 capítulo'
+          :total+' capítulos';
+
+      button.append(
+        number,
+        main,
+        count
+      );
+
+      list.appendChild(
+        button
+      );
+    }
+  );
+
+  renderArcSelect();
+}
+
+
+function renderChapters(){
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        item.id===currentArc
+    );
+
+  const list=
+    document.getElementById(
+      'chapterList'
+    );
+
+  list.replaceChildren();
+
+  if(!arc){
+
+    document.getElementById(
+      'chapterHeading'
+    ).textContent=
+      'Capítulos';
+
+    const p=
+      document.createElement('p');
+
+    p.textContent=
+      'Nenhum arco selecionado.';
+
+    list.appendChild(p);
+
+    return;
+  }
+
+  document.getElementById(
+    'chapterLabel'
+  ).textContent=
+    'ÍNDICE';
+
+  document.getElementById(
+    'chapterHeading'
+  ).textContent=
+    arc.name;
+
+  if(
+    !Array.isArray(
+      arc.chapters
+    )
+  ){
+
+    arc.chapters=[];
+  }
+
+  if(!arc.chapters.length){
+
+    const p=
+      document.createElement('p');
+
+    p.textContent=
+      'Ainda não há capítulos publicados neste arco.';
+
+    list.appendChild(p);
+
+    return;
+  }
+
+  arc.chapters.forEach(
+    (chapter,index)=>{
+
+      const row=
+        document.createElement(
+          'div'
+        );
+
+      row.className=
+        'chapter';
+
+      const number=
+        document.createElement(
+          'span'
+        );
+
+      number.className=
+        'num';
+
+      number.textContent=
+        String(index+1)
+          .padStart(2,'0');
+
+      const title=
+        document.createElement(
+          'span'
+        );
+
+      title.className=
+        'title';
+
+      title.textContent=
+        chapter.title;
+
+      const read=
+        document.createElement(
+          'button'
+        );
+
+      read.textContent='Ler';
+
+      read.onclick=()=>{
+
+        openSavedChapter(
+          arc.id,
+          chapter.id
+        );
+      };
+
+      row.append(
+        number,
+        title,
+        read
+      );
+
+      list.appendChild(row);
+    }
+  );
+}
+
+
+function createArc(){
+
+  const name=
+    document.getElementById(
+      'arcName'
+    ).value.trim();
+
+  const description=
+    document.getElementById(
+      'arcDescription'
+    ).value.trim();
+
+  if(!name){
+
+    alert(
+      'Digite o nome do arco.'
+    );
+
+    return;
+  }
+
+  const arc={
+    id:Date.now(),
+    name,
+    description:
+      description||
+      'Arco da história',
+    chapters:[]
+  };
+
+  siteData.arcs.push(arc);
+
+  currentArc=arc.id;
+
+  document.getElementById(
+    'arcName'
+  ).value='';
+
+  document.getElementById(
+    'arcDescription'
+  ).value='';
+
+  persist();
+
+  renderArcList();
+  renderChapters();
+
+  alert(
+    'Arco criado.'
+  );
+}async function previewCover(event){
+
+  const file=
+    event.target.files&&
+    event.target.files[0];
+
+  if(!file){
+    return;
+  }
+
+  if(
+    !file.type.startsWith('image/')
+  ){
+
+    alert(
+      'Escolha um arquivo de imagem.'
+    );
+
+    return;
+  }
+
+  try{
+
+    const data=
+      await readFileAsDataURL(file);
+
+    siteData.cover=data;
+
+    const image=
+      document.getElementById(
+        'coverImage'
+      );
+
+    image.src=data;
+    image.style.display='block';
+
+    persist();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível carregar a capa.'
+    );
+  }
+}
+
+
+async function previewChapterImage(event){
+
+  const file=
+    event.target.files&&
+    event.target.files[0];
+
+  if(!file){
+    return;
+  }
+
+  if(
+    !file.type.startsWith('image/')
+  ){
+
+    alert(
+      'Escolha um arquivo de imagem.'
+    );
+
+    return;
+  }
+
+  try{
+
+    siteData.chapterImage=
+      await readFileAsDataURL(file);
+
+    persist();
+
+    alert(
+      'Imagem carregada para o capítulo.'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível carregar a imagem.'
+    );
+  }
+}
+
+
+function saveMainDraft(){
+
+  const title=
+    document.getElementById(
+      'chapterName'
+    ).value;
+
+  const text=
+    document.getElementById(
+      'chapterText'
+    ).value;
+
+  const arcId=
+    Number(
+      document.getElementById(
+        'chapterArcSelect'
+      ).value
+    );
+
+  siteData.drafts.main={
+    title,
+    text,
+    arcId,
+    image:
+      siteData.chapterImage||''
+  };
+
+  persist();
+
+  alert(
+    'Rascunho salvo neste navegador.'
+  );
+}
+
+
+function applyChapterText(){
+
+  const title=
+    document.getElementById(
+      'chapterName'
+    ).value.trim()||
+    'Capítulo sem título';
+
+  const text=
+    document.getElementById(
+      'chapterText'
+    ).value.trim();
+
+  const arcId=
+    Number(
+      document.getElementById(
+        'chapterArcSelect'
+      ).value
+    );
+
+  if(!text){
+
+    alert(
+      'Escreva o texto do capítulo.'
+    );
+
+    return;
+  }
+
+  renderChapter(
+    {
+      title,
+      text,
+      image:
+        siteData.chapterImage||''
+    },
+    arcId
+  );
+
+  closeAuthorPanel();
+
+  const reader=
+    document.getElementById(
+      'reader'
+    );
+
+  reader.classList.add(
+    'open'
+  );
+
+  reader.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+}
+
+
+function publishMainChapter(){
+
+  const title=
+    document.getElementById(
+      'chapterName'
+    ).value.trim()||
+    'Capítulo sem título';
+
+  const text=
+    document.getElementById(
+      'chapterText'
+    ).value.trim();
+
+  const arcId=
+    Number(
+      document.getElementById(
+        'chapterArcSelect'
+      ).value
+    );
+
+  if(!text){
+
+    alert(
+      'Escreva o capítulo antes de salvar.'
+    );
+
+    return;
+  }
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        item.id===arcId
+    );
+
+  if(!arc){
+
+    alert(
+      'Selecione um arco válido.'
+    );
+
+    return;
+  }
+
+  if(
+    !Array.isArray(
+      arc.chapters
+    )
+  ){
+
+    arc.chapters=[];
+  }
+
+  const chapter={
+    id:Date.now(),
+    title,
+    text,
+    image:
+      siteData.chapterImage||''
+  };
+
+  arc.chapters.push(
+    chapter
+  );
+
+  siteData.drafts.main=null;
+
+  siteData.chapterImage='';
+
+  currentArc=arc.id;
+
+  persist();
+
+  renderArcList();
+  renderChapters();
+
+  renderChapter(
+    chapter,
+    arc.id
+  );
+
+  closeAuthorPanel();
+
+  const reader=
+    document.getElementById(
+      'reader'
+    );
+
+  reader.classList.add(
+    'open'
+  );
+
+  reader.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+
+  document.getElementById(
+    'chapterName'
+  ).value='';
+
+  document.getElementById(
+    'chapterText'
+  ).value='';
+
+  document.getElementById(
+    'chapterUpload'
+  ).value='';
+
+  alert(
+    'Capítulo salvo neste navegador.'
+  );
+}
+
+
+function renderChapter(
+  chapter,
+  arcId
+){
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        item.id===arcId
+    );
+
+  document.getElementById(
+    'readerArc'
+  ).textContent=
+    arc
+      ?arc.name
+      :String(
+          arcId||
+          'ROTA ALTERNATIVA'
+        );
+
+  document.getElementById(
+    'readerTitle'
+  ).textContent=
+    chapter.title||
+    'Capítulo';
+
+  const content=
+    document.getElementById(
+      'chapterContent'
+    );
+
+  content.replaceChildren();
+
+  const text=
+    chapter.text||'';
+
+  const paragraphs=
+    text
+      .split(/\n\s*\n/)
+      .map(item=>item.trim())
+      .filter(Boolean);
+
+  if(!paragraphs.length){
+
+    const p=
+      document.createElement('p');
+
+    p.textContent=
+      'Este capítulo está vazio.';
+
+    content.appendChild(p);
+
+  }else{
+
+    paragraphs.forEach(
+      paragraph=>{
+
+        const p=
+          document.createElement('p');
+
+        p.textContent=
+          paragraph;
+
+        content.appendChild(p);
+      }
+    );
+  }
+
+  const figure=
+    document.getElementById(
+      'chapterFigure'
+    );
+
+  const image=
+    document.getElementById(
+      'chapterIllustration'
+    );
+
+  if(chapter.image){
+
+    image.src=
+      chapter.image;
+
+    figure.style.display=
+      'block';
+
+  }else{
+
+    image.removeAttribute(
+      'src'
+    );
+
+    figure.style.display=
+      'none';
+  }
+}
+
+
+function openSavedChapter(
+  arcId,
+  chapterId
+){
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        item.id===arcId
+    );
+
+  if(!arc){
+    return;
+  }
+
+  const index=
+    arc.chapters.findIndex(
+      chapter=>
+        chapter.id===chapterId
+    );
+
+  if(index<0){
+    return;
+  }
+
+  currentArc=
+    arcId;
+
+  currentChapterIndex=
+    index;
+
+  renderChapter(
+    arc.chapters[index],
+    arcId
+  );
+
+  const reader=
+    document.getElementById(
+      'reader'
+    );
+
+  reader.classList.add(
+    'open'
+  );
+
+  reader.scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+}
+
+
+function closeReader(){
+
+  document.getElementById(
+    'reader'
+  ).classList.remove(
+    'open'
+  );
+}
+
+
+function changeReader(delta){
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        item.id===currentArc
+    );
+
+  if(
+    !arc||
+    !Array.isArray(
+      arc.chapters
+    )||
+    !arc.chapters.length
+  ){
+
+    return;
+  }
+
+  if(currentChapterIndex<0){
+
+    currentChapterIndex=0;
+
+  }else{
+
+    currentChapterIndex+=
+      delta;
+  }
+
+  if(currentChapterIndex<0){
+
+    currentChapterIndex=0;
+
+    alert(
+      'Você já está no primeiro capítulo deste arco.'
+    );
+
+    return;
+  }
+
+  if(
+    currentChapterIndex>=
+    arc.chapters.length
+  ){
+
+    currentChapterIndex=
+      arc.chapters.length-1;
+
+    alert(
+      'Você chegou ao último capítulo deste arco.'
+    );
+
+    return;
+  }
+
+  const chapter=
+    arc.chapters[
+      currentChapterIndex
+    ];
+
+  renderChapter(
+    chapter,
+    arc.id
+  );
+
+  document.getElementById(
+    'reader'
+  ).scrollIntoView({
+    behavior:'smooth',
+    block:'start'
+  });
+}
+
+
+async function addCharacter(){
+
+  const name=
+    document.getElementById(
+      'characterName'
+    ).value.trim();
+
+  const description=
+    document.getElementById(
+      'characterDescription'
+    ).value.trim();
+
+  const file=
+    document.getElementById(
+      'characterImage'
+    ).files[0];
+
+  if(!name){
+
+    alert(
+      'Coloque o nome do personagem.'
+    );
+
+    return;
+  }
+
+  let image='';
+
+  if(file){
+
+    if(
+      !file.type.startsWith(
+        'image/'
+      )
+    ){
+
+      alert(
+        'Escolha uma imagem válida.'
+      );
+
+      return;
+    }
+
+    try{
+
+      image=
+        await readFileAsDataURL(
+          file
+        );
+
+    }catch(error){
+
+      console.error(error);
+
+      alert(
+        'Não foi possível carregar a imagem do personagem.'
+      );
+
+      return;
+    }
+  }
+
+  siteData.characters.push({
+    id:Date.now(),
+    name,
+    description,
+    image
+  });
+
+  persist();
+
+  renderCharacters();
+
+  document.getElementById(
+    'characterName'
+  ).value='';
+
+  document.getElementById(
+    'characterDescription'
+  ).value='';
+
+  document.getElementById(
+    'characterImage'
+  ).value='';
+
+  alert(
+    'Personagem adicionado.'
+  );
+}
+
+
+function renderCharacters(){
+
+  const box=
+    document.getElementById(
+      'publicCharacters'
+    );
+
+  box.replaceChildren();
+
+  if(
+    !siteData.characters.length
+  ){
+
+    const p=
+      document.createElement('p');
+
+    p.textContent=
+      'Nenhuma ficha de personagem adicionada.';
+
+    box.appendChild(p);
+
+    return;
+  }
+
+  siteData.characters.forEach(
+    character=>{
+
+      const card=
+        document.createElement(
+          'div'
+        );
+
+      card.className=
+        'notice character-card';
+
+      if(character.image){
+
+        const image=
+          document.createElement(
+            'img'
+          );
+
+        image.src=
+          character.image;
+
+        image.alt=
+          'Imagem de '+
+          character.name;
+
+        card.appendChild(
+          image
+        );
+      }
+
+      const title=
+        document.createElement(
+          'strong'
+        );
+
+      title.textContent=
+        character.name;
+
+      card.appendChild(
+        title
+      );
+
+      if(
+        character.description
+      ){
+
+        const description=
+          document.createElement(
+            'p'
+          );
+
+        description.textContent=
+          character.description;
+
+        description.style.marginBottom=
+          '0';
+
+        card.appendChild(
+          description
+        );
+      }
+
+      box.appendChild(
+        card
+      );
+    }
+  );
+}
+
+
+function publishNotice(
+  id,
+  label
+){
+
+  const field=
+    document.getElementById(id);
+
+  const text=
+    field.value.trim();
+
+  if(!text){
+
+    alert(
+      'Escreva o aviso antes de publicar.'
+    );
+
+    return;
+  }
+
+  siteData.notices.unshift({
+    id:Date.now(),
+    label,
+    text
+  });
+
+  persist();
+
+  renderNotices();
+
+  field.value='';
+
+  alert(
+    'Aviso adicionado.'
+  );
+}
+
+
+function renderNotices(){
+
+  const box=
+    document.getElementById(
+      'publishedNotices'
+    );
+
+  box.replaceChildren();
+
+  if(
+    !siteData.notices.length
+  ){
+
+    box.style.display=
+      'none';
+
+    return;
+  }
+
+  box.style.display=
+    'block';
+
+  siteData.notices.forEach(
+    notice=>{
+
+      const item=
+        document.createElement(
+          'div'
+        );
+
+      item.style.marginTop=
+        '10px';
+
+      const title=
+        document.createElement(
+          'strong'
+        );
+
+      title.textContent=
+        notice.label;
+
+      const text=
+        document.createElement(
+          'p'
+        );
+
+      text.textContent=
+        notice.text;
+
+      text.style.margin=
+        '5px 0 0';
+
+      item.append(
+        title,
+        text
+      );
+
+      box.appendChild(
+        item
+      );
+    }
+  );
+}
+
+
+function openRoutePanel(){
+
+  document.getElementById(
+    'routeOverlay'
+  ).classList.add(
+    'open'
+  );
+
+  loadRouteDraft();
+}
+
+
+function closeRoutePanel(){
+
+  document.getElementById(
+    'routeOverlay'
+  ).classList.remove(
+    'open'
+  );
+}
+
+
+function loadRouteDraft(){
+
+  const route=
+    document.getElementById(
+      'routeChoice'
+    ).value;
+
+  const saved=
+    siteData.drafts.routes?.[
+      route
+    ]||
+    siteData.routes[route]||
+    {
+      title:'',
+      text:''
+    };
+
+  document.getElementById(
+    'routeChapterTitle'
+  ).value=
+    saved.title||'';
+
+  document.getElementById(
+    'routeChapterText'
+  ).value=
+    saved.text||'';
+}
+
+
+function saveRouteDraft(){
+
+  const route=
+    document.getElementById(
+      'routeChoice'
+    ).value;
+
+  if(
+    !siteData.drafts.routes
+  ){
+
+    siteData.drafts.routes={};
+  }
+
+  siteData.drafts.routes[
+    route
+  ]={
+    title:
+      document.getElementById(
+        'routeChapterTitle'
+      ).value,
+
+    text:
+      document.getElementById(
+        'routeChapterText'
+      ).value
+  };
+
+  persist();
+
+  alert(
+    'Rascunho de '+
+    route+
+    ' salvo neste navegador.'
+  );
+}
+
+
+function applyRouteText(){
+
+  const route=
+    document.getElementById(
+      'routeChoice'
+    ).value;
+
+  const title=
+    document.getElementById(
+      'routeChapterTitle'
+    ).value.trim()||
+    'Capítulo alternativo';
+
+  const text=
+    document.getElementById(
+      'routeChapterText'
+    ).value.trim();
+
+  if(!text){
+
+    alert(
+      'Escreva o texto da rota.'
+    );
+
+    return;
+  }
+
+  siteData.routes[
+    route
+  ]={
+    title,
+    text
+  };
+
+  if(
+    siteData.drafts.routes
+  ){
+
+    delete siteData.drafts
+      .routes[route];
+  }
+
+  persist();
+
+  renderRoutes();
+
+  closeRoutePanel();
+
+  alert(
+    'Conteúdo salvo em '+
+    route+
+    '.'
+  );
+}
+
+
+function renderRoutes(){
+
+  const container=
+    document.getElementById(
+      'publicRoutes'
+    );
+
+  const cards=
+    Array.from(
+      container.children
+    );
+
+  ROUTE_NAMES.forEach(
+    (route,index)=>{
+
+      const card=
+        cards[index];
+
+      if(!card){
+        return;
+      }
+
+      card.replaceChildren();
+
+      const heading=
+        document.createElement(
+          'h3'
+        );
+
+      heading.textContent=
+        route;
+
+      card.appendChild(
+        heading
+      );
+
+      const data=
+        siteData.routes[
+          route
+        ];
+
+      if(
+        !data||
+        !data.text
+      ){
+
+        const empty=
+          document.createElement(
+            'p'
+          );
+
+        empty.textContent=
+          'Nenhum capítulo publicado.';
+
+        card.appendChild(
+          empty
+        );
+
+        return;
+      }
+
+      const title=
+        document.createElement(
+          'strong'
+        );
+
+      title.textContent=
+        data.title||
+        'Capítulo alternativo';
+
+      const preview=
+        document.createElement(
+          'p'
+        );
+
+      preview.textContent=
+        data.text.length>180
+          ?data.text.slice(
+              0,
+              180
+            )+'…'
+          :data.text;
+
+      const button=
+        document.createElement(
+          'button'
+        );
+
+      button.className=
+        'secondary';
+
+      button.textContent=
+        'Ler rota';
+
+      button.onclick=()=>{
+
+        currentChapterIndex=-1;
+
+        renderChapter(
+          {
+            title:
+              data.title||
+              'Capítulo alternativo',
+
+            text:
+              data.text,
+
+            image:''
+          },
+          route
+        );
+
+        const reader=
+          document.getElementById(
+            'reader'
+          );
+
+        reader.classList.add(
+          'open'
+        );
+
+        reader.scrollIntoView({
+          behavior:'smooth',
+          block:'start'
+        });
+      };
+
+      card.append(
+        title,
+        preview,
+        button
+      );
+    }
+  );
+}
+
+
+function restoreUI(){
+
+  restore();
+
+  renderNovelInfo();
+
+  if(siteData.cover){
+
+    const image=
+      document.getElementById(
+        'coverImage'
+      );
+
+    image.src=
+      siteData.cover;
+
+    image.style.display=
+      'block';
+  }
+
+  const mode=
+    siteData.settings.mode||
+    'light';
+
   document.body.classList.toggle(
     'dark',
     mode==='dark'
   );
 
-  document.getElementById('bgMode').value=
-    mode
-}
+  document.getElementById(
+    'bgMode'
+  ).value=
+    mode;
 
-function restoreUI(){
-  restore();
+  const fontSize=
+    siteData.settings.fontSize||
+    '18';
 
-  if(siteData.cover){
-    const im=document.getElementById('coverImage');
+  document.querySelector(
+    '.reader-body'
+  ).style.fontSize=
+    fontSize+'px';
 
-    im.src=siteData.cover;
-    im.style.display='block'
+  document.getElementById(
+    'fontSize'
+  ).value=
+    fontSize;
+
+  const width=
+    siteData.settings.width||
+    '680';
+
+  document.querySelector(
+    '.reader-body'
+  ).style.maxWidth=
+    width+'px';
+
+  document.getElementById(
+    'widthMode'
+  ).value=
+    width;
+
+  const accent=
+    siteData.settings.accent||
+    '#7c5cff';
+
+  document.documentElement
+    .style
+    .setProperty(
+      '--accent',
+      accent
+    );
+
+  if(siteData.arcs.length){
+
+    if(
+      !siteData.arcs.some(
+        arc=>
+          arc.id===currentArc
+      )
+    ){
+
+      currentArc=
+        siteData.arcs[0].id;
+    }
   }
 
-  if(siteData.chapterImage){
-    const im=
-      document.getElementById('chapterIllustration');
-
-    im.src=siteData.chapterImage;
-    im.style.display='block'
-  }
-
-  if(siteData.title){
-    document.querySelector('.hero-copy h1')
-      .textContent=siteData.title;
-
-    document.title=
-      siteData.title+' — Só MLD'
-  }
-
-  if(siteData.synopsis){
-    document.querySelector('.hero-desc')
-      .textContent=siteData.synopsis
-  }
+  renderSwatches();
 
   renderArcList();
+
   renderChapters();
+
   renderCharacters();
+
   renderNotices();
 
-  ROUTE_NAMES.forEach((name,i)=>{
-    const d=siteData.routes[name];
+  renderRoutes();
 
-    const card=
-      document.getElementById('publicRoutes')
-        .children[i];
-
-    if(d&&card){
-      card.replaceChildren();
-
-      const h=document.createElement('h3');
-      h.textContent=name;
-
-      const t=document.createElement('strong');
-      t.textContent=d.title;
-
-      const p=document.createElement('p');
-
-      p.textContent=
-        d.text.slice(0,180)+
-        (d.text.length>180?'…':'');
-
-      card.append(h,t,p)
-    }
-  });
-
-  if(siteData.settings.mode){
-    setModeNoSave(siteData.settings.mode)
-  }
-
-  if(siteData.settings.fontSize){
-    document.querySelector('.reader-body')
-      .style.fontSize=
-      siteData.settings.fontSize+'px';
-
-    document.getElementById('fontSize').value=
-      siteData.settings.fontSize
-  }
-
-  if(siteData.settings.width){
-    document.querySelector('.reader-body')
-      .style.maxWidth=
-      siteData.settings.width+'px';
-
-    document.getElementById('widthMode').value=
-      siteData.settings.width
-  }
+  renderArcSelect();
 }
+
 
 document.addEventListener(
   'DOMContentLoaded',
@@ -2469,5 +3904,6 @@ document.addEventListener(
 );
 
 </script>
+
 </body>
-                                                                 </html>
+</html>
