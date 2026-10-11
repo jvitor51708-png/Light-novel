@@ -513,7 +513,192 @@ font-weight:800
 
   <nav class="nav">
     <button onclick="scrollToId('arcos')">Arcos</button>
-    <button onclick="scrollToId('novidades')">Novidades</button>      <div class="notice">No site final, o autor poderá adicionar, renomear e organizar os arcos. A contagem de capítulos será atualizada automaticamente.</div>
+    <button onclick="scrollToId('novidades')">Novidades</button>
+    <button onclick="openDrawer()">Personalizar</button>
+    <button class="iconbtn"
+            aria-label="Alternar modo claro/escuro"
+            onclick="toggleDark()">☾</button>
+    <button class="iconbtn"
+            aria-label="Abrir menu"
+            onclick="toggleMenu()">☰</button>
+  </nav>
+</header>
+
+<div id="siteMenu"
+     style="display:none;
+     position:sticky;
+     top:68px;
+     z-index:4;
+     background:var(--panel);
+     border-bottom:1px solid var(--line);
+     padding:12px max(20px,calc((100vw - 1120px)/2));">
+
+  <button class="secondary"
+          onclick="openAuthorLogin()">
+    ⚙ Painel do Autor
+  </button>
+</div>
+
+<main class="container">
+
+<section class="hero" id="inicio">
+
+  <div class="cover"
+       id="novelCover"
+       aria-label="Capa demonstrativa da Só MLD">
+
+    <img id="coverImage"
+         alt="Imagem da capa da Só MLD"
+         style="display:none;
+         position:absolute;
+         inset:0;
+         width:100%;
+         height:100%;
+         object-fit:cover;
+         z-index:0">
+
+    <div class="eyebrow">
+      Uma light novel original
+    </div>
+
+    <div>
+      <h2>SÓ<br>MLD</h2>
+
+      <div style="margin-top:14px;
+                  font-size:12px;
+                  letter-spacing:2px">
+        MISTÉRIO • DRAMA • FANTASIA
+      </div>
+    </div>
+
+    <div class="cover-bottom">
+      Uma história por descobrir
+    </div>
+
+  </div>
+
+  <div class="hero-copy">
+
+    <span class="pill">
+      ✦ LIGHT NOVEL
+    </span>
+
+    <h1>Só MLD</h1>
+
+    <p class="hero-desc">
+      Um mundo de segredos, personagens marcantes e acontecimentos
+      que escondem mais do que parecem. Entre nessa história e
+      descubra o que existe por trás de cada capítulo.
+    </p>
+
+    <div class="actions">
+
+      <button class="primary"
+              onclick="scrollToId('arcos')">
+        Começar a ler&nbsp; →
+      </button>
+
+      <button class="secondary"
+              onclick="openDrawer()">
+        Personalizar leitura
+      </button>
+
+    </div>
+
+    <p style="font-size:12px;margin-top:18px">
+      Capa e sinopse demonstrativas.
+      O autor poderá editar tudo pelo painel.
+    </p>
+
+  </div>
+
+</section>
+
+<div class="section-head" id="arcos">
+
+  <div>
+    <h2>Explore a história</h2>
+    <p>
+      Escolha um arco e continue a leitura no seu ritmo.
+    </p>
+  </div>
+
+  <span class="pill">
+    3 arcos de exemplo
+  </span>
+
+</div>
+
+<section class="grid">
+
+<div class="card">
+
+  <div class="tagline">
+    Índice da novel
+  </div>
+
+  <h2 style="margin:8px 0 14px">
+    Arcos da história
+  </h2>
+
+  <div class="arc-list"
+       id="arcList">
+
+    <button class="arc active"
+            onclick="selectArc(1,this)">
+
+      <span class="arc-num">
+        01
+      </span>
+
+      <span class="arc-main">
+        <strong>Arco 1</strong>
+        <small>O começo da história</small>
+      </span>
+
+      <span class="count">
+        19 capítulos⌄
+      </span>
+
+    </button>
+
+    <button class="arc"
+            onclick="selectArc(2,this)">
+
+      <span class="arc-num">
+        02
+      </span>
+
+      <span class="arc-main">
+        <strong>Arco 2</strong>
+        <small>Novos acontecimentos</small>
+      </span>
+
+      <span class="count">
+        50 capítulos›
+      </span>
+
+    </button>
+
+    <button class="arc"
+            onclick="selectArc(3,this)">
+
+      <span class="arc-num">
+        03
+      </span>
+
+      <span class="arc-main">
+        <strong>Arco 3</strong>
+        <small>A definir pelo autor</small>
+      </span>
+
+      <span class="count">
+        Em breve›
+      </span>
+
+    </button>
+
+  </div>      <div class="notice">No site final, o autor poderá adicionar, renomear e organizar os arcos. A contagem de capítulos será atualizada automaticamente.</div>
     </div>
 
     <div class="card">
@@ -2285,4 +2470,4 @@ document.addEventListener(
 
 </script>
 </body>
-        </html>
+                                                                 </html>
