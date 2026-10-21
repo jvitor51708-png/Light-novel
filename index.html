@@ -14,11 +14,11 @@
   --muted:#73738a;
   --line:#e7e5ef;
   --soft:#eeeaff;
+  --danger:#e05252;
   --shadow:0 12px 35px #28204d12
 }
 
 *{box-sizing:border-box}
-
 html{scroll-behavior:smooth}
 
 body{
@@ -59,8 +59,7 @@ button{cursor:pointer;border:0}
   display:flex;
   gap:11px;
   align-items:center;
-  font-weight:850;
-  letter-spacing:.2px
+  font-weight:850
 }
 
 .brand-mark{
@@ -182,7 +181,6 @@ h1{
 }
 
 h2{letter-spacing:-.5px}
-
 p{color:var(--muted)}
 
 .hero-desc{
@@ -214,6 +212,17 @@ p{color:var(--muted)}
   border-radius:12px;
   font-weight:700
 }
+
+.danger{
+  background:#e0525218;
+  color:var(--danger);
+  border:1px solid #e0525245;
+  padding:11px 15px;
+  border-radius:12px;
+  font-weight:750
+}
+
+.danger:hover{background:#e0525228}
 
 .section-head{
   display:flex;
@@ -282,9 +291,7 @@ p{color:var(--muted)}
 }
 
 .arc-main{flex:1}
-
 .arc-main strong{display:block}
-
 .arc-main small{color:var(--muted)}
 
 .count{
@@ -326,8 +333,6 @@ p{color:var(--muted)}
   font-weight:700;
   font-size:12px
 }
-
-/* CAPA INDIVIDUAL DO ARCO */
 
 .arc-selected{
   display:grid;
@@ -424,7 +429,6 @@ footer{
 }
 
 .drawer h2{margin-top:25px}
-
 .drawer p{font-size:13px}
 
 .field{
@@ -487,22 +491,36 @@ footer{
   font-weight:800
 }
 
-.character-card{margin-top:12px}
-
-.character-card img{
-  display:block;
-  width:100%;
-  max-height:240px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-bottom:10px
+.status{
+  padding:10px 12px;
+  border-radius:10px;
+  background:var(--soft);
+  font-size:12px;
+  margin:12px 0
 }
 
-.route-card button{margin-top:8px}
+.inline-help{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:7px
+}
 
-/* NOVA TELA DE LEITURA */
+.management-box{
+  padding:15px;
+  margin:14px 0;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:var(--bg)
+}
 
-.reader-screen{
+.management-box h4{
+  margin:0 0 8px
+}
+
+/* LEITOR */
+
+.reader-screen,
+.wiki-screen{
   display:none;
   position:fixed;
   inset:0;
@@ -511,9 +529,13 @@ footer{
   overflow-y:auto
 }
 
-.reader-screen.open{display:block}
+.reader-screen.open,
+.wiki-screen.open{
+  display:block
+}
 
-.reader-header{
+.reader-header,
+.wiki-header{
   min-height:64px;
   position:sticky;
   top:0;
@@ -570,27 +592,141 @@ footer{
   border-top:1px solid var(--line)
 }
 
-.inline-help{
-  color:var(--muted);
-  font-size:12px;
-  margin-top:7px
+/* WIKI */
+
+.wiki-container{
+  max-width:1000px;
+  margin:auto;
+  padding:34px 18px 80px
 }
 
-.status{
-  padding:10px 12px;
-  border-radius:10px;
+.wiki-title{
+  text-align:center;
+  margin-bottom:30px
+}
+
+.wiki-title h1{
+  margin-bottom:8px
+}
+
+.wiki-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:16px
+}
+
+.wiki-card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+  transition:.18s
+}
+
+.wiki-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--accent)
+}
+
+.wiki-card-image{
+  width:100%;
+  aspect-ratio:4/3;
   background:var(--soft);
-  font-size:12px;
-  margin:12px 0
+  overflow:hidden
+}
+
+.wiki-card-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.wiki-card-body{
+  padding:15px
+}
+
+.wiki-card-body h3{
+  margin:0 0 6px
+}
+
+.wiki-card-body p{
+  margin:0;
+  font-size:13px;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden
+}
+
+.character-page{
+  display:none;
+  max-width:850px;
+  margin:auto;
+  padding:34px 18px 80px
+}
+
+.character-page.open{display:block}
+
+.character-profile{
+  display:grid;
+  grid-template-columns:minmax(180px,280px) 1fr;
+  gap:28px;
+  align-items:start
+}
+
+.character-profile-image{
+  width:100%;
+  border-radius:18px;
+  background:var(--soft);
+  border:1px solid var(--line);
+  overflow:hidden
+}
+
+.character-profile-image img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:430px;
+  object-fit:cover
+}
+
+.character-info{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:22px;
+  box-shadow:var(--shadow)
+}
+
+.character-info h1{
+  margin-top:4px
+}
+
+.character-description{
+  color:var(--text);
+  white-space:pre-wrap;
+  line-height:1.8
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:30px
 }
 
 @media(max-width:760px){
 
   .topbar{padding:0 15px}
 
-  .nav button:not(.iconbtn){display:none}
+  .nav button:not(.iconbtn){
+    display:none
+  }
 
-  .container{padding:16px 13px 45px}
+  .container{
+    padding:16px 13px 45px
+  }
 
   .hero{
     grid-template-columns:1fr;
@@ -605,11 +741,8 @@ footer{
   }
 
   .hero-copy{text-align:center}
-
   .hero-desc{font-size:14px}
-
   .actions{justify-content:center}
-
   .grid{grid-template-columns:1fr}
 
   .section-head{
@@ -618,11 +751,8 @@ footer{
   }
 
   .chapter{gap:8px}
-
   .chapter .title{font-size:13px}
-
   .count{font-size:11px}
-
   .brand span{font-size:14px}
 
   .arc-selected{
@@ -633,6 +763,15 @@ footer{
 
   .reader-page{
     padding:28px 17px 70px
+  }
+
+  .character-profile{
+    grid-template-columns:1fr
+  }
+
+  .character-profile-image{
+    max-width:280px;
+    margin:auto
   }
 }
 
@@ -656,6 +795,10 @@ footer{
 
     <button onclick="scrollToId('novidades')">
       Novidades
+    </button>
+
+    <button onclick="openWiki()">
+      Wiki
     </button>
 
     <button onclick="openDrawer()">
@@ -690,11 +833,21 @@ footer{
     padding:12px max(20px,calc((100vw - 1120px)/2));
   ">
 
-  <button
-    class="secondary"
-    onclick="openAuthorLogin()">
-    ⚙ Painel do Autor
-  </button>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+    <button
+      class="secondary"
+      onclick="openWiki()">
+      📚 Wiki de personagens
+    </button>
+
+    <button
+      class="secondary"
+      onclick="openAuthorLogin()">
+      ⚙ Painel do Autor
+    </button>
+
+  </div>
 
 </div>
 
@@ -770,8 +923,8 @@ footer{
 
       <button
         class="secondary"
-        onclick="openDrawer()">
-        Personalizar leitura
+        onclick="openWiki()">
+        📚 Wiki
       </button>
 
     </div>
@@ -779,6 +932,7 @@ footer{
   </div>
 
 </section>
+
 
 <div class="section-head" id="arcos">
 
@@ -830,9 +984,7 @@ footer{
 
       <div>
 
-        <div
-          class="tagline"
-          id="chapterLabel">
+        <div class="tagline">
           ÍNDICE
         </div>
 
@@ -844,10 +996,7 @@ footer{
 
         <p
           id="selectedArcDescription"
-          style="
-            margin:0;
-            font-size:13px
-          ">
+          style="margin:0;font-size:13px">
           Selecione um arco.
         </p>
 
@@ -864,18 +1013,15 @@ footer{
 
 </section>
 
+
 <div class="section-head" id="novidades">
 
   <div>
-
-    <h2>
-      Novidades da MLD
-    </h2>
+    <h2>Novidades da MLD</h2>
 
     <p>
       Capítulos recentes e avisos do autor.
     </p>
-
   </div>
 
 </div>
@@ -962,79 +1108,14 @@ footer{
 
 </section>
 
-<div class="section-head">
 
-  <div>
+<!--
+  PERSONAGENS NÃO FICAM MAIS AQUI.
 
-    <h2>
-      O universo da história
-    </h2>
+  A antiga seção "O universo da história" foi removida da home.
+  A Wiki existe como uma tela completamente separada.
+-->
 
-    <p>
-      Informações extras para conhecer melhor o mundo de MLD.
-    </p>
-
-  </div>
-
-</div>
-
-<section class="grid">
-
-  <div class="card">
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        👥
-      </div>
-
-      <div>
-
-        <strong>
-          Personagens
-        </strong>
-
-        <small>
-          Fichas extras para conhecer melhor cada personagem.
-          Essas informações não alteram o cânone da obra.
-        </small>
-
-      </div>
-
-    </div>
-
-    <div
-      id="publicCharacters"
-      style="margin-top:14px">
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="feature">
-
-      <div class="feature-icon">
-        🌌
-      </div>
-
-      <div>
-
-        <strong>
-          Enciclopédia do universo
-        </strong>
-
-        <small>
-          Lugares, organizações, poderes e conceitos importantes da MLD.
-        </small>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
 
 <div class="section-head">
 
@@ -1057,6 +1138,7 @@ footer{
   id="publicRoutes">
 </section>
 
+
 <footer>
   SÓ MLD · Light Novel
   <br>
@@ -1066,7 +1148,7 @@ footer{
 </main>
 
 
-<!-- LEITOR EM TELA PRÓPRIA -->
+<!-- LEITOR -->
 
 <section
   class="reader-screen"
@@ -1124,6 +1206,113 @@ footer{
     </div>
 
   </article>
+
+</section>
+
+
+<!-- WIKI EM TELA TOTALMENTE SEPARADA -->
+
+<section
+  class="wiki-screen"
+  id="wikiScreen">
+
+  <header class="wiki-header">
+
+    <button
+      class="secondary"
+      onclick="closeWiki()">
+      ← Voltar
+    </button>
+
+    <strong>
+      Wiki MLD
+    </strong>
+
+    <button
+      class="iconbtn"
+      onclick="toggleDark()">
+      ☾
+    </button>
+
+  </header>
+
+
+  <!-- LISTA DA WIKI -->
+
+  <div
+    class="wiki-container"
+    id="wikiHome">
+
+    <div class="wiki-title">
+
+      <div class="tagline">
+        ENCICLOPÉDIA
+      </div>
+
+      <h1>
+        Personagens
+      </h1>
+
+      <p>
+        Informações e fichas dos personagens de My Life Destroyed.
+      </p>
+
+    </div>
+
+    <div
+      class="wiki-grid"
+      id="wikiCharacters">
+    </div>
+
+  </div>
+
+
+  <!-- PÁGINA INDIVIDUAL DO PERSONAGEM -->
+
+  <div
+    class="character-page"
+    id="characterPage">
+
+    <button
+      class="secondary"
+      onclick="backToWiki()"
+      style="margin-bottom:20px">
+      ← Todos os personagens
+    </button>
+
+    <div class="character-profile">
+
+      <div
+        class="character-profile-image"
+        id="wikiCharacterImageBox">
+
+        <img
+          id="wikiCharacterImage"
+          alt="Imagem do personagem"
+          style="display:none">
+
+      </div>
+
+      <article class="character-info">
+
+        <div class="tagline">
+          PERSONAGEM
+        </div>
+
+        <h1 id="wikiCharacterName">
+          Personagem
+        </h1>
+
+        <div
+          class="character-description"
+          id="wikiCharacterDescription">
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
 
   </section><!-- PERSONALIZAÇÃO -->
 
@@ -1242,9 +1431,8 @@ footer{
     </div>
 
     <div class="notice">
-      Suas preferências de leitura continuam salvas somente
-      no seu aparelho. O conteúdo publicado da MLD será sincronizado
-      pelo Firebase.
+      Suas preferências ficam salvas somente neste aparelho.
+      O conteúdo publicado continua sincronizado pelo Firebase.
     </div>
 
   </aside>
@@ -1297,7 +1485,7 @@ footer{
       </h2>
 
       <p>
-        Entre usando a conta de autor criada no Firebase.
+        Entre usando sua conta de autor.
       </p>
 
       <div class="field">
@@ -1337,10 +1525,7 @@ footer{
 
       <p
         id="loginError"
-        style="
-          color:#e05252;
-          display:none
-        ">
+        style="color:#e05252;display:none">
         Não foi possível entrar.
       </p>
 
@@ -1375,19 +1560,16 @@ footer{
       </button>
 
 
-      <hr
-        style="
-          border:0;
-          border-top:1px solid var(--line);
-          margin:24px 0
-        ">
+      <hr style="
+        border:0;
+        border-top:1px solid var(--line);
+        margin:24px 0
+      ">
 
 
-      <!-- INFORMAÇÕES DA NOVEL -->
+      <!-- NOVEL -->
 
-      <h3>
-        Informações da novel
-      </h3>
+      <h3>Informações da novel</h3>
 
       <div class="field">
 
@@ -1409,7 +1591,8 @@ footer{
 
         <textarea
           id="synopsis"
-          style="min-height:130px"></textarea>
+          style="min-height:130px">
+        </textarea>
 
       </div>
 
@@ -1424,11 +1607,6 @@ footer{
           type="url"
           placeholder="Cole o link da imagem">
 
-        <small style="color:var(--muted)">
-          Essa é a capa principal da MLD.
-          Ela é diferente das capas dos arcos.
-        </small>
-
       </div>
 
       <button
@@ -1438,46 +1616,47 @@ footer{
         Salvar informações
       </button>
 
+      <button
+        class="danger"
+        style="width:100%;margin-top:9px"
+        onclick="removeMainCover()">
+        🗑 Remover capa principal
+      </button>
 
-      <hr
-        style="
-          border:0;
-          border-top:1px solid var(--line);
-          margin:24px 0
-        ">
+
+      <hr style="
+        border:0;
+        border-top:1px solid var(--line);
+        margin:24px 0
+      ">
 
 
-      <!-- ARCOS -->
+      <!-- CRIAR ARCO -->
 
-      <h3>
-        Arcos
-      </h3>
-
-      <p>
-        Cada arco pode ter nome, descrição e sua própria capa.
-      </p>
+      <h3>Criar arco</h3>
 
       <div class="field">
 
         <label for="arcName">
-          Nome do novo arco
+          Nome
         </label>
 
         <input
           id="arcName"
-          placeholder="Ex.: Arco 4">
+          placeholder="Ex.: Arco Sirius">
 
       </div>
 
       <div class="field">
 
         <label for="arcDescription">
-          Descrição do arco
+          Descrição
         </label>
 
         <textarea
           id="arcDescription"
-          placeholder="Descrição do arco"></textarea>
+          placeholder="Descrição do arco">
+        </textarea>
 
       </div>
 
@@ -1492,10 +1671,6 @@ footer{
           type="url"
           placeholder="Cole o link da capa">
 
-        <small style="color:var(--muted)">
-          Cada arco terá sua própria capa no índice.
-        </small>
-
       </div>
 
       <button
@@ -1506,24 +1681,109 @@ footer{
       </button>
 
 
-      <hr
-        style="
-          border:0;
-          border-top:1px solid var(--line);
-          margin:24px 0
-        ">
+      <!-- GERENCIAR ARCO -->
+
+      <div class="management-box">
+
+        <h4>Gerenciar arco publicado</h4>
+
+        <div class="field">
+
+          <label for="manageArcSelect">
+            Arco
+          </label>
+
+          <select
+            id="manageArcSelect"
+            onchange="loadManagedArc()">
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label for="manageArcName">
+            Nome
+          </label>
+
+          <input
+            id="manageArcName"
+            placeholder="Nome do arco">
+
+        </div>
+
+        <div class="field">
+
+          <label for="manageArcDescription">
+            Descrição
+          </label>
+
+          <textarea
+            id="manageArcDescription">
+          </textarea>
+
+        </div>
+
+        <div class="field">
+
+          <label for="manageArcCoverUrl">
+            Capa
+          </label>
+
+          <input
+            id="manageArcCoverUrl"
+            type="url"
+            placeholder="Link da capa">
+        </div>
+
+        <button
+          class="secondary"
+          style="width:100%"
+          onclick="updateArc()">
+          Salvar alterações do arco
+        </button>
+
+        <button
+          class="danger"
+          style="width:100%;margin-top:9px"
+          onclick="removeArcCover()">
+          🖼 Remover capa do arco
+        </button>
+
+        <button
+          class="danger"
+          style="width:100%;margin-top:9px"
+          onclick="deleteArc()">
+          🗑 Excluir arco inteiro
+        </button>
+
+        <small
+          style="
+            display:block;
+            color:var(--muted);
+            margin-top:8px
+          ">
+          Excluir um arco também exclui todos os capítulos dele.
+        </small>
+
+      </div>
 
 
-      <!-- CAPÍTULOS -->
+      <hr style="
+        border:0;
+        border-top:1px solid var(--line);
+        margin:24px 0
+      ">
 
-      <h3>
-        Capítulos
-      </h3>
+
+      <!-- NOVO CAPÍTULO -->
+
+      <h3>Novo capítulo</h3>
 
       <div class="field">
 
         <label for="chapterArcSelect">
-          Arco do capítulo
+          Arco
         </label>
 
         <select id="chapterArcSelect">
@@ -1534,7 +1794,7 @@ footer{
       <div class="field">
 
         <label for="chapterName">
-          Título do capítulo
+          Título
         </label>
 
         <input
@@ -1546,41 +1806,27 @@ footer{
       <div class="field">
 
         <label for="chapterText">
-          Texto do capítulo
+          Texto
         </label>
 
         <textarea
           id="chapterText"
           style="min-height:320px"
-          placeholder="Escreva o capítulo aqui...
-
-Para colocar uma imagem entre dois trechos:
-
-1. Deixe o cursor no lugar desejado.
-2. Toque em Inserir imagem aqui.
-3. Cole o link da imagem.
-
-A imagem aparecerá exatamente naquele ponto."></textarea>
-
-        <small class="inline-help">
-          Você pode colocar quantas imagens quiser no capítulo.
-        </small>
+          placeholder="Escreva o capítulo aqui...">
+        </textarea>
 
       </div>
-
-
-      <!-- INSERÇÃO DE IMAGEM NO PONTO DO CURSOR -->
 
       <div class="field">
 
         <label for="inlineImageUrl">
-          Imagem para inserir no capítulo
+          Imagem para inserir
         </label>
 
         <input
           id="inlineImageUrl"
           type="url"
-          placeholder="Link da imagem">
+          placeholder="Cole o link da imagem">
 
       </div>
 
@@ -1591,66 +1837,106 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
         🖼 Inserir imagem aqui
       </button>
 
-      <div class="notice">
-        A imagem será colocada exatamente onde estiver o cursor
-        dentro do texto. Assim você não precisa aceitar uma ilustração
-        aleatória aparecendo 14 parágrafos depois da cena que ela representa.
-      </div>
+      <button
+        class="danger"
+        style="width:100%;margin-top:9px"
+        onclick="removeImageAtCursor()">
+        🗑 Excluir imagem selecionada
+      </button>
 
+      <div class="notice">
+        Para excluir uma imagem do capítulo, toque em qualquer parte
+        do código <strong>[[IMG:...]]</strong> dentro do texto e depois
+        em “Excluir imagem selecionada”.
+      </div>
 
       <button
         class="primary"
-        style="
-          width:100%;
-          margin-top:14px
-        "
+        style="width:100%;margin-top:14px"
         onclick="previewMainChapter()">
         Visualizar capítulo
       </button>
 
       <button
         class="secondary"
-        style="
-          width:100%;
-          margin-top:9px
-        "
+        style="width:100%;margin-top:9px"
         onclick="saveMainDraft()">
         Salvar rascunho neste aparelho
       </button>
 
       <button
         class="primary"
-        style="
-          width:100%;
-          margin-top:9px
-        "
+        style="width:100%;margin-top:9px"
         onclick="publishMainChapter()">
         Publicar capítulo
       </button>
 
 
-      <hr
-        style="
-          border:0;
-          border-top:1px solid var(--line);
-          margin:24px 0
-        ">
+      <!-- GERENCIAR CAPÍTULO -->
+
+      <div class="management-box">
+
+        <h4>Gerenciar capítulo publicado</h4>
+
+        <div class="field">
+
+          <label for="manageChapterArc">
+            Arco
+          </label>
+
+          <select
+            id="manageChapterArc"
+            onchange="renderChapterManagement()">
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label for="manageChapterSelect">
+            Capítulo
+          </label>
+
+          <select
+            id="manageChapterSelect">
+          </select>
+
+        </div>
+
+        <button
+          class="danger"
+          style="width:100%"
+          onclick="deleteChapter()">
+          🗑 Excluir capítulo
+        </button>
+
+      </div>
 
 
-      <!-- PERSONAGENS -->
+      <hr style="
+        border:0;
+        border-top:1px solid var(--line);
+        margin:24px 0
+      ">
 
-      <h3>
-        Personagens
-      </h3>
+
+      <!-- WIKI / PERSONAGENS -->
+
+      <div class="tagline">
+        Wiki
+      </div>
+
+      <h3>Personagens</h3>
 
       <p>
-        Crie fichas extras para apresentar os personagens aos leitores.
+        Tudo criado aqui aparece somente na Wiki.
+        Nada desta seção será mostrado na página principal.
       </p>
 
       <div class="field">
 
         <label for="characterName">
-          Nome do personagem
+          Nome
         </label>
 
         <input
@@ -1675,12 +1961,14 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
       <div class="field">
 
         <label for="characterDescription">
-          Descrição e curiosidades
+          Informações do personagem
         </label>
 
         <textarea
           id="characterDescription"
-          placeholder="Personalidade, gostos, curiosidades..."></textarea>
+          style="min-height:180px"
+          placeholder="Biografia, personalidade, aparência, curiosidades, poderes...">
+        </textarea>
 
       </div>
 
@@ -1688,23 +1976,97 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
         class="primary"
         style="width:100%"
         onclick="addCharacter()">
-        Adicionar personagem
+        Adicionar à Wiki
       </button>
 
 
-      <hr
-        style="
-          border:0;
-          border-top:1px solid var(--line);
-          margin:24px 0
-        ">
+      <!-- GERENCIAR PERSONAGEM -->
+
+      <div class="management-box">
+
+        <h4>Gerenciar personagem</h4>
+
+        <div class="field">
+
+          <label for="manageCharacterSelect">
+            Personagem
+          </label>
+
+          <select
+            id="manageCharacterSelect"
+            onchange="loadManagedCharacter()">
+          </select>
+
+        </div>
+
+        <div class="field">
+
+          <label for="manageCharacterName">
+            Nome
+          </label>
+
+          <input
+            id="manageCharacterName">
+        </div>
+
+        <div class="field">
+
+          <label for="manageCharacterImage">
+            Imagem
+          </label>
+
+          <input
+            id="manageCharacterImage"
+            type="url">
+        </div>
+
+        <div class="field">
+
+          <label for="manageCharacterDescription">
+            Informações
+          </label>
+
+          <textarea
+            id="manageCharacterDescription"
+            style="min-height:180px">
+          </textarea>
+
+        </div>
+
+        <button
+          class="secondary"
+          style="width:100%"
+          onclick="updateCharacter()">
+          Salvar alterações
+        </button>
+
+        <button
+          class="danger"
+          style="width:100%;margin-top:9px"
+          onclick="removeCharacterImage()">
+          🖼 Remover imagem
+        </button>
+
+        <button
+          class="danger"
+          style="width:100%;margin-top:9px"
+          onclick="deleteCharacter()">
+          🗑 Excluir personagem
+        </button>
+
+      </div>
+
+
+      <hr style="
+        border:0;
+        border-top:1px solid var(--line);
+        margin:24px 0
+      ">
 
 
       <!-- AVISOS -->
 
-      <h3>
-        Avisos
-      </h3>
+      <h3>Avisos</h3>
 
       <div class="field">
 
@@ -1714,7 +2076,8 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
 
         <textarea
           id="authorNotice"
-          placeholder="Atualização, comunicado, pausa..."></textarea>
+          placeholder="Atualização, comunicado, pausa...">
+        </textarea>
 
       </div>
 
@@ -1725,9 +2088,8 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
           'authorNotice',
           '📣 Aviso do autor'
         )">
-        Publicar aviso do autor
+        Publicar aviso
       </button>
-
 
       <div class="field">
 
@@ -1737,7 +2099,8 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
 
         <textarea
           id="contentWarning"
-          placeholder="Escreva aqui o aviso de conteúdo..."></textarea>
+          placeholder="Aviso de conteúdo...">
+        </textarea>
 
       </div>
 
@@ -1752,23 +2115,16 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
       </button>
 
 
-      <hr
-        style="
-          border:0;
-          border-top:1px solid var(--line);
-          margin:24px 0
-        ">
+      <hr style="
+        border:0;
+        border-top:1px solid var(--line);
+        margin:24px 0
+      ">
 
 
       <!-- ROTAS -->
 
-      <h3>
-        Rotas alternativas
-      </h3>
-
-      <p>
-        As seis rotas continuam separadas da história principal.
-      </p>
+      <h3>Rotas alternativas</h3>
 
       <button
         class="secondary"
@@ -1815,10 +2171,6 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
 
     </div>
 
-    <p>
-      Escolha uma rota e publique o conteúdo dela.
-    </p>
-
     <div class="field">
 
       <label for="routeChoice">
@@ -1861,7 +2213,8 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
       <textarea
         id="routeChapterText"
         style="min-height:280px"
-        placeholder="Escreva aqui o conteúdo da rota..."></textarea>
+        placeholder="Escreva aqui o conteúdo da rota...">
+      </textarea>
 
     </div>
 
@@ -1874,29 +2227,15 @@ A imagem aparecerá exatamente naquele ponto."></textarea>
 
     <button
       class="secondary"
-      style="
-        width:100%;
-        margin-top:9px
-      "
+      style="width:100%;margin-top:9px"
       onclick="saveRouteDraft()">
-      Salvar rascunho neste aparelho
+      Salvar rascunho
     </button>
 
   </aside>
 
 </div>
 
-
-<!--
-  FIREBASE
-
-  Compat foi escolhido de propósito porque este site usa onclick=""
-  diretamente no HTML.
-
-  Assim as funções continuam globais e não precisamos transformar
-  o projeto inteiro em módulos só porque JavaScript decidiu que
-  simplicidade era ofensiva.
--->
 
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
@@ -1920,22 +2259,14 @@ firebase.initializeApp(firebaseConfig);
 const auth=firebase.auth();
 const db=firebase.firestore();
 
-
-/*
-  UID NOVO DO AUTOR.
-
-  Além das regras do Firestore, verificamos aqui para impedir que
-  outra conta abra a interface administrativa.
-*/
-
 const AUTHOR_UID=
   '9R8dc8dgPcUyDoZBM7SpJqnfiuA3';
 
+const PREFS_KEY=
+  'somld_reader_preferences';
 
-const PREFS_KEY='somld_reader_preferences';
-
-const DRAFTS_KEY='somld_author_drafts_v3';
-
+const DRAFTS_KEY=
+  'somld_author_drafts_v3';
 
 const ROUTE_NAMES=[
   'Rota da Ganância',
@@ -1945,7 +2276,6 @@ const ROUTE_NAMES=[
   'Rota da Luxúria',
   'Rota do Orgulho'
 ];
-
 
 const palettes=[
   ['Roxo','#7c5cff'],
@@ -1960,19 +2290,9 @@ const palettes=[
   ['Cinza','#777789']
 ];
 
-
 let currentArc=null;
-
 let currentChapterIndex=-1;
-
 let previewMode=false;
-
-
-/*
-  Conteúdo PUBLICADO.
-
-  Agora isso é preenchido pelo Firestore e não pelo localStorage.
-*/
 
 let siteData={
 
@@ -1992,12 +2312,6 @@ let siteData={
   routes:{}
 };
 
-
-/*
-  Apenas coisas privadas do navegador:
-  preferências e rascunhos.
-*/
-
 let localData={
 
   settings:{
@@ -2014,6 +2328,10 @@ let localData={
 };
 
 
+/* =========================
+   DADOS LOCAIS
+========================= */
+
 function loadLocalData(){
 
   try{
@@ -2029,7 +2347,6 @@ function loadLocalData(){
       ...prefs
     };
 
-
     const drafts=
       JSON.parse(
         localStorage.getItem(DRAFTS_KEY)||
@@ -2039,6 +2356,7 @@ function loadLocalData(){
     localData.drafts={
       ...localData.drafts,
       ...drafts,
+
       routes:{
         ...(localData.drafts.routes||{}),
         ...(drafts.routes||{})
@@ -2054,7 +2372,6 @@ function loadLocalData(){
   }
 }
 
-
 function savePreferences(){
 
   localStorage.setItem(
@@ -2064,7 +2381,6 @@ function savePreferences(){
     )
   );
 }
-
 
 function saveDrafts(){
 
@@ -2076,6 +2392,10 @@ function saveDrafts(){
   );
 }
 
+
+/* =========================
+   INTERFACE
+========================= */
 
 function scrollToId(id){
 
@@ -2092,7 +2412,6 @@ function scrollToId(id){
   });
 }
 
-
 function toggleMenu(){
 
   const menu=
@@ -2106,14 +2425,12 @@ function toggleMenu(){
       :'block';
 }
 
-
 function openDrawer(){
 
   document.getElementById(
     'drawer'
   ).classList.add('open');
 }
-
 
 function closeDrawer(){
 
@@ -2122,6 +2439,231 @@ function closeDrawer(){
   ).classList.remove('open');
 }
 
+
+/* =========================
+   WIKI
+========================= */
+
+function openWiki(){
+
+  document.getElementById(
+    'siteMenu'
+  ).style.display='none';
+
+  document.getElementById(
+    'wikiScreen'
+  ).classList.add('open');
+
+  document.body.style.overflow=
+    'hidden';
+
+  backToWiki();
+
+  renderWiki();
+}
+
+function closeWiki(){
+
+  document.getElementById(
+    'wikiScreen'
+  ).classList.remove('open');
+
+  document.body.style.overflow='';
+}
+
+function backToWiki(){
+
+  document.getElementById(
+    'wikiHome'
+  ).style.display='block';
+
+  document.getElementById(
+    'characterPage'
+  ).classList.remove('open');
+
+  document.getElementById(
+    'wikiScreen'
+  ).scrollTop=0;
+}
+
+function renderWiki(){
+
+  const box=
+    document.getElementById(
+      'wikiCharacters'
+    );
+
+  box.replaceChildren();
+
+  if(!siteData.characters.length){
+
+    const empty=
+      document.createElement('div');
+
+    empty.className='empty';
+
+    empty.textContent=
+      'Nenhum personagem foi adicionado à Wiki ainda.';
+
+    box.appendChild(empty);
+
+    return;
+  }
+
+  siteData.characters.forEach(
+    character=>{
+
+      const card=
+        document.createElement('article');
+
+      card.className='wiki-card';
+
+      card.onclick=()=>{
+
+        openCharacterPage(
+          character.id
+        );
+      };
+
+      const imageBox=
+        document.createElement('div');
+
+      imageBox.className=
+        'wiki-card-image';
+
+      if(character.imageUrl){
+
+        const image=
+          document.createElement('img');
+
+        image.src=
+          character.imageUrl;
+
+        image.alt=
+          character.name;
+
+        image.loading='lazy';
+
+        imageBox.appendChild(image);
+
+      }else{
+
+        imageBox.style.display=
+          'grid';
+
+        imageBox.style.placeItems=
+          'center';
+
+        imageBox.textContent='👤';
+      }
+
+      const body=
+        document.createElement('div');
+
+      body.className=
+        'wiki-card-body';
+
+      const title=
+        document.createElement('h3');
+
+      title.textContent=
+        character.name;
+
+      const description=
+        document.createElement('p');
+
+      description.textContent=
+        character.description||
+        'Sem informações adicionais.';
+
+      body.append(
+        title,
+        description
+      );
+
+      card.append(
+        imageBox,
+        body
+      );
+
+      box.appendChild(card);
+    }
+  );
+}
+
+function openCharacterPage(id){
+
+  const character=
+    siteData.characters.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!character){
+    return;
+  }
+
+  document.getElementById(
+    'wikiHome'
+  ).style.display='none';
+
+  const page=
+    document.getElementById(
+      'characterPage'
+    );
+
+  page.classList.add('open');
+
+  document.getElementById(
+    'wikiCharacterName'
+  ).textContent=
+    character.name;
+
+  document.getElementById(
+    'wikiCharacterDescription'
+  ).textContent=
+    character.description||
+    'Nenhuma informação adicionada.';
+
+  const image=
+    document.getElementById(
+      'wikiCharacterImage'
+    );
+
+  const imageBox=
+    document.getElementById(
+      'wikiCharacterImageBox'
+    );
+
+  if(character.imageUrl){
+
+    image.src=
+      character.imageUrl;
+
+    image.style.display='block';
+
+    imageBox.style.minHeight='0';
+
+  }else{
+
+    image.removeAttribute('src');
+
+    image.style.display='none';
+
+    imageBox.style.minHeight=
+      '260px';
+  }
+
+  document.getElementById(
+    'wikiScreen'
+  ).scrollTop=0;
+}
+
+
+/* =========================
+   PERSONALIZAÇÃO
+========================= */
 
 function renderSwatches(){
 
@@ -2169,9 +2711,7 @@ function renderSwatches(){
           );
 
         document
-          .querySelectorAll(
-            '.swatch'
-          )
+          .querySelectorAll('.swatch')
           .forEach(
             item=>
               item.classList.remove(
@@ -2186,13 +2726,10 @@ function renderSwatches(){
         savePreferences();
       };
 
-      box.appendChild(
-        button
-      );
+      box.appendChild(button);
     }
   );
 }
-
 
 function setMode(mode){
 
@@ -2217,7 +2754,6 @@ function setMode(mode){
   savePreferences();
 }
 
-
 function toggleDark(){
 
   const dark=
@@ -2229,7 +2765,6 @@ function toggleDark(){
     dark?'dark':'light'
   );
 }
-
 
 function setFontSize(size){
 
@@ -2244,7 +2779,6 @@ function setFontSize(size){
   savePreferences();
 }
 
-
 function setReaderWidth(width){
 
   document.querySelector(
@@ -2257,7 +2791,6 @@ function setReaderWidth(width){
 
   savePreferences();
 }
-
 
 function applyPreferences(){
 
@@ -2312,13 +2845,6 @@ async function loadSite(){
 
   try{
 
-    /*
-      Mantendo EXATAMENTE o documento que você criou:
-      coleção: site
-      documento: Config
-      campo existente: Title
-    */
-
     const configSnap=
       await db
         .collection('site')
@@ -2327,8 +2853,7 @@ async function loadSite(){
 
     if(configSnap.exists){
 
-      const data=
-        configSnap.data();
+      const data=configSnap.data();
 
       siteData.title=
         data.Title||
@@ -2352,10 +2877,7 @@ async function loadSite(){
 
     siteData.arcs=[];
 
-    for(
-      const arcDoc
-      of arcsSnap.docs
-    ){
+    for(const arcDoc of arcsSnap.docs){
 
       const arcData=
         arcDoc.data();
@@ -2378,9 +2900,7 @@ async function loadSite(){
 
       siteData.arcs.push({
         id:arcDoc.id,
-        name:
-          arcData.name||
-          'Arco',
+        name:arcData.name||'Arco',
         description:
           arcData.description||
           'Arco da história',
@@ -2433,11 +2953,9 @@ async function loadSite(){
     routesSnap.docs.forEach(
       doc=>{
 
-        const data=
-          doc.data();
+        const data=doc.data();
 
         if(data.name){
-
           siteData.routes[
             data.name
           ]=data;
@@ -2447,13 +2965,8 @@ async function loadSite(){
 
 
     /*
-      Banco novo:
-      se ainda não houver arcos,
-      mostramos os 3 arcos padrão.
-
-      Eles são gravados no Firebase
-      somente quando o autor estiver
-      autenticado.
+      Mantém os arcos padrão caso
+      o banco ainda esteja vazio.
     */
 
     if(!siteData.arcs.length){
@@ -2468,7 +2981,6 @@ async function loadSite(){
           order:1,
           chapters:[]
         },
-
         {
           id:'arc-2',
           name:'Arco 2',
@@ -2478,7 +2990,6 @@ async function loadSite(){
           order:2,
           chapters:[]
         },
-
         {
           id:'arc-3',
           name:'Arco 3',
@@ -2496,7 +3007,6 @@ async function loadSite(){
       !currentArc&&
       siteData.arcs.length
     ){
-
       currentArc=
         siteData.arcs[0].id;
     }
@@ -2507,35 +3017,28 @@ async function loadSite(){
   }catch(error){
 
     console.error(
-      'Erro ao carregar o site:',
+      'Erro ao carregar site:',
       error
     );
 
     alert(
-      'Não foi possível carregar os dados do site. Confira sua conexão e o console do navegador.'
+      'Não foi possível carregar os dados do site.'
     );
   }
 }
 
 
-
 function renderEverything(){
 
   renderNovelInfo();
-
   renderArcList();
-
   renderChapters();
-
   renderArcSelect();
-
-  renderCharacters();
-
+  renderWiki();
+  renderCharacterManagement();
   renderNotices();
-
   renderRoutes();
 }
-
 
 
 function renderNovelInfo(){
@@ -2546,17 +3049,14 @@ function renderNovelInfo(){
 
   document.getElementById(
     'publicNovelTitle'
-  ).textContent=
-    title;
+  ).textContent=title;
 
   document.getElementById(
     'publicSynopsis'
   ).textContent=
     siteData.synopsis||'';
 
-  document.title=
-    title;
-
+  document.title=title;
 
   const cover=
     document.getElementById(
@@ -2568,24 +3068,19 @@ function renderNovelInfo(){
     cover.src=
       siteData.coverUrl;
 
-    cover.style.display=
-      'block';
+    cover.style.display='block';
 
   }else{
 
-    cover.removeAttribute(
-      'src'
-    );
+    cover.removeAttribute('src');
 
-    cover.style.display=
-      'none';
+    cover.style.display='none';
   }
 }
 
 
-
 /* =========================
-   LOGIN DO AUTOR
+   LOGIN
 ========================= */
 
 function openAuthorLogin(){
@@ -2598,9 +3093,7 @@ function openAuthorLogin(){
     'authorOverlay'
   ).classList.add('open');
 
-
-  const user=
-    auth.currentUser;
+  const user=auth.currentUser;
 
   if(
     user&&
@@ -2622,16 +3115,12 @@ function openAuthorLogin(){
 }
 
 
-
 function closeAuthorPanel(){
 
   document.getElementById(
     'authorOverlay'
-  ).classList.remove(
-    'open'
-  );
+  ).classList.remove('open');
 }
-
 
 
 async function authorLogin(){
@@ -2651,21 +3140,17 @@ async function authorLogin(){
       'loginError'
     );
 
-  errorBox.style.display=
-    'none';
-
+  errorBox.style.display='none';
 
   if(!email||!password){
 
     errorBox.textContent=
       'Digite o e-mail e a senha.';
 
-    errorBox.style.display=
-      'block';
+    errorBox.style.display='block';
 
     return;
   }
-
 
   try{
 
@@ -2675,7 +3160,6 @@ async function authorLogin(){
           email,
           password
         );
-
 
     if(
       credential.user.uid!==
@@ -2687,12 +3171,10 @@ async function authorLogin(){
       errorBox.textContent=
         'Esta conta não possui acesso ao painel.';
 
-      errorBox.style.display=
-        'block';
+      errorBox.style.display='block';
 
       return;
     }
-
 
     showAuthorPanel();
 
@@ -2703,11 +3185,9 @@ async function authorLogin(){
     errorBox.textContent=
       'E-mail ou senha incorretos.';
 
-    errorBox.style.display=
-      'block';
+    errorBox.style.display='block';
   }
 }
-
 
 
 async function authorLogout(){
@@ -2716,13 +3196,11 @@ async function authorLogout(){
 
   document.getElementById(
     'authorPanel'
-  ).style.display=
-    'none';
+  ).style.display='none';
 
   document.getElementById(
     'authorLogin'
-  ).style.display=
-    'block';
+  ).style.display='block';
 
   document.getElementById(
     'authorPassword'
@@ -2730,19 +3208,15 @@ async function authorLogout(){
 }
 
 
-
 function showAuthorPanel(){
 
   document.getElementById(
     'authorLogin'
-  ).style.display=
-    'none';
+  ).style.display='none';
 
   document.getElementById(
     'authorPanel'
-  ).style.display=
-    'block';
-
+  ).style.display='block';
 
   document.getElementById(
     'coverTitle'
@@ -2750,24 +3224,22 @@ function showAuthorPanel(){
     siteData.title||
     'Só MLD';
 
-
   document.getElementById(
     'synopsis'
   ).value=
     siteData.synopsis||'';
-
 
   document.getElementById(
     'mainCoverUrl'
   ).value=
     siteData.coverUrl||'';
 
-
   renderArcSelect();
+
+  renderCharacterManagement();
 
   loadMainDraft();
 }
-
 
 
 auth.onAuthStateChanged(
@@ -2787,7 +3259,6 @@ auth.onAuthStateChanged(
         overlay.classList
           .contains('open')
       ){
-
         showAuthorPanel();
       }
     }
@@ -2795,11 +3266,9 @@ auth.onAuthStateChanged(
 );
 
 
-
 function requireAuthor(){
 
-  const user=
-    auth.currentUser;
+  const user=auth.currentUser;
 
   if(
     !user||
@@ -2817,17 +3286,13 @@ function requireAuthor(){
 }
 
 
-
 /* =========================
-   CONFIGURAÇÃO DA NOVEL
+   NOVEL
 ========================= */
 
 async function saveNovelInfo(){
 
-  if(!requireAuthor()){
-    return;
-  }
-
+  if(!requireAuthor())return;
 
   const title=
     document.getElementById(
@@ -2835,18 +3300,15 @@ async function saveNovelInfo(){
     ).value.trim()||
     'Só MLD';
 
-
   const synopsis=
     document.getElementById(
       'synopsis'
     ).value.trim();
 
-
   const coverUrl=
     document.getElementById(
       'mainCoverUrl'
     ).value.trim();
-
 
   try{
 
@@ -2863,27 +3325,17 @@ async function saveNovelInfo(){
               .FieldValue
               .serverTimestamp()
         },
-        {
-          merge:true
-        }
+        {merge:true}
       );
 
-
-    siteData.title=
-      title;
-
-    siteData.synopsis=
-      synopsis;
-
-    siteData.coverUrl=
-      coverUrl;
-
+    siteData.title=title;
+    siteData.synopsis=synopsis;
+    siteData.coverUrl=coverUrl;
 
     renderNovelInfo();
 
-
     alert(
-      'Informações da novel publicadas.'
+      'Informações publicadas.'
     );
 
   }catch(error){
@@ -2891,11 +3343,68 @@ async function saveNovelInfo(){
     console.error(error);
 
     alert(
-      'Não foi possível salvar as informações.'
+      'Não foi possível salvar.'
     );
   }
 }
 
+
+async function removeMainCover(){
+
+  if(!requireAuthor())return;
+
+  if(!siteData.coverUrl){
+
+    alert(
+      'Não existe capa principal para remover.'
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      'Remover a capa principal da novel?'
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    await db
+      .collection('site')
+      .doc('Config')
+      .set(
+        {
+          coverUrl:'',
+          updatedAt:
+            firebase.firestore
+              .FieldValue
+              .serverTimestamp()
+        },
+        {merge:true}
+      );
+
+    siteData.coverUrl='';
+
+    document.getElementById(
+      'mainCoverUrl'
+    ).value='';
+
+    renderNovelInfo();
+
+    alert('Capa removida.');
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível remover a capa.'
+    );
+  }
+}
 
 
 /* =========================
@@ -2911,13 +3420,10 @@ function renderArcList(){
 
   list.replaceChildren();
 
-
   if(!siteData.arcs.length){
 
     const p=
-      document.createElement(
-        'p'
-      );
+      document.createElement('p');
 
     p.textContent=
       'Nenhum arco cadastrado.';
@@ -2927,17 +3433,14 @@ function renderArcList(){
     return;
   }
 
-
   if(
     !siteData.arcs.some(
       arc=>arc.id===currentArc
     )
   ){
-
     currentArc=
       siteData.arcs[0].id;
   }
-
 
   siteData.arcs.forEach(
     (arc,index)=>{
@@ -2955,90 +3458,62 @@ function renderArcList(){
             :''
         );
 
-
       button.onclick=()=>{
 
-        currentArc=
-          arc.id;
-
-        currentChapterIndex=
-          -1;
+        currentArc=arc.id;
+        currentChapterIndex=-1;
 
         renderArcList();
-
         renderChapters();
       };
 
-
       const number=
-        document.createElement(
-          'span'
-        );
+        document.createElement('span');
 
-      number.className=
-        'arc-num';
+      number.className='arc-num';
 
       number.textContent=
         String(index+1)
           .padStart(2,'0');
 
-
       const main=
-        document.createElement(
-          'span'
-        );
+        document.createElement('span');
 
-      main.className=
-        'arc-main';
-
+      main.className='arc-main';
 
       const strong=
         document.createElement(
           'strong'
         );
 
-      strong.textContent=
-        arc.name;
-
+      strong.textContent=arc.name;
 
       const small=
-        document.createElement(
-          'small'
-        );
+        document.createElement('small');
 
       small.textContent=
         arc.description||
         'Arco da história';
-
 
       main.append(
         strong,
         small
       );
 
-
       const count=
-        document.createElement(
-          'span'
-        );
+        document.createElement('span');
 
-      count.className=
-        'count';
-
+      count.className='count';
 
       const total=
-        Array.isArray(
-          arc.chapters
-        )
+        Array.isArray(arc.chapters)
           ?arc.chapters.length
           :0;
-
 
       count.textContent=
         total===1
           ?'1 capítulo'
           :total+' capítulos';
-
 
       button.append(
         number,
@@ -3046,34 +3521,20 @@ function renderArcList(){
         count
       );
 
-
-      list.appendChild(
-        button
-      );
+      list.appendChild(button);
     }
   );
 }
 
 
+function fillArcSelect(
+  select,
+  previous
+){
 
-function renderArcSelect(){
-
-  const select=
-    document.getElementById(
-      'chapterArcSelect'
-    );
-
-  if(!select){
-    return;
-  }
-
-
-  const previous=
-    select.value;
-
+  if(!select)return;
 
   select.replaceChildren();
-
 
   siteData.arcs.forEach(
     arc=>{
@@ -3089,25 +3550,29 @@ function renderArcSelect(){
       option.textContent=
         arc.name;
 
-      select.appendChild(
-        option
-      );
+      select.appendChild(option);
     }
   );
-
 
   if(
     siteData.arcs.some(
       arc=>
         String(arc.id)===
-        previous
+        String(previous)
     )
   ){
 
     select.value=
-      previous;
+      String(previous);
 
-  }else if(currentArc){
+  }else if(
+    currentArc&&
+    siteData.arcs.some(
+      arc=>
+        String(arc.id)===
+        String(currentArc)
+    )
+  ){
 
     select.value=
       String(currentArc);
@@ -3115,35 +3580,90 @@ function renderArcSelect(){
 }
 
 
+function renderArcSelect(){
+
+  const chapterSelect=
+    document.getElementById(
+      'chapterArcSelect'
+    );
+
+  const manageSelect=
+    document.getElementById(
+      'manageArcSelect'
+    );
+
+  const chapterManageArc=
+    document.getElementById(
+      'manageChapterArc'
+    );
+
+  const chapterPrevious=
+    chapterSelect
+      ?chapterSelect.value
+      :'';
+
+  const managePrevious=
+    manageSelect
+      ?manageSelect.value
+      :'';
+
+  const chapterManagePrevious=
+    chapterManageArc
+      ?chapterManageArc.value
+      :'';
+
+  fillArcSelect(
+    chapterSelect,
+    chapterPrevious
+  );
+
+  fillArcSelect(
+    manageSelect,
+    managePrevious
+  );
+
+  fillArcSelect(
+    chapterManageArc,
+    chapterManagePrevious
+  );
+
+  loadManagedArc();
+
+  renderChapterManagement();
+}
+
 
 function renderChapters(){
 
   const arc=
     siteData.arcs.find(
-      item=>
-        item.id===currentArc
+      item=>item.id===currentArc
     );
-
 
   const list=
     document.getElementById(
       'chapterList'
     );
 
-
   list.replaceChildren();
 
-
   if(!arc){
+
+    document.getElementById(
+      'chapterHeading'
+    ).textContent='Capítulos';
+
+    document.getElementById(
+      'selectedArcDescription'
+    ).textContent=
+      'Nenhum arco selecionado.';
+
     return;
   }
 
-
   document.getElementById(
     'chapterHeading'
-  ).textContent=
-    arc.name;
-
+  ).textContent=arc.name;
 
   document.getElementById(
     'selectedArcDescription'
@@ -3151,43 +3671,29 @@ function renderChapters(){
     arc.description||
     'Arco da história';
 
-
   const cover=
     document.getElementById(
       'selectedArcCover'
     );
 
-
   if(arc.coverUrl){
 
-    cover.src=
-      arc.coverUrl;
-
-    cover.style.display=
-      'block';
+    cover.src=arc.coverUrl;
+    cover.style.display='block';
 
   }else{
 
-    cover.removeAttribute(
-      'src'
-    );
-
-    cover.style.display=
-      'none';
+    cover.removeAttribute('src');
+    cover.style.display='none';
   }
 
-
   if(
-    !Array.isArray(
-      arc.chapters
-    )||
+    !Array.isArray(arc.chapters)||
     !arc.chapters.length
   ){
 
     const p=
-      document.createElement(
-        'p'
-      );
+      document.createElement('p');
 
     p.textContent=
       'Ainda não há capítulos publicados neste arco.';
@@ -3197,53 +3703,38 @@ function renderChapters(){
     return;
   }
 
-
   arc.chapters.forEach(
     (chapter,index)=>{
 
       const row=
-        document.createElement(
-          'div'
-        );
+        document.createElement('div');
 
-      row.className=
-        'chapter';
-
+      row.className='chapter';
 
       const number=
-        document.createElement(
-          'span'
-        );
+        document.createElement('span');
 
-      number.className=
-        'num';
+      number.className='num';
 
       number.textContent=
         String(index+1)
           .padStart(2,'0');
 
-
       const title=
-        document.createElement(
-          'span'
-        );
+        document.createElement('span');
 
-      title.className=
-        'title';
+      title.className='title';
 
       title.textContent=
         chapter.title||
         'Capítulo';
-
 
       const read=
         document.createElement(
           'button'
         );
 
-      read.textContent=
-        'Ler';
-
+      read.textContent='Ler';
 
       read.onclick=()=>{
 
@@ -3253,47 +3744,36 @@ function renderChapters(){
         );
       };
 
-
       row.append(
         number,
         title,
         read
       );
 
-
-      list.appendChild(
-        row
-      );
+      list.appendChild(row);
     }
   );
 }
 
 
-
 async function createArc(){
 
-  if(!requireAuthor()){
-    return;
-  }
-
+  if(!requireAuthor())return;
 
   const name=
     document.getElementById(
       'arcName'
     ).value.trim();
 
-
   const description=
     document.getElementById(
       'arcDescription'
     ).value.trim();
 
-
   const coverUrl=
     document.getElementById(
       'arcCoverUrl'
     ).value.trim();
-
 
   if(!name){
 
@@ -3304,12 +3784,20 @@ async function createArc(){
     return;
   }
 
-
   try{
 
-    const order=
-      siteData.arcs.length+1;
+    const highestOrder=
+      siteData.arcs.reduce(
+        (max,arc)=>
+          Math.max(
+            max,
+            Number(arc.order)||0
+          ),
+        0
+      );
 
+    const order=
+      highestOrder+1;
 
     const reference=
       await db
@@ -3327,7 +3815,6 @@ async function createArc(){
               .serverTimestamp()
         });
 
-
     siteData.arcs.push({
       id:reference.id,
       name,
@@ -3339,10 +3826,8 @@ async function createArc(){
       chapters:[]
     });
 
-
     currentArc=
       reference.id;
-
 
     document.getElementById(
       'arcName'
@@ -3356,17 +3841,11 @@ async function createArc(){
       'arcCoverUrl'
     ).value='';
 
-
     renderArcList();
-
     renderChapters();
-
     renderArcSelect();
 
-
-    alert(
-      'Arco publicado.'
-    );
+    alert('Arco publicado.');
 
   }catch(error){
 
@@ -3379,9 +3858,532 @@ async function createArc(){
 }
 
 
+function loadManagedArc(){
+
+  const select=
+    document.getElementById(
+      'manageArcSelect'
+    );
+
+  if(!select)return;
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        String(item.id)===
+        String(select.value)
+    );
+
+  document.getElementById(
+    'manageArcName'
+  ).value=
+    arc?.name||'';
+
+  document.getElementById(
+    'manageArcDescription'
+  ).value=
+    arc?.description||'';
+
+  document.getElementById(
+    'manageArcCoverUrl'
+  ).value=
+    arc?.coverUrl||'';
+}
+
+
+async function ensureArcExists(
+  arc
+){
+
+  const ref=
+    db
+      .collection('arcs')
+      .doc(String(arc.id));
+
+  const snap=
+    await ref.get();
+
+  if(!snap.exists){
+
+    await ref.set({
+      name:arc.name,
+      description:
+        arc.description||
+        'Arco da história',
+      coverUrl:
+        arc.coverUrl||'',
+      order:
+        arc.order||1,
+      createdAt:
+        firebase.firestore
+          .FieldValue
+          .serverTimestamp()
+    });
+  }
+
+  return ref;
+}
+
+
+async function updateArc(){
+
+  if(!requireAuthor())return;
+
+  const id=
+    document.getElementById(
+      'manageArcSelect'
+    ).value;
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!arc){
+
+    alert('Arco não encontrado.');
+    return;
+  }
+
+  const name=
+    document.getElementById(
+      'manageArcName'
+    ).value.trim();
+
+  const description=
+    document.getElementById(
+      'manageArcDescription'
+    ).value.trim();
+
+  const coverUrl=
+    document.getElementById(
+      'manageArcCoverUrl'
+    ).value.trim();
+
+  if(!name){
+
+    alert(
+      'O arco precisa ter um nome.'
+    );
+
+    return;
+  }
+
+  try{
+
+    const ref=
+      await ensureArcExists(arc);
+
+    await ref.set(
+      {
+        name,
+        description,
+        coverUrl,
+        updatedAt:
+          firebase.firestore
+            .FieldValue
+            .serverTimestamp()
+      },
+      {merge:true}
+    );
+
+    arc.name=name;
+    arc.description=description;
+    arc.coverUrl=coverUrl;
+
+    renderArcList();
+    renderChapters();
+    renderArcSelect();
+
+    alert(
+      'Arco atualizado.'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível atualizar o arco.'
+    );
+  }
+}
+
+
+async function removeArcCover(){
+
+  if(!requireAuthor())return;
+
+  const id=
+    document.getElementById(
+      'manageArcSelect'
+    ).value;
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!arc)return;
+
+  if(!arc.coverUrl){
+
+    alert(
+      'Esse arco não possui capa.'
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      'Remover a capa de "'+
+      arc.name+
+      '"?'
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    const ref=
+      await ensureArcExists(arc);
+
+    await ref.set(
+      {
+        coverUrl:'',
+        updatedAt:
+          firebase.firestore
+            .FieldValue
+            .serverTimestamp()
+      },
+      {merge:true}
+    );
+
+    arc.coverUrl='';
+
+    document.getElementById(
+      'manageArcCoverUrl'
+    ).value='';
+
+    renderChapters();
+
+    alert('Capa removida.');
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível remover a capa.'
+    );
+  }
+}
+
+
+async function deleteArc(){
+
+  if(!requireAuthor())return;
+
+  const id=
+    document.getElementById(
+      'manageArcSelect'
+    ).value;
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!arc){
+
+    alert('Arco não encontrado.');
+    return;
+  }
+
+  const confirmed=
+    confirm(
+      'EXCLUIR "'+
+      arc.name+
+      '"?\n\n'+
+      'Todos os capítulos desse arco também serão apagados.\n\n'+
+      'Essa ação não pode ser desfeita.'
+    );
+
+  if(!confirmed)return;
+
+  try{
+
+    const arcRef=
+      db
+        .collection('arcs')
+        .doc(String(arc.id));
+
+    const snapshot=
+      await arcRef
+        .collection('chapters')
+        .get();
+
+    /*
+      Firestore não apaga subcoleções
+      sozinho. Porque facilitar seria
+      aparentemente ilegal.
+    */
+
+    const docs=
+      snapshot.docs;
+
+    for(
+      let i=0;
+      i<docs.length;
+      i+=400
+    ){
+
+      const batch=db.batch();
+
+      docs
+        .slice(i,i+400)
+        .forEach(
+          chapterDoc=>
+            batch.delete(
+              chapterDoc.ref
+            )
+        );
+
+      await batch.commit();
+    }
+
+    await arcRef.delete();
+
+    siteData.arcs=
+      siteData.arcs.filter(
+        item=>
+          String(item.id)!==
+          String(arc.id)
+      );
+
+    currentArc=
+      siteData.arcs.length
+        ?siteData.arcs[0].id
+        :null;
+
+    currentChapterIndex=-1;
+
+    renderArcList();
+    renderChapters();
+    renderArcSelect();
+
+    alert(
+      'Arco excluído.'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível excluir o arco.'
+    );
+  }
+}
+
 
 /* =========================
-   IMAGENS DENTRO DO TEXTO
+   GERENCIAR CAPÍTULOS
+========================= */
+
+function renderChapterManagement(){
+
+  const arcSelect=
+    document.getElementById(
+      'manageChapterArc'
+    );
+
+  const chapterSelect=
+    document.getElementById(
+      'manageChapterSelect'
+    );
+
+  if(
+    !arcSelect||
+    !chapterSelect
+  ){
+    return;
+  }
+
+  const previous=
+    chapterSelect.value;
+
+  chapterSelect.replaceChildren();
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        String(item.id)===
+        String(arcSelect.value)
+    );
+
+  if(
+    !arc||
+    !arc.chapters.length
+  ){
+
+    const option=
+      document.createElement(
+        'option'
+      );
+
+    option.value='';
+
+    option.textContent=
+      'Nenhum capítulo publicado';
+
+    chapterSelect.appendChild(
+      option
+    );
+
+    return;
+  }
+
+  arc.chapters.forEach(
+    (chapter,index)=>{
+
+      const option=
+        document.createElement(
+          'option'
+        );
+
+      option.value=
+        String(chapter.id);
+
+      option.textContent=
+        (index+1)+
+        '. '+
+        (
+          chapter.title||
+          'Capítulo'
+        );
+
+      chapterSelect.appendChild(
+        option
+      );
+    }
+  );
+
+  if(
+    arc.chapters.some(
+      chapter=>
+        String(chapter.id)===
+        String(previous)
+    )
+  ){
+    chapterSelect.value=
+      previous;
+  }
+}
+
+
+async function deleteChapter(){
+
+  if(!requireAuthor())return;
+
+  const arcId=
+    document.getElementById(
+      'manageChapterArc'
+    ).value;
+
+  const chapterId=
+    document.getElementById(
+      'manageChapterSelect'
+    ).value;
+
+  const arc=
+    siteData.arcs.find(
+      item=>
+        String(item.id)===
+        String(arcId)
+    );
+
+  if(!arc||!chapterId){
+
+    alert(
+      'Selecione um capítulo.'
+    );
+
+    return;
+  }
+
+  const chapter=
+    arc.chapters.find(
+      item=>
+        String(item.id)===
+        String(chapterId)
+    );
+
+  if(!chapter)return;
+
+  if(
+    !confirm(
+      'Excluir "'+
+      chapter.title+
+      '"?\n\n'+
+      'Essa ação não pode ser desfeita.'
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    await db
+      .collection('arcs')
+      .doc(String(arc.id))
+      .collection('chapters')
+      .doc(String(chapter.id))
+      .delete();
+
+    arc.chapters=
+      arc.chapters.filter(
+        item=>
+          String(item.id)!==
+          String(chapter.id)
+      );
+
+    if(
+      String(currentArc)===
+      String(arc.id)
+    ){
+      currentChapterIndex=-1;
+    }
+
+    renderArcList();
+    renderChapters();
+    renderChapterManagement();
+
+    alert(
+      'Capítulo excluído.'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível excluir o capítulo.'
+    );
+  }
+}
+
+
+/* =========================
+   IMAGENS DO CAPÍTULO
 ========================= */
 
 function insertImageAtCursor(){
@@ -3391,12 +4393,10 @@ function insertImageAtCursor(){
       'chapterText'
     );
 
-
   const url=
     document.getElementById(
       'inlineImageUrl'
     ).value.trim();
-
 
   if(!url){
 
@@ -3407,41 +4407,25 @@ function insertImageAtCursor(){
     return;
   }
 
-
   const start=
     textarea.selectionStart;
 
   const end=
     textarea.selectionEnd;
 
-
   const marker=
-    '\n\n[[IMG:'+url+']]\n\n';
+    '\n\n[[IMG:'+
+    url+
+    ']]\n\n';
 
-
-  textarea.value=
-    textarea.value.slice(
-      0,
-      start
-    )+
-    marker+
-    textarea.value.slice(
-      end
-    );
-
-
-  const position=
-    start+
-    marker.length;
-
-
-  textarea.focus();
-
-  textarea.setSelectionRange(
-    position,
-    position
+  textarea.setRangeText(
+    marker,
+    start,
+    end,
+    'end'
   );
 
+  textarea.focus();
 
   document.getElementById(
     'inlineImageUrl'
@@ -3449,42 +4433,107 @@ function insertImageAtCursor(){
 }
 
 
+function removeImageAtCursor(){
 
-/*
-  Converte texto em blocos.
+  const textarea=
+    document.getElementById(
+      'chapterText'
+    );
 
-  TEXTO
+  const text=
+    textarea.value;
 
-  [[IMG:https://imagem.jpg]]
+  const cursor=
+    textarea.selectionStart;
 
-  TEXTO
+  /*
+    Procura todos os [[IMG:...]]
+    e descobre qual deles contém
+    a posição atual do cursor.
+  */
 
-  vira:
+  const regex=
+    /\[\[IMG:https?:\/\/[^\]]+\]\]/gi;
 
-  [
-    {type:'text', text:'...'},
-    {type:'image', url:'...'},
-    {type:'text', text:'...'}
-  ]
-*/
+  let match;
+
+  let found=null;
+
+  while(
+    (
+      match=regex.exec(text)
+    )!==null
+  ){
+
+    const start=match.index;
+
+    const end=
+      start+
+      match[0].length;
+
+    if(
+      cursor>=start&&
+      cursor<=end
+    ){
+
+      found={
+        start,
+        end,
+        text:match[0]
+      };
+
+      break;
+    }
+  }
+
+  if(!found){
+
+    alert(
+      'Toque dentro do [[IMG:...]] da imagem que deseja excluir.'
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      'Remover esta imagem do capítulo?'
+    )
+  ){
+    return;
+  }
+
+  textarea.value=
+    text.slice(
+      0,
+      found.start
+    )+
+    text.slice(
+      found.end
+    );
+
+  textarea.focus();
+
+  textarea.setSelectionRange(
+    found.start,
+    found.start
+  );
+}
+
 
 function textToBlocks(text){
 
   const regex=
     /\[\[IMG:(https?:\/\/[^\]]+)\]\]/gi;
 
-
   const blocks=[];
 
   let lastIndex=0;
-
   let match;
-
 
   while(
     (
-      match=
-        regex.exec(text)
+      match=regex.exec(text)
     )!==null
   ){
 
@@ -3494,7 +4543,6 @@ function textToBlocks(text){
         match.index
       ).trim();
 
-
     if(before){
 
       blocks.push({
@@ -3503,23 +4551,19 @@ function textToBlocks(text){
       });
     }
 
-
     blocks.push({
       type:'image',
       url:match[1].trim()
     });
 
-
     lastIndex=
       regex.lastIndex;
   }
-
 
   const after=
     text.slice(
       lastIndex
     ).trim();
-
 
   if(after){
 
@@ -3529,10 +4573,8 @@ function textToBlocks(text){
     });
   }
 
-
   return blocks;
 }
-
 
 
 function blocksToText(blocks){
@@ -3540,7 +4582,6 @@ function blocksToText(blocks){
   if(!Array.isArray(blocks)){
     return '';
   }
-
 
   return blocks.map(
     block=>{
@@ -3556,7 +4597,6 @@ function blocksToText(blocks){
         );
       }
 
-
       return block.text||'';
 
     }
@@ -3564,9 +4604,8 @@ function blocksToText(blocks){
 }
 
 
-
 /* =========================
-   RASCUNHO
+   RASCUNHOS
 ========================= */
 
 function saveMainDraft(){
@@ -3589,9 +4628,7 @@ function saveMainDraft(){
       ).value
   };
 
-
   saveDrafts();
-
 
   alert(
     'Rascunho salvo neste aparelho.'
@@ -3599,29 +4636,22 @@ function saveMainDraft(){
 }
 
 
-
 function loadMainDraft(){
 
   const draft=
     localData.drafts.main;
 
-
-  if(!draft){
-    return;
-  }
-
+  if(!draft)return;
 
   document.getElementById(
     'chapterName'
   ).value=
     draft.title||'';
 
-
   document.getElementById(
     'chapterText'
   ).value=
     draft.text||'';
-
 
   if(
     siteData.arcs.some(
@@ -3639,9 +4669,8 @@ function loadMainDraft(){
 }
 
 
-
 /* =========================
-   PUBLICAÇÃO DO CAPÍTULO
+   PUBLICAR CAPÍTULO
 ========================= */
 
 function previewMainChapter(){
@@ -3652,18 +4681,15 @@ function previewMainChapter(){
     ).value.trim()||
     'Capítulo sem título';
 
-
   const text=
     document.getElementById(
       'chapterText'
     ).value.trim();
 
-
   const arcId=
     document.getElementById(
       'chapterArcSelect'
     ).value;
-
 
   if(!text){
 
@@ -3674,7 +4700,6 @@ function previewMainChapter(){
     return;
   }
 
-
   const chapter={
     id:'preview',
     title,
@@ -3682,31 +4707,22 @@ function previewMainChapter(){
       textToBlocks(text)
   };
 
-
   previewMode=true;
-
   currentChapterIndex=-1;
-
 
   renderChapter(
     chapter,
     arcId
   );
 
-
   closeAuthorPanel();
-
 
   document.getElementById(
     'readerScreen'
-  ).classList.add(
-    'open'
-  );
-
+  ).classList.add('open');
 
   document.body.style.overflow=
     'hidden';
-
 
   document.getElementById(
     'readerScreen'
@@ -3714,13 +4730,9 @@ function previewMainChapter(){
 }
 
 
-
 async function publishMainChapter(){
 
-  if(!requireAuthor()){
-    return;
-  }
-
+  if(!requireAuthor())return;
 
   const title=
     document.getElementById(
@@ -3728,18 +4740,15 @@ async function publishMainChapter(){
     ).value.trim()||
     'Capítulo sem título';
 
-
   const text=
     document.getElementById(
       'chapterText'
     ).value.trim();
 
-
   const arcId=
     document.getElementById(
       'chapterArcSelect'
     ).value;
-
 
   if(!text){
 
@@ -3750,14 +4759,12 @@ async function publishMainChapter(){
     return;
   }
 
-
   const arc=
     siteData.arcs.find(
       item=>
         String(item.id)===
         String(arcId)
     );
-
 
   if(!arc){
 
@@ -3768,73 +4775,39 @@ async function publishMainChapter(){
     return;
   }
 
-
   try{
 
-    /*
-      Se for um dos arcos padrão que ainda
-      só existe visualmente, criamos o documento.
-    */
-
     const arcReference=
-      db
-        .collection('arcs')
-        .doc(String(arc.id));
-
-
-    const arcSnapshot=
-      await arcReference.get();
-
-
-    if(!arcSnapshot.exists){
-
-      await arcReference.set({
-
-        name:arc.name,
-
-        description:
-          arc.description||
-          'Arco da história',
-
-        coverUrl:
-          arc.coverUrl||'',
-
-        order:
-          arc.order||1,
-
-        createdAt:
-          firebase.firestore
-            .FieldValue
-            .serverTimestamp()
-      });
-    }
-
+      await ensureArcExists(arc);
 
     const blocks=
       textToBlocks(text);
 
+    const highestOrder=
+      arc.chapters.reduce(
+        (max,chapter)=>
+          Math.max(
+            max,
+            Number(chapter.order)||0
+          ),
+        0
+      );
 
     const order=
-      arc.chapters.length+1;
-
+      highestOrder+1;
 
     const reference=
       await arcReference
         .collection('chapters')
         .add({
-
           title,
-
           blocks,
-
           order,
-
           createdAt:
             firebase.firestore
               .FieldValue
               .serverTimestamp()
         });
-
 
     const chapter={
       id:reference.id,
@@ -3843,31 +4816,22 @@ async function publishMainChapter(){
       order
     };
 
+    arc.chapters.push(chapter);
 
-    arc.chapters.push(
-      chapter
-    );
-
-
-    localData.drafts.main=
-      null;
+    localData.drafts.main=null;
 
     saveDrafts();
 
-
-    currentArc=
-      arc.id;
+    currentArc=arc.id;
 
     currentChapterIndex=
       arc.chapters.length-1;
 
     previewMode=false;
 
-
     renderArcList();
-
     renderChapters();
-
+    renderArcSelect();
 
     document.getElementById(
       'chapterName'
@@ -3877,34 +4841,26 @@ async function publishMainChapter(){
       'chapterText'
     ).value='';
 
-
     closeAuthorPanel();
-
 
     renderChapter(
       chapter,
       arc.id
     );
 
-
     document.getElementById(
       'readerScreen'
-    ).classList.add(
-      'open'
-    );
-
+    ).classList.add('open');
 
     document.body.style.overflow=
       'hidden';
-
 
     document.getElementById(
       'readerScreen'
     ).scrollTop=0;
 
-
     alert(
-      'Capítulo publicado. Agora ele fica disponível nos outros aparelhos também.'
+      'Capítulo publicado.'
     );
 
   }catch(error){
@@ -3916,7 +4872,6 @@ async function publishMainChapter(){
     );
   }
 }
-
 
 
 /* =========================
@@ -3935,7 +4890,6 @@ function renderChapter(
         String(arcId)
     );
 
-
   document.getElementById(
     'readerArc'
   ).textContent=
@@ -3946,36 +4900,23 @@ function renderChapter(
           'MLD'
         );
 
-
   document.getElementById(
     'readerTitle'
   ).textContent=
     chapter.title||
     'Capítulo';
 
-
   const content=
     document.getElementById(
       'chapterContent'
     );
 
-
   content.replaceChildren();
-
-
-  /*
-    Compatibilidade:
-    se algum capítulo antigo possuir apenas
-    "text", ele ainda poderá ser lido.
-  */
 
   let blocks=
     chapter.blocks;
 
-
-  if(
-    !Array.isArray(blocks)
-  ){
+  if(!Array.isArray(blocks)){
 
     blocks=
       textToBlocks(
@@ -3983,13 +4924,10 @@ function renderChapter(
       );
   }
 
-
   if(!blocks.length){
 
     const p=
-      document.createElement(
-        'p'
-      );
+      document.createElement('p');
 
     p.textContent=
       'Este capítulo está vazio.';
@@ -3998,7 +4936,6 @@ function renderChapter(
 
     return;
   }
-
 
   blocks.forEach(
     block=>{
@@ -4016,22 +4953,17 @@ function renderChapter(
         image.className=
           'reader-image';
 
-        image.src=
-          block.url;
+        image.src=block.url;
 
         image.alt=
           'Ilustração do capítulo';
 
-        image.loading=
-          'lazy';
+        image.loading='lazy';
 
-        content.appendChild(
-          image
-        );
+        content.appendChild(image);
 
         return;
       }
-
 
       if(
         block.type==='text'&&
@@ -4042,11 +4974,9 @@ function renderChapter(
           block.text
             .split(/\n\s*\n/)
             .map(
-              item=>
-                item.trim()
+              item=>item.trim()
             )
             .filter(Boolean);
-
 
         paragraphs.forEach(
           paragraph=>{
@@ -4059,16 +4989,13 @@ function renderChapter(
             p.textContent=
               paragraph;
 
-            content.appendChild(
-              p
-            );
+            content.appendChild(p);
           }
         );
       }
     }
   );
 }
-
 
 
 function openSavedChapter(
@@ -4083,11 +5010,7 @@ function openSavedChapter(
         String(arcId)
     );
 
-
-  if(!arc){
-    return;
-  }
-
+  if(!arc)return;
 
   const index=
     arc.chapters.findIndex(
@@ -4096,64 +5019,38 @@ function openSavedChapter(
         String(chapterId)
     );
 
+  if(index<0)return;
 
-  if(index<0){
-    return;
-  }
-
-
-  currentArc=
-    arc.id;
-
-  currentChapterIndex=
-    index;
-
+  currentArc=arc.id;
+  currentChapterIndex=index;
   previewMode=false;
-
 
   renderChapter(
     arc.chapters[index],
     arc.id
   );
 
-
   const reader=
     document.getElementById(
       'readerScreen'
     );
 
-
-  reader.classList.add(
-    'open'
-  );
-
+  reader.classList.add('open');
 
   document.body.style.overflow=
     'hidden';
 
-
   reader.scrollTop=0;
 }
-
 
 
 function closeReader(){
 
   document.getElementById(
     'readerScreen'
-  ).classList.remove(
-    'open'
-  );
+  ).classList.remove('open');
 
-
-  document.body.style.overflow=
-    '';
-
-
-  /*
-    Se era só uma visualização do editor,
-    voltamos para o painel.
-  */
+  document.body.style.overflow='';
 
   if(previewMode){
 
@@ -4164,7 +5061,6 @@ function closeReader(){
     return;
   }
 
-
   setTimeout(
     ()=>scrollToId('arcos'),
     50
@@ -4172,34 +5068,25 @@ function closeReader(){
 }
 
 
-
 function changeReader(delta){
 
-  if(previewMode){
-    return;
-  }
-
+  if(previewMode)return;
 
   const arc=
     siteData.arcs.find(
-      item=>
-        item.id===currentArc
+      item=>item.id===currentArc
     );
-
 
   if(
     !arc||
     !arc.chapters.length
   ){
-
     return;
   }
-
 
   const next=
     currentChapterIndex+
     delta;
-
 
   if(next<0){
 
@@ -4209,7 +5096,6 @@ function changeReader(delta){
 
     return;
   }
-
 
   if(
     next>=
@@ -4223,10 +5109,7 @@ function changeReader(delta){
     return;
   }
 
-
-  currentChapterIndex=
-    next;
-
+  currentChapterIndex=next;
 
   renderChapter(
     arc.chapters[
@@ -4235,25 +5118,18 @@ function changeReader(delta){
     arc.id
   );
 
-
   document.getElementById(
     'readerScreen'
   ).scrollTop=0;
 }
 
 
-
 function startReading(){
 
-  for(
-    const arc
-    of siteData.arcs
-  ){
+  for(const arc of siteData.arcs){
 
     if(
-      Array.isArray(
-        arc.chapters
-      )&&
+      Array.isArray(arc.chapters)&&
       arc.chapters.length
     ){
 
@@ -4266,11 +5142,7 @@ function startReading(){
     }
   }
 
-
-  scrollToId(
-    'arcos'
-  );
-
+  scrollToId('arcos');
 
   alert(
     'Ainda não há capítulos publicados.'
@@ -4278,35 +5150,28 @@ function startReading(){
 }
 
 
-
 /* =========================
-   PERSONAGENS
+   PERSONAGENS / WIKI
 ========================= */
 
 async function addCharacter(){
 
-  if(!requireAuthor()){
-    return;
-  }
-
+  if(!requireAuthor())return;
 
   const name=
     document.getElementById(
       'characterName'
     ).value.trim();
 
-
   const description=
     document.getElementById(
       'characterDescription'
     ).value.trim();
 
-
   const imageUrl=
     document.getElementById(
       'characterImageUrl'
     ).value.trim();
-
 
   if(!name){
 
@@ -4317,28 +5182,20 @@ async function addCharacter(){
     return;
   }
 
-
   try{
 
     const reference=
       await db
-        .collection(
-          'characters'
-        )
+        .collection('characters')
         .add({
-
           name,
-
           description,
-
           imageUrl,
-
           createdAt:
             firebase.firestore
               .FieldValue
               .serverTimestamp()
         });
-
 
     siteData.characters.push({
       id:reference.id,
@@ -4346,10 +5203,6 @@ async function addCharacter(){
       description,
       imageUrl
     });
-
-
-    renderCharacters();
-
 
     document.getElementById(
       'characterName'
@@ -4363,9 +5216,11 @@ async function addCharacter(){
       'characterImageUrl'
     ).value='';
 
+    renderWiki();
+    renderCharacterManagement();
 
     alert(
-      'Personagem publicado.'
+      'Personagem adicionado à Wiki.'
     );
 
   }catch(error){
@@ -4379,111 +5234,330 @@ async function addCharacter(){
 }
 
 
+function renderCharacterManagement(){
 
-function renderCharacters(){
-
-  const box=
+  const select=
     document.getElementById(
-      'publicCharacters'
+      'manageCharacterSelect'
     );
 
+  if(!select)return;
 
-  box.replaceChildren();
+  const previous=
+    select.value;
 
+  select.replaceChildren();
 
-  if(
-    !siteData.characters.length
-  ){
+  if(!siteData.characters.length){
 
-    const p=
+    const option=
       document.createElement(
-        'p'
+        'option'
       );
 
-    p.textContent=
-      'Nenhuma ficha de personagem adicionada.';
+    option.value='';
 
-    box.appendChild(p);
+    option.textContent=
+      'Nenhum personagem';
+
+    select.appendChild(option);
+
+    loadManagedCharacter();
 
     return;
   }
 
-
   siteData.characters.forEach(
     character=>{
 
-      const card=
+      const option=
         document.createElement(
-          'div'
+          'option'
         );
 
-      card.className=
-        'notice character-card';
+      option.value=
+        String(character.id);
 
-
-      if(character.imageUrl){
-
-        const image=
-          document.createElement(
-            'img'
-          );
-
-        image.src=
-          character.imageUrl;
-
-        image.alt=
-          'Imagem de '+
-          character.name;
-
-        image.loading=
-          'lazy';
-
-        card.appendChild(
-          image
-        );
-      }
-
-
-      const title=
-        document.createElement(
-          'strong'
-        );
-
-      title.textContent=
+      option.textContent=
         character.name;
 
-
-      card.appendChild(
-        title
-      );
-
-
-      if(character.description){
-
-        const description=
-          document.createElement(
-            'p'
-          );
-
-        description.textContent=
-          character.description;
-
-        description.style.marginBottom=
-          '0';
-
-        card.appendChild(
-          description
-        );
-      }
-
-
-      box.appendChild(
-        card
-      );
+      select.appendChild(option);
     }
   );
+
+  if(
+    siteData.characters.some(
+      character=>
+        String(character.id)===
+        String(previous)
+    )
+  ){
+    select.value=previous;
+  }
+
+  loadManagedCharacter();
 }
 
+
+function loadManagedCharacter(){
+
+  const select=
+    document.getElementById(
+      'manageCharacterSelect'
+    );
+
+  if(!select)return;
+
+  const character=
+    siteData.characters.find(
+      item=>
+        String(item.id)===
+        String(select.value)
+    );
+
+  document.getElementById(
+    'manageCharacterName'
+  ).value=
+    character?.name||'';
+
+  document.getElementById(
+    'manageCharacterImage'
+  ).value=
+    character?.imageUrl||'';
+
+  document.getElementById(
+    'manageCharacterDescription'
+  ).value=
+    character?.description||'';
+}
+
+
+async function updateCharacter(){
+
+  if(!requireAuthor())return;
+
+  const id=
+    document.getElementById(
+      'manageCharacterSelect'
+    ).value;
+
+  const character=
+    siteData.characters.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!character){
+
+    alert(
+      'Selecione um personagem.'
+    );
+
+    return;
+  }
+
+  const name=
+    document.getElementById(
+      'manageCharacterName'
+    ).value.trim();
+
+  const imageUrl=
+    document.getElementById(
+      'manageCharacterImage'
+    ).value.trim();
+
+  const description=
+    document.getElementById(
+      'manageCharacterDescription'
+    ).value.trim();
+
+  if(!name){
+
+    alert(
+      'O personagem precisa ter um nome.'
+    );
+
+    return;
+  }
+
+  try{
+
+    await db
+      .collection('characters')
+      .doc(String(character.id))
+      .set(
+        {
+          name,
+          imageUrl,
+          description,
+          updatedAt:
+            firebase.firestore
+              .FieldValue
+              .serverTimestamp()
+        },
+        {merge:true}
+      );
+
+    character.name=name;
+    character.imageUrl=imageUrl;
+    character.description=description;
+
+    renderWiki();
+    renderCharacterManagement();
+
+    alert(
+      'Personagem atualizado.'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível atualizar o personagem.'
+    );
+  }
+}
+
+
+async function removeCharacterImage(){
+
+  if(!requireAuthor())return;
+
+  const id=
+    document.getElementById(
+      'manageCharacterSelect'
+    ).value;
+
+  const character=
+    siteData.characters.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!character)return;
+
+  if(!character.imageUrl){
+
+    alert(
+      'Esse personagem não possui imagem.'
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      'Remover a imagem de "'+
+      character.name+
+      '"?'
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    await db
+      .collection('characters')
+      .doc(String(character.id))
+      .set(
+        {
+          imageUrl:'',
+          updatedAt:
+            firebase.firestore
+              .FieldValue
+              .serverTimestamp()
+        },
+        {merge:true}
+      );
+
+    character.imageUrl='';
+
+    renderWiki();
+    renderCharacterManagement();
+
+    alert('Imagem removida.');
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível remover a imagem.'
+    );
+  }
+}
+
+
+async function deleteCharacter(){
+
+  if(!requireAuthor())return;
+
+  const id=
+    document.getElementById(
+      'manageCharacterSelect'
+    ).value;
+
+  const character=
+    siteData.characters.find(
+      item=>
+        String(item.id)===
+        String(id)
+    );
+
+  if(!character){
+
+    alert(
+      'Selecione um personagem.'
+    );
+
+    return;
+  }
+
+  if(
+    !confirm(
+      'Excluir "'+
+      character.name+
+      '" da Wiki?\n\n'+
+      'Essa ação não pode ser desfeita.'
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    await db
+      .collection('characters')
+      .doc(String(character.id))
+      .delete();
+
+    siteData.characters=
+      siteData.characters.filter(
+        item=>
+          String(item.id)!==
+          String(character.id)
+      );
+
+    renderWiki();
+    renderCharacterManagement();
+
+    alert(
+      'Personagem excluído.'
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      'Não foi possível excluir o personagem.'
+    );
+  }
+}
 
 
 /* =========================
@@ -4495,18 +5569,13 @@ async function publishNotice(
   label
 ){
 
-  if(!requireAuthor()){
-    return;
-  }
-
+  if(!requireAuthor())return;
 
   const field=
     document.getElementById(id);
 
-
   const text=
     field.value.trim();
-
 
   if(!text){
 
@@ -4517,24 +5586,19 @@ async function publishNotice(
     return;
   }
 
-
   try{
 
     const reference=
       await db
         .collection('notices')
         .add({
-
           label,
-
           text,
-
           createdAt:
             firebase.firestore
               .FieldValue
               .serverTimestamp()
         });
-
 
     siteData.notices.unshift({
       id:reference.id,
@@ -4542,16 +5606,11 @@ async function publishNotice(
       text
     });
 
-
     renderNotices();
-
 
     field.value='';
 
-
-    alert(
-      'Aviso publicado.'
-    );
+    alert('Aviso publicado.');
 
   }catch(error){
 
@@ -4564,7 +5623,6 @@ async function publishNotice(
 }
 
 
-
 function renderNotices(){
 
   const box=
@@ -4572,36 +5630,23 @@ function renderNotices(){
       'publishedNotices'
     );
 
-
   box.replaceChildren();
 
+  if(!siteData.notices.length){
 
-  if(
-    !siteData.notices.length
-  ){
-
-    box.style.display=
-      'none';
-
+    box.style.display='none';
     return;
   }
 
-
-  box.style.display=
-    'block';
-
+  box.style.display='block';
 
   siteData.notices.forEach(
     notice=>{
 
       const item=
-        document.createElement(
-          'div'
-        );
+        document.createElement('div');
 
-      item.style.marginTop=
-        '10px';
-
+      item.style.marginTop='10px';
 
       const title=
         document.createElement(
@@ -4611,11 +5656,8 @@ function renderNotices(){
       title.textContent=
         notice.label;
 
-
       const text=
-        document.createElement(
-          'p'
-        );
+        document.createElement('p');
 
       text.textContent=
         notice.text;
@@ -4623,56 +5665,41 @@ function renderNotices(){
       text.style.margin=
         '5px 0 0';
 
-
       item.append(
         title,
         text
       );
 
-
-      box.appendChild(
-        item
-      );
+      box.appendChild(item);
     }
   );
 }
 
 
-
 /* =========================
-   ROTAS ALTERNATIVAS
+   ROTAS
 ========================= */
 
 function openRoutePanel(){
 
   document.getElementById(
     'authorOverlay'
-  ).classList.remove(
-    'open'
-  );
-
+  ).classList.remove('open');
 
   document.getElementById(
     'routeOverlay'
-  ).classList.add(
-    'open'
-  );
-
+  ).classList.add('open');
 
   loadRouteDraft();
 }
-
 
 
 function closeRoutePanel(){
 
   document.getElementById(
     'routeOverlay'
-  ).classList.remove(
-    'open'
-  );
+  ).classList.remove('open');
 }
-
 
 
 function loadRouteDraft(){
@@ -4681,7 +5708,6 @@ function loadRouteDraft(){
     document.getElementById(
       'routeChoice'
     ).value;
-
 
   const saved=
     localData.drafts.routes[
@@ -4695,12 +5721,10 @@ function loadRouteDraft(){
       text:''
     };
 
-
   document.getElementById(
     'routeChapterTitle'
   ).value=
     saved.title||'';
-
 
   document.getElementById(
     'routeChapterText'
@@ -4709,14 +5733,12 @@ function loadRouteDraft(){
 }
 
 
-
 function saveRouteDraft(){
 
   const route=
     document.getElementById(
       'routeChoice'
     ).value;
-
 
   localData.drafts.routes[
     route
@@ -4733,9 +5755,7 @@ function saveRouteDraft(){
       ).value
   };
 
-
   saveDrafts();
-
 
   alert(
     'Rascunho salvo neste aparelho.'
@@ -4743,10 +5763,7 @@ function saveRouteDraft(){
 }
 
 
-
-function routeDocumentId(
-  route
-){
+function routeDocumentId(route){
 
   return route
     .normalize('NFD')
@@ -4766,19 +5783,14 @@ function routeDocumentId(
 }
 
 
-
 async function publishRoute(){
 
-  if(!requireAuthor()){
-    return;
-  }
-
+  if(!requireAuthor())return;
 
   const route=
     document.getElementById(
       'routeChoice'
     ).value;
-
 
   const title=
     document.getElementById(
@@ -4786,12 +5798,10 @@ async function publishRoute(){
     ).value.trim()||
     'Capítulo alternativo';
 
-
   const text=
     document.getElementById(
       'routeChapterText'
     ).value.trim();
-
 
   if(!text){
 
@@ -4801,7 +5811,6 @@ async function publishRoute(){
 
     return;
   }
-
 
   try{
 
@@ -4815,21 +5824,15 @@ async function publishRoute(){
           .serverTimestamp()
     };
 
-
     await db
       .collection('routes')
       .doc(
-        routeDocumentId(
-          route
-        )
+        routeDocumentId(route)
       )
       .set(
         data,
-        {
-          merge:true
-        }
+        {merge:true}
       );
-
 
     siteData.routes[
       route
@@ -4839,13 +5842,11 @@ async function publishRoute(){
       text
     };
 
-
     delete localData
       .drafts
       .routes[
         route
       ];
-
 
     saveDrafts();
 
@@ -4853,10 +5854,7 @@ async function publishRoute(){
 
     closeRoutePanel();
 
-
-    alert(
-      'Rota publicada.'
-    );
+    alert('Rota publicada.');
 
   }catch(error){
 
@@ -4869,7 +5867,6 @@ async function publishRoute(){
 }
 
 
-
 function renderRoutes(){
 
   const container=
@@ -4877,41 +5874,28 @@ function renderRoutes(){
       'publicRoutes'
     );
 
-
   container.replaceChildren();
-
 
   ROUTE_NAMES.forEach(
     route=>{
 
       const card=
-        document.createElement(
-          'div'
-        );
+        document.createElement('div');
 
       card.className=
         'card route-card';
 
-
       const heading=
-        document.createElement(
-          'h3'
-        );
+        document.createElement('h3');
 
-      heading.textContent=
-        route;
+      heading.textContent=route;
 
-
-      card.appendChild(
-        heading
-      );
-
+      card.appendChild(heading);
 
       const data=
         siteData.routes[
           route
         ];
-
 
       if(
         !data||
@@ -4919,25 +5903,17 @@ function renderRoutes(){
       ){
 
         const empty=
-          document.createElement(
-            'p'
-          );
+          document.createElement('p');
 
         empty.textContent=
           'Nenhum capítulo publicado.';
 
-        card.appendChild(
-          empty
-        );
+        card.appendChild(empty);
 
-
-        container.appendChild(
-          card
-        );
+        container.appendChild(card);
 
         return;
       }
-
 
       const title=
         document.createElement(
@@ -4948,12 +5924,8 @@ function renderRoutes(){
         data.title||
         'Capítulo alternativo';
 
-
       const preview=
-        document.createElement(
-          'p'
-        );
-
+        document.createElement('p');
 
       preview.textContent=
         data.text.length>180
@@ -4963,55 +5935,41 @@ function renderRoutes(){
             )+'…'
           :data.text;
 
-
       const button=
         document.createElement(
           'button'
         );
 
-      button.className=
-        'secondary';
+      button.className='secondary';
 
-      button.textContent=
-        'Ler rota';
-
+      button.textContent='Ler rota';
 
       button.onclick=()=>{
 
         currentChapterIndex=-1;
-
         previewMode=false;
-
 
         renderChapter(
           {
             title:
               data.title||
               'Capítulo alternativo',
-
-            text:
-              data.text
+            text:data.text
           },
           route
         );
 
-
         document.getElementById(
           'readerScreen'
-        ).classList.add(
-          'open'
-        );
-
+        ).classList.add('open');
 
         document.body.style.overflow=
           'hidden';
-
 
         document.getElementById(
           'readerScreen'
         ).scrollTop=0;
       };
-
 
       card.append(
         title,
@@ -5019,14 +5977,10 @@ function renderRoutes(){
         button
       );
 
-
-      container.appendChild(
-        card
-      );
+      container.appendChild(card);
     }
   );
 }
-
 
 
 /* =========================
@@ -5041,15 +5995,8 @@ async function initializeSite(){
 
   renderRoutes();
 
-
-  /*
-    Primeiro mostramos a interface.
-    Depois buscamos o conteúdo público.
-  */
-
   await loadSite();
 }
-
 
 
 document.addEventListener(
@@ -5060,4 +6007,4 @@ document.addEventListener(
 </script>
 
 </body>
-        </html>
+</html>
